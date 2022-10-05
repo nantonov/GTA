@@ -14,7 +14,7 @@ namespace AirlineTickets.Data.EntityConfigurations
             builder.Property(t => t.ArrivalPlace).HasMaxLength(200).IsRequired();
             builder.Property(t => t.DepartureTime).IsRequired();
             builder.Property(t => t.ArrivalTime).IsRequired();
-            builder.Property(t => t.Price).IsRequired();
+            builder.Property(t => t.Price).IsRequired();    
         }
     }
 }
