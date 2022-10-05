@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace AirlineTickets.Data.Services
 {
-    internal class GenericRepository
+    public class GenericRepository<T>
     {
+
     }
 }

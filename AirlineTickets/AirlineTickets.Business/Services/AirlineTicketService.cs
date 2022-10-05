@@ -1,6 +1,7 @@
 ﻿namespace AirlineTickets.Business.Services
 {
-    internal class GenericService
+    public class AirlineTicketService
     {
+
     }
 }

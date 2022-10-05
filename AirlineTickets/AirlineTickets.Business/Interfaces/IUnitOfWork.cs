@@ -1,6 +1,6 @@
 ﻿namespace AirlineTickets.Business.Interfaces
 {
-    public interface IGenericService
+    public interface IUnitOfWork
     {
 
     }
