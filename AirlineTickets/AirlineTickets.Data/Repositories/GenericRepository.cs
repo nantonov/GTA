@@ -6,7 +6,7 @@ namespace AirlineTickets.Data.Services
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public GenericRepository(ApplicationDbContext context)
         {
