@@ -12,15 +12,15 @@ namespace AirlineTickets.Business.Services
 
         public AirlineTicketService(IGenericRepository<AirlineTicket> ticketRepository)
         {
-            this._ticketRepository = ticketRepository;
+            _ticketRepository = ticketRepository;
         }
 
-        public async Task Create(AirlineTicket obj, CancellationToken cancellationToken) =>
-            await _ticketRepository.Create(obj, cancellationToken);
+        public async Task Create(AirlineTicket ticket, CancellationToken cancellationToken) =>
+            await _ticketRepository.Create(ticket, cancellationToken);
 
         public async Task Delete(int id, CancellationToken cancellationToken)
         {
-            var ticket = _ticketRepository.GetById(id, cancellationToken);
+            var ticket = await _ticketRepository.GetById(id, cancellationToken);
 
             if (ticket is null)
             {
@@ -45,16 +45,16 @@ namespace AirlineTickets.Business.Services
         public async Task<IEnumerable<AirlineTicket>> GetAll(CancellationToken cancellationToken) =>
             await _ticketRepository.GetAll(cancellationToken);
 
-        public async Task Update(AirlineTicket obj, CancellationToken cancellationToken)
+        public async Task Update(AirlineTicket ticket, CancellationToken cancellationToken)
         {
-            var ticket = await _ticketRepository.GetById(obj.Id, cancellationToken);
+            var testTicket = await _ticketRepository.GetById(ticket.Id, cancellationToken);
 
-            if (ticket is null)
+            if (testTicket is null)
             {
                 throw new AirlineTicketNullException(ExceptionMessages.AirlineTicketNotFoundMessage);
             }
 
-            await _ticketRepository.Update(obj, cancellationToken);
+            await _ticketRepository.Update(testTicket, cancellationToken);
         }
     }
 }
