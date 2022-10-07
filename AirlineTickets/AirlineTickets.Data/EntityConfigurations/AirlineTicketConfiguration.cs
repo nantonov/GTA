@@ -4,9 +4,9 @@ using AirlineTickets.Data.Entities;
 
 namespace AirlineTickets.Data.EntityConfigurations
 {
-    public class AirlineTicketConfiguration : IEntityTypeConfiguration<AirlineTicket>
+    public class AirlineTicketConfiguration : IEntityTypeConfiguration<AirlineTicketEntity>
     {
-        public void Configure(EntityTypeBuilder<AirlineTicket> builder)
+        public void Configure(EntityTypeBuilder<AirlineTicketEntity> builder)
         {
             builder.HasKey(t => t.Id);
             builder.Property(t => t.PassengerCredentials).HasMaxLength(200).IsRequired();

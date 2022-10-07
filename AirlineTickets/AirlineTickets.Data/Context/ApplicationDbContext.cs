@@ -8,7 +8,7 @@ namespace AirlineTickets.Data.Context
     public class ApplicationDbContext : DbContext
     {
         private readonly IConfiguration? _configuration;
-        public DbSet<AirlineTicket>? AirlineTickets { get; set; }
+        public DbSet<AirlineTicketEntity>? AirlineTickets { get; set; }
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {

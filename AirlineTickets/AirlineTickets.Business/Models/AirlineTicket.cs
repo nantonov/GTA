@@ -1,6 +1,6 @@
 ﻿namespace AirlineTickets.Business.Models
 {
-    public class TicketModel
+    public class AirlineTicket
     {
         public int Id { get; set; }
         public string? DeparturePlace { get; set; }

@@ -20,7 +20,7 @@ var configurationBuilder = new ConfigurationBuilder().AddJsonFile("appsettings.j
 var options = new DbContextOptionsBuilder().Options;
 builder.Services.AddDbContext<ApplicationDbContext>(_ => new ApplicationDbContext(options: options, configurationBuilder))
     .AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>))
-    .AddTransient(typeof(IGenericService<TicketModel>), typeof(GenericService<TicketModel, AirlineTicket>));
+    .AddTransient(typeof(IGenericService<AirlineTickets.Business.Models.AirlineTicket>), typeof(GenericService<AirlineTickets.Business.Models.AirlineTicket, AirlineTickets.Data.Entities.AirlineTicketEntity>));
 
 var app = builder.Build();
 
