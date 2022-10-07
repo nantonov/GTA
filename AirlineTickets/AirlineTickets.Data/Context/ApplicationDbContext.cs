@@ -1,4 +1,4 @@
-﻿using AirlineTickets.Core.Entities;
+﻿using AirlineTickets.Data.Entities;
 using AirlineTickets.Data.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -8,7 +8,7 @@ namespace AirlineTickets.Data.Context
     public class ApplicationDbContext : DbContext
     {
         private readonly IConfiguration? _configuration;
-        public DbSet<AirlineTicket>? AirlineTickets { get; set; }
+        public DbSet<AirlineTicketEntity>? AirlineTickets { get; set; }
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {

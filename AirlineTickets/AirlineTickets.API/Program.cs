@@ -1,3 +1,12 @@
+using AirlineTickets.Business.Interfaces;
+using AirlineTickets.Business.Models;
+using AirlineTickets.Business.Services;
+using AirlineTickets.Data.Context;
+using AirlineTickets.Data.Entities;
+using AirlineTickets.Data.Interfaces;
+using AirlineTickets.Data.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +15,12 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var configurationBuilder = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+var options = new DbContextOptionsBuilder().Options;
+builder.Services.AddDbContext<ApplicationDbContext>(_ => new ApplicationDbContext(options: options, configurationBuilder))
+    .AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>))
+    .AddTransient(typeof(IGenericService<AirlineTicket>), typeof(GenericService<AirlineTicket, AirlineTicketEntity>));
 
 var app = builder.Build();
 
