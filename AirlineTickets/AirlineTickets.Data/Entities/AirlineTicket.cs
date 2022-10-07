@@ -1,4 +1,4 @@
-﻿namespace AirlineTickets.Core.Entities
+﻿namespace AirlineTickets.Data.Entities
 {
     public class AirlineTicket
     {

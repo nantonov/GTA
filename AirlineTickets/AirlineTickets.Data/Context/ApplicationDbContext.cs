@@ -1,4 +1,4 @@
-﻿using AirlineTickets.Core.Entities;
+﻿using AirlineTickets.Data.Entities;
 using AirlineTickets.Data.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

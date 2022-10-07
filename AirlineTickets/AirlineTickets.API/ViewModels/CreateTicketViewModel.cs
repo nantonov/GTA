@@ -1,6 +1,6 @@
 ﻿namespace AirlineTickets.API.Models
 {
-    public class UpdateTicketModel
+    public class CreateTicketViewModel
     {
 
     }

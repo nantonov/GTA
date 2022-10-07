@@ -6,9 +6,9 @@
 
         public Task<T?> GetById(int id, CancellationToken cancellationToken);
 
-        public Task Create(T obj, CancellationToken cancellationToken);
+        public Task<T> Create(T obj, CancellationToken cancellationToken);
 
-        public Task Update(T obj, CancellationToken cancellationToken);
+        public Task<T> Update(T obj, CancellationToken cancellationToken);
 
         public Task Delete(int id, CancellationToken cancellationToken);
     }

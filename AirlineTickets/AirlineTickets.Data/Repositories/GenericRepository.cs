@@ -15,10 +15,11 @@ namespace AirlineTickets.Data.Services
             _dbSet = _context.Set<T>();
         }
 
-        public async Task Create(T obj, CancellationToken cancellationToken)
+        public async Task<T> Create(T obj, CancellationToken cancellationToken)
         {
             await _dbSet.AddAsync(obj, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
+            return obj;
         }
 
         public async Task Delete(int id, CancellationToken cancellationToken)
@@ -37,10 +38,11 @@ namespace AirlineTickets.Data.Services
             return await _dbSet.FindAsync(id, cancellationToken);
         }
 
-        public async Task Update(T obj, CancellationToken cancellationToken)
+        public async Task<T> Update(T obj, CancellationToken cancellationToken)
         {
             _context.Entry(obj).State = EntityState.Modified;
             await _context.SaveChangesAsync(cancellationToken);
+            return obj;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using AirlineTickets.Core.Entities;
+using AirlineTickets.Data.Entities;
 
 namespace AirlineTickets.Data.EntityConfigurations
 {
