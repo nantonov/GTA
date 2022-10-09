@@ -9,6 +9,8 @@ namespace AirlineTickets.Data.Context
     {
         private readonly IConfiguration? _configuration;
         public DbSet<AirlineTicketEntity>? AirlineTickets { get; set; }
+        public DbSet<CityEntity>? Cities { get; set; }
+        public DbSet<HotelEntity>? Hotels { get; set; }
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
@@ -35,6 +37,9 @@ namespace AirlineTickets.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new AirlineTicketConfiguration());
+            modelBuilder.ApplyConfiguration(new AirlineTicketCityConfiguration());
+            modelBuilder.ApplyConfiguration(new CityConfiguration());
+            modelBuilder.ApplyConfiguration(new HotelConfiguration());
         }
     }
 }
