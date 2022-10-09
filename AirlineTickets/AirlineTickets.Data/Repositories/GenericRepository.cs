@@ -2,12 +2,12 @@
 using AirlineTickets.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace AirlineTickets.Data.Services
+namespace AirlineTickets.Data.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private readonly ApplicationDbContext _context;
-        private readonly DbSet<T> _dbSet;
+        protected readonly ApplicationDbContext _context;
+        protected readonly DbSet<T> _dbSet;
 
         public GenericRepository(ApplicationDbContext context)
         {
@@ -28,12 +28,12 @@ namespace AirlineTickets.Data.Services
             await _context.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task<IEnumerable<T>> GetAll(CancellationToken cancellationToken)
+        public virtual async Task<IEnumerable<T>> GetAll(CancellationToken cancellationToken)
         {
             return await _dbSet.AsNoTracking().ToListAsync(cancellationToken);
         }
 
-        public async Task<T?> GetById(int id, CancellationToken cancellationToken)
+        public virtual async Task<T?> GetById(int id, CancellationToken cancellationToken)
         {
             return await _dbSet.FindAsync(id, cancellationToken);
         }

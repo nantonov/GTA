@@ -9,6 +9,7 @@ namespace AirlineTickets.Data.EntityConfigurations
         public void Configure(EntityTypeBuilder<AirlineTicketCity> builder)
         {
             builder.HasKey(tc => new { tc.AirlineTicketId, tc.CityId });
+            builder.ToTable("AirlineTicketsCities");
             builder.Property(t => t.StayingStatus).IsRequired();
 
             builder.HasOne(tc => tc.AirlineTicket)
