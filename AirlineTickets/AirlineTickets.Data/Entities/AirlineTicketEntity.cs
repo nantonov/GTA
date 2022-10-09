@@ -3,11 +3,10 @@
     public class AirlineTicketEntity
     {
         public int Id { get; set; }
-        public string? DeparturePlace { get; set; }
-        public string? ArrivalPlace { get; set; }
         public DateTime DepartureTime { get; set; }
         public DateTime ArrivalTime { get; set; }
         public int Price { get; set; }
         public string? PassengerCredentials { get; set; }
+        public ICollection<CityEntity>? Cities { get; set; }
     }
 }
