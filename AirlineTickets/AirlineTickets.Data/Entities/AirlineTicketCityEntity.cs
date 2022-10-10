@@ -2,7 +2,7 @@
 
 namespace AirlineTickets.Data.Entities
 {
-    public class AirlineTicketCity
+    public class AirlineTicketCityEntity
     {
         public int AirlineTicketId { get; set; }
         public int CityId { get; set; }

@@ -23,7 +23,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(_ => new ApplicationDbContex
     .AddTransient<IGenericRepository<CityEntity>, CityRepository>()
     .AddTransient<IGenericRepository<HotelEntity>, HotelRepository>()
     .AddTransient<IGenericRepository<AirlineTicketEntity>, AirlineTicketRepository>()
-    .AddTransient<IGenericRepository<AirlineTicketCity>, AirlineTicketCityRepository>()
+    .AddTransient<IGenericRepository<AirlineTicketCityEntity>, AirlineTicketCityRepository>()
     .AddTransient(typeof(IGenericService<AirlineTicket>), typeof(GenericService<AirlineTicket, AirlineTicketEntity>));
 
 var app = builder.Build();

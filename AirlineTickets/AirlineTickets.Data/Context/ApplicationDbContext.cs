@@ -11,7 +11,7 @@ namespace AirlineTickets.Data.Context
         public DbSet<AirlineTicketEntity>? AirlineTickets { get; set; }
         public DbSet<CityEntity>? Cities { get; set; }
         public DbSet<HotelEntity>? Hotels { get; set; }
-        public DbSet<AirlineTicketCity>? AirlineTicketCities { get; set; }
+        public DbSet<AirlineTicketCityEntity>? AirlineTicketCities { get; set; }
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {

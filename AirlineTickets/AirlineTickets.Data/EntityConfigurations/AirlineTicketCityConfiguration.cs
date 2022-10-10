@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AirlineTickets.Data.EntityConfigurations
 {
-    public class AirlineTicketCityConfiguration : IEntityTypeConfiguration<AirlineTicketCity>
+    public class AirlineTicketCityConfiguration : IEntityTypeConfiguration<AirlineTicketCityEntity>
     {
-        public void Configure(EntityTypeBuilder<AirlineTicketCity> builder)
+        public void Configure(EntityTypeBuilder<AirlineTicketCityEntity> builder)
         {
             builder.HasKey(tc => new { tc.AirlineTicketId, tc.CityId });
             builder.ToTable("AirlineTicketsCities");
