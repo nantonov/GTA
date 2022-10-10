@@ -15,14 +15,14 @@ namespace AirlineTickets.Data.Context
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
-            Database.EnsureCreated();
+            Database.Migrate();
         }
 
         public ApplicationDbContext(DbContextOptions options, IConfiguration configuration) : base(options)
         {
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
-            Database.EnsureCreated();
+            Database.Migrate();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
