@@ -4,7 +4,7 @@ using AirlineTickets.Business.Services;
 using AirlineTickets.Data.Context;
 using AirlineTickets.Data.Entities;
 using AirlineTickets.Data.Interfaces;
-using AirlineTickets.Data.Services;
+using AirlineTickets.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +20,10 @@ var configurationBuilder = new ConfigurationBuilder().AddJsonFile("appsettings.j
 var options = new DbContextOptionsBuilder().Options;
 builder.Services.AddDbContext<ApplicationDbContext>(_ => new ApplicationDbContext(options: options, configurationBuilder))
     .AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>))
+    .AddTransient<IGenericRepository<CityEntity>, CityRepository>()
+    .AddTransient<IGenericRepository<HotelEntity>, HotelRepository>()
+    .AddTransient<IGenericRepository<AirlineTicketEntity>, AirlineTicketRepository>()
+    .AddTransient<IGenericRepository<AirlineTicketCityEntity>, AirlineTicketCityRepository>()
     .AddTransient(typeof(IGenericService<AirlineTicket>), typeof(GenericService<AirlineTicket, AirlineTicketEntity>));
 
 var app = builder.Build();

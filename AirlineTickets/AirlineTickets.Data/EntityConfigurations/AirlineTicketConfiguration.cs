@@ -10,11 +10,9 @@ namespace AirlineTickets.Data.EntityConfigurations
         {
             builder.HasKey(t => t.Id);
             builder.Property(t => t.PassengerCredentials).HasMaxLength(200).IsRequired();
-            builder.Property(t => t.DeparturePlace).HasMaxLength(200).IsRequired();
-            builder.Property(t => t.ArrivalPlace).HasMaxLength(200).IsRequired();
             builder.Property(t => t.DepartureTime).IsRequired();
             builder.Property(t => t.ArrivalTime).IsRequired();
-            builder.Property(t => t.Price).IsRequired();    
+            builder.Property(t => t.Price).IsRequired();
         }
     }
 }
