@@ -2,8 +2,8 @@
 {
     public enum CityStayingStatus
     {
-        departure,
-        arrival,
-        transit
+        Departure,
+        Arrival,
+        Transit
     };
 }

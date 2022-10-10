@@ -7,6 +7,7 @@
         public DateTime ArrivalTime { get; set; }
         public int Price { get; set; }
         public string? PassengerCredentials { get; set; }
+
         public ICollection<AirlineTicketCityEntity>? AirlineTicketCities { get; set; }
     }
 }
