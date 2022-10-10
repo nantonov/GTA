@@ -17,8 +17,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var configurationBuilder = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-var options = new DbContextOptionsBuilder().Options;
-builder.Services.AddDbContext<ApplicationDbContext>(_ => new ApplicationDbContext(options: options, configurationBuilder))
+var connectionString = configurationBuilder.GetConnectionString("SqlServer");
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString))
     .AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>))
     .AddTransient<IGenericRepository<CityEntity>, CityRepository>()
     .AddTransient<IGenericRepository<HotelEntity>, HotelRepository>()
