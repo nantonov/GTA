@@ -1,13 +1,11 @@
 ﻿using AirlineTickets.Data.Entities;
 using AirlineTickets.Data.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace AirlineTickets.Data.Context
 {
     public class ApplicationDbContext : DbContext
     {
-        private readonly IConfiguration? _configuration;
         public DbSet<AirlineTicketEntity>? AirlineTickets { get; set; }
         public DbSet<CityEntity>? Cities { get; set; }
         public DbSet<HotelEntity>? Hotels { get; set; }
@@ -15,24 +13,7 @@ namespace AirlineTickets.Data.Context
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
-            Database.EnsureCreated();
-        }
-
-        public ApplicationDbContext(DbContextOptions options, IConfiguration configuration) : base(options)
-        {
-            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-
-            Database.EnsureCreated();
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            string connectionString = _configuration.GetConnectionString("SqlServer");
-
-            if (!string.IsNullOrEmpty(connectionString))
-            {
-                optionsBuilder.UseSqlServer(connectionString);
-            }
+            if (Database.IsRelational()) Database.Migrate();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
