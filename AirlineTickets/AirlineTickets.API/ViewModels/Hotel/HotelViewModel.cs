@@ -1,6 +1,8 @@
-﻿namespace AirlineTickets.Data.Entities
+﻿using AirlineTickets.Data.Entities;
+
+namespace AirlineTickets.API.ViewModels.Hotel
 {
-    public class HotelEntity
+    public class HotelViewModel
     {
         public int Id { get; set; }
         public string? Name { get; set; }
