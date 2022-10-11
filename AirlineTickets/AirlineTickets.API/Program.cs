@@ -1,5 +1,7 @@
+using AirlineTickets.API.Mapper.Profiles;
 using AirlineTickets.Business.DI;
 using AirlineTickets.Data.DI;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,15 @@ builder.Services.AddSwaggerGen();
 var configurationBuilder = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 
 builder.Services.AddBusinessLogicDependencies(configurationBuilder);
+
+var mapperConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new EntityModel());
+    mc.AddProfile(new ModelViewModel());
+});
+
+IMapper mapper = mapperConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 
