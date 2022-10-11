@@ -6,6 +6,6 @@ namespace AirlineTickets.API.Controllers
     [Route("[controller]")]
     public class AirlineTicketController : ControllerBase
     {
-        
+
     }
 }
