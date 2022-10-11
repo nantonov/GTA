@@ -12,8 +12,7 @@ builder.Services.AddSwaggerGen();
 
 var configurationBuilder = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 
-builder.Services.AddDataAccessDependencies(configurationBuilder);
-builder.Services.AddBusinessLogicDependencies();
+builder.Services.AddBusinessLogicDependencies(configurationBuilder);
 
 var app = builder.Build();
 
