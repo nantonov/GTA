@@ -1,11 +1,5 @@
-using AirlineTickets.Business.Interfaces;
-using AirlineTickets.Business.Models;
-using AirlineTickets.Business.Services;
-using AirlineTickets.Data.Context;
-using AirlineTickets.Data.Entities;
-using AirlineTickets.Data.Interfaces;
-using AirlineTickets.Data.Repositories;
-using Microsoft.EntityFrameworkCore;
+using AirlineTickets.Business.DI;
+using AirlineTickets.Data.DI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,17 +11,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var configurationBuilder = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-var connectionString = configurationBuilder.GetConnectionString("SqlServer");
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString))
-    .AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>))
-    .AddTransient<IGenericRepository<CityEntity>, CityRepository>()
-    .AddTransient<IGenericRepository<HotelEntity>, HotelRepository>()
-    .AddTransient<IGenericRepository<AirlineTicketEntity>, AirlineTicketRepository>()
-    .AddTransient<IGenericRepository<AirlineTicketCityEntity>, AirlineTicketCityRepository>()
-    .AddTransient<IGenericService<AirlineTicket>, GenericService<AirlineTicket, AirlineTicketEntity>>()
-    .AddTransient<IGenericService<AirlineTicketCity>, GenericService<AirlineTicketCity, AirlineTicketCityEntity>>()
-    .AddTransient<IGenericService<City>, GenericService<City, CityEntity>>()
-    .AddTransient<IGenericService<Hotel>, GenericService<Hotel, HotelEntity>>();
+
+builder.Services.AddDataAccessDependencies(configurationBuilder);
+builder.Services.AddBusinessLogicDependencies();
 
 var app = builder.Build();
 
