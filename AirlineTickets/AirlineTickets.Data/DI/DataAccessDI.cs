@@ -19,7 +19,7 @@ namespace AirlineTickets.Data.DI
             services.AddTransient<IGenericRepository<CityEntity>, CityRepository>();
             services.AddTransient<IGenericRepository<HotelEntity>, HotelRepository>();
             services.AddTransient<IGenericRepository<AirlineTicketEntity>, AirlineTicketRepository>();
-            services.AddTransient<IGenericRepository<AirlineTicketCityEntity>, AirlineTicketCityRepository>();
+            services.AddTransient<IAirlineTicketCityRepository, AirlineTicketCityRepository>();
         }
     }
 }

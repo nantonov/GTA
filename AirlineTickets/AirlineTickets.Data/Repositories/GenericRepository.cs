@@ -24,8 +24,13 @@ namespace AirlineTickets.Data.Repositories
 
         public async Task Delete(int id, CancellationToken cancellationToken)
         {
-            _context.Remove(id);
-            await _context.SaveChangesAsync(cancellationToken);
+            var entity = await GetById(id, cancellationToken);
+
+            if (entity is not null)
+            {
+                _context.Remove(entity);
+                await _context.SaveChangesAsync(cancellationToken);
+            }
         }
 
         public virtual async Task<IEnumerable<T>> GetAll(CancellationToken cancellationToken)
