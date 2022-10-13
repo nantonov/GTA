@@ -1,4 +1,4 @@
-﻿using AirlineTickets.Data.Entities;
+﻿using AirlineTickets.API.ViewModels.AirlineTicketCity;
 
 namespace AirlineTickets.API.ViewModels.AirlineTicket
 {
@@ -10,6 +10,6 @@ namespace AirlineTickets.API.ViewModels.AirlineTicket
         public int Price { get; set; }
         public string? PassengerCredentials { get; set; }
 
-        public ICollection<AirlineTicketCityEntity>? AirlineTicketCities { get; set; }
+        public ICollection<TicketCityViewModel>? AirlineTicketCities { get; set; }
     }
 }

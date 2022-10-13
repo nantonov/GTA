@@ -1,4 +1,4 @@
-﻿using AirlineTickets.Data.Entities;
+﻿using AirlineTickets.API.ViewModels.City;
 
 namespace AirlineTickets.API.ViewModels.Hotel
 {
@@ -10,6 +10,6 @@ namespace AirlineTickets.API.ViewModels.Hotel
         public int RoomsNumber { get; set; }
 
         public int CityId { get; set; }
-        public CityEntity? City { get; set; }
+        public CityViewModel? City { get; set; }
     }
 }

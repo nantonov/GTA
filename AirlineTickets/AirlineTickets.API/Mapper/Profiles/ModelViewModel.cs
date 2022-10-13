@@ -11,14 +11,14 @@ namespace AirlineTickets.API.Mapper.Profiles
     {
         public ModelViewModel()
         {
-            CreateMap<AirlineTicket, TicketViewModel>().ReverseMap();
-            CreateMap<AirlineTicket, CreateUpdateTicketViewModel>().ReverseMap();
-            CreateMap<AirlineTicketCity, TicketCityViewModel>().ReverseMap();
-            CreateMap<AirlineTicketCity, CreateUpdateTicketCityViewModel>().ReverseMap();
-            CreateMap<City, CityViewModel>().ReverseMap();
-            CreateMap<City, CreateUpdateCityViewModel>().ReverseMap();
-            CreateMap<Hotel, HotelViewModel>().ReverseMap();
-            CreateMap<Hotel, CreateUpdateHotelViewModel>().ReverseMap();
+            CreateMap<AirlineTicket, TicketViewModel>();
+            CreateMap<CreateUpdateTicketViewModel, AirlineTicket>();
+            CreateMap<AirlineTicketCity, TicketCityViewModel>();
+            CreateMap<CreateUpdateTicketCityViewModel, AirlineTicketCity>();
+            CreateMap<City, CityViewModel>();
+            CreateMap<CreateUpdateCityViewModel, City>();
+            CreateMap<Hotel, HotelViewModel>();
+            CreateMap<CreateUpdateHotelViewModel, Hotel>();
         }
     }
 }

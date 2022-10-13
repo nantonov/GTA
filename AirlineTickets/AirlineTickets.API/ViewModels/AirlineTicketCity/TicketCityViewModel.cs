@@ -1,5 +1,6 @@
-﻿using AirlineTickets.Core.Enums;
-using AirlineTickets.Data.Entities;
+﻿using AirlineTickets.API.ViewModels.AirlineTicket;
+using AirlineTickets.API.ViewModels.City;
+using AirlineTickets.Core.Enums;
 
 namespace AirlineTickets.API.ViewModels.AirlineTicketCity
 {
@@ -9,7 +10,7 @@ namespace AirlineTickets.API.ViewModels.AirlineTicketCity
         public int CityId { get; set; }
         public CityStayingStatus StayingStatus { get; set; }
 
-        public AirlineTicketEntity? AirlineTicket { get; set; }
-        public CityEntity? City { get; set; }
+        public TicketViewModel? AirlineTicket { get; set; }
+        public CityViewModel? City { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using AirlineTickets.Data.Entities;
+﻿using AirlineTickets.API.ViewModels.AirlineTicketCity;
+using AirlineTickets.API.ViewModels.Hotel;
 
 namespace AirlineTickets.API.ViewModels.City
 {
@@ -9,7 +10,7 @@ namespace AirlineTickets.API.ViewModels.City
         public int Population { get; set; }
         public int Area { get; set; }
 
-        public ICollection<AirlineTicketCityEntity>? AirlineTicketCities { get; set; }
-        public ICollection<HotelEntity>? Hotels { get; set; }
+        public ICollection<TicketCityViewModel>? AirlineTicketCities { get; set; }
+        public ICollection<HotelViewModel>? Hotels { get; set; }
     }
 }
