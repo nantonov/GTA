@@ -19,7 +19,7 @@ namespace AirlineTickets.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet()]
+        [HttpGet]
         public async Task<IEnumerable<CityViewModel>> GetAll(CancellationToken cancellationToken) =>
             _mapper.Map<IEnumerable<CityViewModel>>(await _cityService.GetAll(cancellationToken));
 
@@ -27,7 +27,7 @@ namespace AirlineTickets.API.Controllers
         public async Task<CityViewModel> GetById(int id, CancellationToken cancellationToken) =>
             _mapper.Map<CityViewModel>(await _cityService.Get(id, cancellationToken));
 
-        [HttpPost()]
+        [HttpPost]
         public async Task<CityViewModel> Create([FromBody] CreateUpdateCityViewModel createModel, CancellationToken cancellationToken)
         {
             var city = await _cityService.Create(_mapper.Map<City>(createModel), cancellationToken);

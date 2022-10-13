@@ -19,38 +19,34 @@ namespace AirlineTickets.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet()]
+        [HttpGet]
         public async Task<IEnumerable<TicketCityViewModel>> GetAll(CancellationToken cancellationToken) =>
             _mapper.Map<IEnumerable<TicketCityViewModel>>(await _ticketCityService.GetAll(cancellationToken));
 
-        [HttpGet("{ticketId}&{cityId}")]
+        [HttpGet("Ticket{ticketId}/City{cityId}")]
         public async Task<TicketCityViewModel> GetById(int ticketId, int cityId, CancellationToken cancellationToken) =>
             _mapper.Map<TicketCityViewModel>(await _ticketCityService.Get(ticketId, cityId, cancellationToken));
 
-        [HttpPost("{ticketId}&{cityId}")]
-        public async Task<TicketCityViewModel> Create(int ticketId, int cityId, [FromBody] CreateUpdateTicketCityViewModel createModel, CancellationToken cancellationToken)
+        [HttpPost]
+        public async Task<TicketCityViewModel> Create([FromBody] CreateUpdateTicketCityViewModel createModel, CancellationToken cancellationToken)
         {
             var model = _mapper.Map<AirlineTicketCity>(createModel);
-            model.AirlineTicketId = ticketId;
-            model.CityId = cityId;
 
             var ticketCity = await _ticketCityService.Create(model, cancellationToken);
 
             return _mapper.Map<TicketCityViewModel>(ticketCity);
         }
 
-        [HttpDelete("{ticketId}&{cityId}")]
+        [HttpDelete("Ticket{ticketId}/City{cityId}")]
         public async Task Delete(int ticketId, int cityId, CancellationToken cancellationToken)
         {
             await _ticketCityService.Delete(ticketId, cityId, cancellationToken);
         }
 
-        [HttpPut("{ticketId}&{cityId}")]
-        public async Task<TicketCityViewModel> Update(int ticketId, int cityId, [FromBody] CreateUpdateTicketCityViewModel updateModel, CancellationToken cancellationToken)
+        [HttpPut]
+        public async Task<TicketCityViewModel> Update([FromBody] CreateUpdateTicketCityViewModel updateModel, CancellationToken cancellationToken)
         {
             var model = _mapper.Map<AirlineTicketCity>(updateModel);
-            model.AirlineTicketId = ticketId;
-            model.CityId = cityId;
 
             var ticketCity = await _ticketCityService.Update(model, cancellationToken);
 
