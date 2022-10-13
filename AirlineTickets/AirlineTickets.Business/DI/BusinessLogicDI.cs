@@ -15,7 +15,7 @@ namespace AirlineTickets.Business.DI
             services.AddDataAccessDependencies(configuration);
 
             services.AddTransient<IGenericService<AirlineTicket>, GenericService<AirlineTicket, AirlineTicketEntity>>();
-            services.AddTransient<IGenericService<AirlineTicketCity>, GenericService<AirlineTicketCity, AirlineTicketCityEntity>>();
+            services.AddTransient<IAirlineTicketCityService, AirlineTicketCityService>();
             services.AddTransient<IGenericService<City>, GenericService<City, CityEntity>>();
             services.AddTransient<IGenericService<Hotel>, GenericService<Hotel, HotelEntity>>();
         }
