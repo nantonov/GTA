@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlineTickets.API", "AirlineTickets.API\AirlineTickets.API.csproj", "{237AA222-B95E-4B1F-8C1A-9E6682245AA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlineTickets.API", "AirlineTickets.API\AirlineTickets.API.csproj", "{237AA222-B95E-4B1F-8C1A-9E6682245AA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlineTickets.Business", "AirlineTickets.Business\AirlineTickets.Business.csproj", "{7100F172-2DDC-47BB-8AF7-4AA07DE4893F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlineTickets.Business", "AirlineTickets.Business\AirlineTickets.Business.csproj", "{7100F172-2DDC-47BB-8AF7-4AA07DE4893F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlineTickets.Data", "AirlineTickets.Data\AirlineTickets.Data.csproj", "{54A9054E-AB86-4DBA-BC17-C64257B1B0F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlineTickets.Data", "AirlineTickets.Data\AirlineTickets.Data.csproj", "{54A9054E-AB86-4DBA-BC17-C64257B1B0F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlineTickets.Core", "AirlineTickets.Core\AirlineTickets.Core.csproj", "{3CD04EAF-2469-40A0-AE17-93D25A3E6F67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlineTickets.Core", "AirlineTickets.Core\AirlineTickets.Core.csproj", "{3CD04EAF-2469-40A0-AE17-93D25A3E6F67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlineTickets.Data.Tests", "AirlineTickets.Data.Tests\AirlineTickets.Data.Tests.csproj", "{E29C9A71-AC20-4E1D-A80F-0362368FC61F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{3CD04EAF-2469-40A0-AE17-93D25A3E6F67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CD04EAF-2469-40A0-AE17-93D25A3E6F67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CD04EAF-2469-40A0-AE17-93D25A3E6F67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E29C9A71-AC20-4E1D-A80F-0362368FC61F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E29C9A71-AC20-4E1D-A80F-0362368FC61F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E29C9A71-AC20-4E1D-A80F-0362368FC61F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E29C9A71-AC20-4E1D-A80F-0362368FC61F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
