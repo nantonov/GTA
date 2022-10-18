@@ -2,6 +2,7 @@
 using AirlineTickets.Business.Models;
 using AirlineTickets.Data.Entities;
 using AirlineTickets.Data.Interfaces;
+using AirlineTickets.Data.Repositories;
 using AutoMapper;
 
 namespace AirlineTickets.Business.Services
@@ -17,9 +18,16 @@ namespace AirlineTickets.Business.Services
             _mapper = mapper;
         }
 
-        public async Task Delete(int ticketId, int cityId, CancellationToken cancellationToken)
+        public async Task<AirlineTicketCity> Delete(int ticketId, int cityId, CancellationToken cancellationToken)
         {
-            await _airlineTicketCityRepository.Delete(ticketId, cityId, cancellationToken);
+            var ticketCity = await _airlineTicketCityRepository.GetById(ticketId, cityId, cancellationToken);
+
+            if (ticketCity is not null)
+            {
+                await _airlineTicketCityRepository.Delete(ticketId, cityId, cancellationToken);
+            }
+
+            return _mapper.Map<AirlineTicketCity>(ticketCity);
         }
 
         public async Task<AirlineTicketCity> Get(int ticketId, int cityId, CancellationToken cancellationToken)
