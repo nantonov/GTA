@@ -2,6 +2,7 @@ using AirlineTickets.API.ViewModels.AirlineTicketCity;
 using AirlineTickets.Business.Interfaces;
 using AirlineTickets.Business.Models;
 using AutoMapper;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AirlineTickets.API.Controllers
@@ -12,11 +13,14 @@ namespace AirlineTickets.API.Controllers
     {
         private readonly IAirlineTicketCityService _ticketCityService;
         private readonly IMapper _mapper;
+        private readonly IValidator<CreateUpdateTicketCityViewModel> _ticketCityValidator;
 
-        public AirlineTicketCityController(IAirlineTicketCityService ticketCityService, IMapper mapper)
+        public AirlineTicketCityController(IAirlineTicketCityService ticketCityService, IMapper mapper,
+            IValidator<CreateUpdateTicketCityViewModel> hotelValidator)
         {
             _ticketCityService = ticketCityService;
             _mapper = mapper;
+            _ticketCityValidator = hotelValidator;
         }
 
         [HttpGet]
@@ -30,6 +34,8 @@ namespace AirlineTickets.API.Controllers
         [HttpPost]
         public async Task<TicketCityViewModel> Create([FromBody] CreateUpdateTicketCityViewModel createModel, CancellationToken cancellationToken)
         {
+            await _ticketCityValidator.ValidateAndThrowAsync(createModel, cancellationToken);
+
             var model = _mapper.Map<AirlineTicketCity>(createModel);
 
             var ticketCity = await _ticketCityService.Create(model, cancellationToken);
@@ -46,6 +52,8 @@ namespace AirlineTickets.API.Controllers
         [HttpPut]
         public async Task<TicketCityViewModel> Update([FromBody] CreateUpdateTicketCityViewModel updateModel, CancellationToken cancellationToken)
         {
+            await _ticketCityValidator.ValidateAndThrowAsync(updateModel, cancellationToken);
+
             var model = _mapper.Map<AirlineTicketCity>(updateModel);
 
             var ticketCity = await _ticketCityService.Update(model, cancellationToken);

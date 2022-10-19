@@ -1,8 +1,8 @@
-using AirlineTickets.API.ViewModels.City;
 using AirlineTickets.API.ViewModels.Hotel;
 using AirlineTickets.Business.Interfaces;
 using AirlineTickets.Business.Models;
 using AutoMapper;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AirlineTickets.API.Controllers
@@ -13,11 +13,14 @@ namespace AirlineTickets.API.Controllers
     {
         private readonly IGenericService<Hotel> _hotelService;
         private readonly IMapper _mapper;
+        private readonly IValidator<CreateUpdateHotelViewModel> _hotelValidator;
 
-        public HotelController(IGenericService<Hotel> hotelService, IMapper mapper)
+        public HotelController(IGenericService<Hotel> hotelService, IMapper mapper,
+            IValidator<CreateUpdateHotelViewModel> hotelValidator)
         {
             _hotelService = hotelService;
             _mapper = mapper;
+            _hotelValidator = hotelValidator;
         }
 
         [HttpGet]
@@ -31,6 +34,8 @@ namespace AirlineTickets.API.Controllers
         [HttpPost]
         public async Task<HotelViewModel> Create([FromBody] CreateUpdateHotelViewModel createModel, CancellationToken cancellationToken)
         {
+            await _hotelValidator.ValidateAndThrowAsync(createModel, cancellationToken);
+
             var hotel = await _hotelService.Create(_mapper.Map<Hotel>(createModel), cancellationToken);
 
             return _mapper.Map<HotelViewModel>(hotel);
@@ -45,6 +50,8 @@ namespace AirlineTickets.API.Controllers
         [HttpPut("{id}")]
         public async Task<HotelViewModel> Update(int id, [FromBody] CreateUpdateHotelViewModel updateModel, CancellationToken cancellationToken)
         {
+            await _hotelValidator.ValidateAndThrowAsync(updateModel, cancellationToken);
+
             var model = _mapper.Map<Hotel>(updateModel);
             model.Id = id;
 
