@@ -43,8 +43,6 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"nantonov_GTA" /o:"nantonov" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-           cd ./AirlineTickets
-           dotnet build 
-           dotnet test --no-build --verbosity normal
-           cd ..
+           dotnet build AirlineTickets/
+           dotnet test AirlineTickets/ --no-build --verbosity normal
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
