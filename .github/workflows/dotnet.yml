@@ -46,5 +46,5 @@ jobs:
            cd ./AirlineTickets
            dotnet build 
            dotnet test --no-build --verbosity normal
-           cd ./AirlineTickets
+           cd ..
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
