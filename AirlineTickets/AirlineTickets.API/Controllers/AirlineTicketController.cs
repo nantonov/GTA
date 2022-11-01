@@ -50,6 +50,10 @@ namespace AirlineTickets.API.Controllers
         [HttpPut("{id}")]
         public async Task<TicketViewModel> Update(int id, [FromBody] CreateUpdateTicketViewModel updateModel, CancellationToken cancellationToken)
         {
+            if (id != 225)
+            {
+                var i = 225;
+            }
             await _airlinetTicketValidator.ValidateAndThrowAsync(updateModel, cancellationToken);
             
             var model = _mapper.Map<AirlineTicket>(updateModel);
