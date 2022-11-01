@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using IdentityServer.Quickstart.Account;
 
 namespace IdentityServerHost.Quickstart.UI
 {
@@ -203,6 +204,43 @@ namespace IdentityServerHost.Quickstart.UI
         }
 
         [HttpGet]
+        public IActionResult Register(string returnUrl)
+        {
+            var viewModel = new RegisterViewModel()
+            {
+                ReturnUrl = returnUrl
+            };
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            ApplicationUser user = new ApplicationUser
+            {
+                Email = viewModel.Email,
+                UserName = viewModel.Username
+            };
+
+            var result = await _userManager.CreateAsync(user, viewModel.Password);
+
+            if (result.Succeeded)
+            {
+                await _signInManager.SignInAsync(user, isPersistent: false);
+                return Redirect(viewModel.ReturnUrl);
+            }
+
+            ModelState.AddModelError(String.Empty, result.Errors.ToString());
+            return View(viewModel.ReturnUrl);
+        }
+
+        [HttpGet]
         public IActionResult AccessDenied()
         {
             return View();
@@ -310,9 +348,9 @@ namespace IdentityServerHost.Quickstart.UI
             var vm = new LoggedOutViewModel
             {
                 AutomaticRedirectAfterSignOut = AccountOptions.AutomaticRedirectAfterSignOut,
-                PostLogoutRedirectUri = logout?.PostLogoutRedirectUri,
-                ClientName = string.IsNullOrEmpty(logout?.ClientName) ? logout?.ClientId : logout?.ClientName,
-                SignOutIframeUrl = logout?.SignOutIFrameUrl,
+                PostLogoutRedirectUri = logout.PostLogoutRedirectUri,
+                ClientName = string.IsNullOrEmpty(logout.ClientName) ? logout.ClientId : logout.ClientName,
+                SignOutIframeUrl = logout.SignOutIFrameUrl,
                 LogoutId = logoutId
             };
 
