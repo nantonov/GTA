@@ -4,7 +4,8 @@ using AirlineTickets.API.ViewModels.AirlineTicket;
 using AirlineTickets.API.ViewModels.AirlineTicketCity;
 using AirlineTickets.API.ViewModels.City;
 using AirlineTickets.API.ViewModels.Hotel;
-using AirlineTickets.Business.DI;
+using AirlineTickets.BLL.DI;
+using AirlineTickets.BLL.Mapper.Profiles;
 using AutoMapper;
 using FluentValidation;
 
@@ -22,21 +23,14 @@ builder.Services.AddSwaggerGen();
 
 var configurationBuilder = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 
-builder.Services.AddBusinessLogicDependencies(configurationBuilder);
+builder.Services.AddBLLLogicDependencies(configurationBuilder);
 
 builder.Services.AddScoped<IValidator<CreateUpdateTicketCityViewModel>, AirlineTicketCityValidator>()
     .AddScoped<IValidator<CreateUpdateTicketViewModel>, AirlineTicketValidator>()
     .AddScoped<IValidator<CreateUpdateCityViewModel>, CityValidator>()
     .AddScoped<IValidator<CreateUpdateHotelViewModel>, HotelValidator>();
 
-var mapperConfig = new MapperConfiguration(mc =>
-{
-    mc.AddProfile(new EntityModel());
-    mc.AddProfile(new ModelViewModel());
-});
-
-IMapper mapper = mapperConfig.CreateMapper();
-builder.Services.AddSingleton(mapper);
+builder.Services.AddAutoMapper(typeof(ModelViewModel));
 
 var app = builder.Build();
 

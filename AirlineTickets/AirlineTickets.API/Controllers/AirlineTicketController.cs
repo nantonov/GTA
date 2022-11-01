@@ -1,6 +1,6 @@
 using AirlineTickets.API.ViewModels.AirlineTicket;
-using AirlineTickets.Business.Interfaces;
-using AirlineTickets.Business.Models;
+using AirlineTickets.BLL.Interfaces;
+using AirlineTickets.BLL.Models;
 using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;

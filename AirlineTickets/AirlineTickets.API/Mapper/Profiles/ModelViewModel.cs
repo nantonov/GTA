@@ -2,7 +2,7 @@
 using AirlineTickets.API.ViewModels.AirlineTicketCity;
 using AirlineTickets.API.ViewModels.City;
 using AirlineTickets.API.ViewModels.Hotel;
-using AirlineTickets.Business.Models;
+using AirlineTickets.BLL.Models;
 using AutoMapper;
 
 namespace AirlineTickets.API.Mapper.Profiles
