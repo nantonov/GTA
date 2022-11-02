@@ -2,8 +2,12 @@
 using IdentityServer.Data;
 using IdentityServer.Models;
 using IdentityServer4;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Facebook;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using System.Security.Claims;
 
 var seed = args.Contains("/seed");
 if (seed)
@@ -13,15 +17,12 @@ if (seed)
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build()
-    .GetConnectionString("DefaultConnection");
-
-SeedData.EnsureSeedData(connectionString);
+var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -46,16 +47,45 @@ var identityBuilder = builder.Services.AddIdentityServer(options =>
 identityBuilder.AddDeveloperSigningCredential();
 
 builder.Services.AddAuthentication()
-    .AddGoogle(options =>
+    .AddFacebook(options =>
     {
         options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-
-        // register your IdentityServer with Google at https://console.developers.google.com
-        // enable the Google+ API
-        // set the redirect URI to https://localhost:5001/signin-google
-        options.ClientId = "copy client ID from Google here";
-        options.ClientSecret = "copy client secret from Google here";
+        options.AppId = configuration["Authentication:Facebook:AppId"];
+        options.AppSecret = configuration["Authentication:Facebook:AppSecret"]; 
+        options.SaveTokens = true;
+        options.CallbackPath = new PathString("/signin-facebook-token");
+        options.ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "user_id");
+        options.ClaimActions.MapJsonKey("email", "email");
     });
+
+/*options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+        options.ClientId = builder.Configuration["Authentication:VK:ClientId"];
+        options.ClientSecret = builder.Configuration["Authentication:VK:ClientSecret"];
+        options.ClaimsIssuer = "VK Provider";
+        options.SaveTokens = true;
+        options.CallbackPath = new PathString("/signin-vkontakte-token");
+        options.AuthorizationEndpoint = "https://oauth.vk.com/authorize";
+        options.TokenEndpoint = "https://oauth.vk.com/access_token";
+        options.Scope.Add("email");
+        options.ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "user_id");
+        options.ClaimActions.MapJsonKey("email", "email");
+
+        options.Events = new OAuthEvents
+        {
+            OnCreatingTicket = context =>
+            {
+                context.RunClaimActions(context.TokenResponse.Response.RootElement);
+                return Task.CompletedTask;
+            },
+            OnRemoteFailure = OnFailure
+        };
+    });
+
+Task OnFailure(RemoteFailureContext arg)
+{
+    Console.WriteLine(arg);
+    return Task.CompletedTask;
+}*/
 
 var app = builder.Build();
 

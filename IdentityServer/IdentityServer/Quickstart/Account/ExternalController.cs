@@ -88,64 +88,45 @@ namespace IdentityServerHost.Quickstart.UI
                 throw new Exception("External authentication error");
             }
 
-            if (_logger.IsEnabled(LogLevel.Debug))
-            {
-                var externalClaims = result.Principal.Claims.Select(c => $"{c.Type}: {c.Value}");
-                _logger.LogDebug("External claims: {@claims}", externalClaims);
-            }
+            var externalUser = result.Principal;
 
-            // lookup our user and external provider info
-            var (user, provider, providerUserId, claims) = await FindUserFromExternalProviderAsync(result);
+            var userIdClaim = externalUser.FindFirst(JwtClaimTypes.Subject) ??
+                              externalUser.FindFirst(ClaimTypes.NameIdentifier) ??
+                              throw new Exception("Unknown userid");
+
+            var claims = externalUser.Claims.ToList();
+            claims.Remove(userIdClaim);
+
+            var email = claims.FirstOrDefault(x => x.Type == "email").Value;
+            var username = email.Split("@")[0];
+
+            var provider = result.Properties.Items["scheme"];
+
+            var user = await _userManager.FindByEmailAsync(email);
+
             if (user == null)
             {
-                // this might be where you might initiate a custom workflow for user registration
-                // in this sample we don't show how that would be done, as our sample implementation
-                // simply auto-provisions new external user
-                user = await AutoProvisionUserAsync(provider, providerUserId, claims);
+                await _userManager.CreateAsync(new ApplicationUser
+                {
+                    Email = email,
+                    UserName = username
+
+                });
+
+                user = await _userManager.FindByEmailAsync(email);
+
+                await _userManager.AddClaimsAsync(user, claims);
             }
 
-            // this allows us to collect any additional claims or properties
-            // for the specific protocols used and store them in the local auth cookie.
-            // this is typically used to store data needed for signout from those protocols.
-            var additionalLocalClaims = new List<Claim>();
-            var localSignInProps = new AuthenticationProperties();
-            ProcessLoginCallback(result, additionalLocalClaims, localSignInProps);
-            
-            // issue authentication cookie for user
-            // we must issue the cookie maually, and can't use the SignInManager because
-            // it doesn't expose an API to issue additional claims from the login workflow
-            var principal = await _signInManager.CreateUserPrincipalAsync(user);
-            additionalLocalClaims.AddRange(principal.Claims);
-            var name = principal.FindFirst(JwtClaimTypes.Name)?.Value ?? user.Id;
-            
-            var isuser = new IdentityServerUser(user.Id)
+            await HttpContext.SignInAsync(new IdentityServerUser(user.Id.ToString())
             {
-                DisplayName = name,
-                IdentityProvider = provider,
-                AdditionalClaims = additionalLocalClaims
-            };
+                DisplayName = user.UserName,
+                IdentityProvider = provider
+            });
 
-            await HttpContext.SignInAsync(isuser, localSignInProps);
-
-            // delete temporary cookie used during external authentication
             await HttpContext.SignOutAsync(IdentityServerConstants.ExternalCookieAuthenticationScheme);
 
-            // retrieve return URL
             var returnUrl = result.Properties.Items["returnUrl"] ?? "~/";
-
-            // check if external login is in the context of an OIDC request
-            var context = await _interaction.GetAuthorizationContextAsync(returnUrl);
-            await _events.RaiseAsync(new UserLoginSuccessEvent(provider, providerUserId, user.Id, name, true, context?.Client.ClientId));
-
-            if (context != null)
-            {
-                if (context.IsNativeClient())
-                {
-                    // The client is native, so this change in how to
-                    // return the response is for better UX for the end user.
-                    return this.LoadingPage("Redirect", returnUrl);
-                }
-            }
 
             return Redirect(returnUrl);
         }
