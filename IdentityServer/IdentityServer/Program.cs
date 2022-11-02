@@ -3,10 +3,8 @@ using IdentityServer.Data;
 using IdentityServer.Models;
 using IdentityServer4;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Facebook;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using System.Security.Claims;
 
 var seed = args.Contains("/seed");
@@ -17,7 +15,7 @@ if (seed)
 
 var builder = WebApplication.CreateBuilder(args);
 
-var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+var configuration = builder.Configuration;
 
 builder.Services.AddControllersWithViews();
 
@@ -35,7 +33,6 @@ var identityBuilder = builder.Services.AddIdentityServer(options =>
     options.Events.RaiseFailureEvents = true;
     options.Events.RaiseSuccessEvents = true;
 
-    // see https://identityserver4.readthedocs.io/en/latest/topics/resources.html
     options.EmitStaticAudienceClaim = true;
 })
     .AddInMemoryIdentityResources(Config.IdentityResources)
@@ -43,49 +40,20 @@ var identityBuilder = builder.Services.AddIdentityServer(options =>
     .AddInMemoryClients(Config.Clients)
     .AddAspNetIdentity<ApplicationUser>();
 
-// not recommended for production - you need to store your key material somewhere secure
 identityBuilder.AddDeveloperSigningCredential();
+var a = configuration.GetSection("Authentication");
 
 builder.Services.AddAuthentication()
     .AddFacebook(options =>
     {
         options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
         options.AppId = configuration["Authentication:Facebook:AppId"];
-        options.AppSecret = configuration["Authentication:Facebook:AppSecret"]; 
+        options.AppSecret = configuration["Authentication:Facebook:AppSecret"];
         options.SaveTokens = true;
         options.CallbackPath = new PathString("/signin-facebook-token");
         options.ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "user_id");
         options.ClaimActions.MapJsonKey("email", "email");
     });
-
-/*options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-        options.ClientId = builder.Configuration["Authentication:VK:ClientId"];
-        options.ClientSecret = builder.Configuration["Authentication:VK:ClientSecret"];
-        options.ClaimsIssuer = "VK Provider";
-        options.SaveTokens = true;
-        options.CallbackPath = new PathString("/signin-vkontakte-token");
-        options.AuthorizationEndpoint = "https://oauth.vk.com/authorize";
-        options.TokenEndpoint = "https://oauth.vk.com/access_token";
-        options.Scope.Add("email");
-        options.ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "user_id");
-        options.ClaimActions.MapJsonKey("email", "email");
-
-        options.Events = new OAuthEvents
-        {
-            OnCreatingTicket = context =>
-            {
-                context.RunClaimActions(context.TokenResponse.Response.RootElement);
-                return Task.CompletedTask;
-            },
-            OnRemoteFailure = OnFailure
-        };
-    });
-
-Task OnFailure(RemoteFailureContext arg)
-{
-    Console.WriteLine(arg);
-    return Task.CompletedTask;
-}*/
 
 var app = builder.Build();
 
