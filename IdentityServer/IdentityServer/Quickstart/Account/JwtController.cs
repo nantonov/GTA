@@ -20,9 +20,9 @@ namespace IdentityServer.Quickstart.Account
         }
 
         [Route("AirlineTicketsJwt")]
-        [HttpPost]
+        [HttpGet]
         [Authorize]
-        public ActionResult GetAirlineTicketsJwt()
+        public IActionResult GetAirlineTicketsJwt()
         {
             var signinKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
 

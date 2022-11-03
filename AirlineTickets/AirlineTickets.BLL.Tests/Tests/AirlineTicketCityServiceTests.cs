@@ -39,7 +39,7 @@ namespace AirlineTickets.BLL.Tests.Tests
             _ticketCityRepository.Setup(r => r.GetById(AirlineTicketCityModels.TicketCityModel.AirlineTicketId,
                 AirlineTicketCityModels.TicketCityModel.CityId, default)).ReturnsAsync(value: null);
 
-            var result = await _ticketCityService.Delete(AirlineTicketCityModels.TicketCityModel.AirlineTicketId, 
+            var result = await _ticketCityService.Delete(AirlineTicketCityModels.TicketCityModel.AirlineTicketId,
                 AirlineTicketCityModels.TicketCityModel.CityId, default);
 
             result.ShouldBeNull();
@@ -48,14 +48,14 @@ namespace AirlineTickets.BLL.Tests.Tests
         [Fact]
         public async Task Delete_WhenIdIsSet_ShouldReturnModel()
         {
-            _ticketCityRepository.Setup(r => r.GetById(AirlineTicketCityModels.TicketCityModel.AirlineTicketId, 
+            _ticketCityRepository.Setup(r => r.GetById(AirlineTicketCityModels.TicketCityModel.AirlineTicketId,
                 AirlineTicketCityModels.TicketCityModel.CityId, default)).ReturnsAsync(AirlineTicketCityEntities.TicketCityEntity);
             _ticketCityRepository.Setup(r => r.Delete(AirlineTicketCityModels.TicketCityModel.AirlineTicketId,
                 AirlineTicketCityModels.TicketCityModel.CityId, default));
             _mapper.Setup(m => m.Map<AirlineTicketCity>(AirlineTicketCityEntities.TicketCityEntity))
                 .Returns(AirlineTicketCityModels.TicketCityModel);
 
-            var result = await _ticketCityService.Delete(AirlineTicketCityModels.TicketCityModel.AirlineTicketId, 
+            var result = await _ticketCityService.Delete(AirlineTicketCityModels.TicketCityModel.AirlineTicketId,
                 AirlineTicketCityModels.TicketCityModel.CityId, default);
 
             result.StayingStatus.ShouldBe(AirlineTicketCityModels.TicketCityModel.StayingStatus);
@@ -64,10 +64,10 @@ namespace AirlineTickets.BLL.Tests.Tests
         [Fact]
         public async Task Get_WhenEntityNotExist_ShouldReturnNull()
         {
-            _ticketCityRepository.Setup(r => r.GetById(AirlineTicketCityModels.TicketCityModel.AirlineTicketId, 
+            _ticketCityRepository.Setup(r => r.GetById(AirlineTicketCityModels.TicketCityModel.AirlineTicketId,
                 AirlineTicketCityModels.TicketCityModel.CityId, default)).ReturnsAsync(value: null);
 
-            var result = await _ticketCityService.Get(AirlineTicketCityModels.TicketCityModel.AirlineTicketId, 
+            var result = await _ticketCityService.Get(AirlineTicketCityModels.TicketCityModel.AirlineTicketId,
                 AirlineTicketCityModels.TicketCityModel.CityId, default);
 
             result.ShouldBeNull();
@@ -76,12 +76,12 @@ namespace AirlineTickets.BLL.Tests.Tests
         [Fact]
         public async Task Get_WhenEntityExist_ShouldReturnModel()
         {
-            _ticketCityRepository.Setup(r => r.GetById(AirlineTicketCityModels.TicketCityModel.AirlineTicketId, 
+            _ticketCityRepository.Setup(r => r.GetById(AirlineTicketCityModels.TicketCityModel.AirlineTicketId,
                 AirlineTicketCityModels.TicketCityModel.CityId, default)).ReturnsAsync(AirlineTicketCityEntities.TicketCityEntity);
             _mapper.Setup(m => m.Map<AirlineTicketCity>(AirlineTicketCityEntities.TicketCityEntity))
                 .Returns(AirlineTicketCityModels.TicketCityModel);
 
-            var result = await _ticketCityService.Get(AirlineTicketCityModels.TicketCityModel.AirlineTicketId, 
+            var result = await _ticketCityService.Get(AirlineTicketCityModels.TicketCityModel.AirlineTicketId,
                 AirlineTicketCityModels.TicketCityModel.CityId, default);
 
             result.StayingStatus.ShouldBe(AirlineTicketCityModels.TicketCityModel.StayingStatus);
