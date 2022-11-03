@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+	<TargetFramework>net6.0</TargetFramework>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<Nullable>enable</Nullable>
 
-    <IsPackable>false</IsPackable>
+	<IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,9 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AirlineTickets.BLL\AirlineTickets.BLL.csproj" />
-    <ProjectReference Include="..\AirlineTickets.Business\AirlineTickets.BLL.csproj" />
     <ProjectReference Include="..\AirlineTickets.DAL\AirlineTickets.DAL.csproj" />
-    <ProjectReference Include="..\AirlineTickets.Data\AirlineTickets.DAL.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,11 +4,13 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>5dce2ba7-f8ac-45d3-8c79-1fc5a39bd427</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
     <PackageReference Include="FluentValidation" Version="11.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.9">
       <PrivateAssets>all</PrivateAssets>
@@ -20,9 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AirlineTickets.BLL\AirlineTickets.BLL.csproj" />
-    <ProjectReference Include="..\AirlineTickets.Business\AirlineTickets.BLL.csproj" />
     <ProjectReference Include="..\AirlineTickets.DAL\AirlineTickets.DAL.csproj" />
-    <ProjectReference Include="..\AirlineTickets.Data\AirlineTickets.DAL.csproj" />
   </ItemGroup>
 
 </Project>

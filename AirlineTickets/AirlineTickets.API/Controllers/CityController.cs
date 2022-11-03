@@ -3,10 +3,12 @@ using AirlineTickets.BLL.Interfaces;
 using AirlineTickets.BLL.Models;
 using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AirlineTickets.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class CityController : ControllerBase
