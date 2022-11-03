@@ -20,7 +20,7 @@ var configurationBuilder = builder.Configuration;
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
-    options.Authority = "https://localhost:5001/";
+    options.Authority = configurationBuilder["Urls:Authority"];
     options.RequireHttpsMetadata = false;
     options.Audience = "AirlineTicketsAPI";
     options.TokenValidationParameters = new TokenValidationParameters
@@ -56,7 +56,7 @@ builder.Services.AddSwaggerGen(options =>
         {
             Password = new OpenApiOAuthFlow
             {
-                TokenUrl = new Uri(configurationBuilder["TokenUrl"]),
+                TokenUrl = new Uri(configurationBuilder["Urls:Token"]),
                 Scopes = new Dictionary<string, string>
                 {
                     {"AirlineTicketsAPI", "AirlineTickets API"}
