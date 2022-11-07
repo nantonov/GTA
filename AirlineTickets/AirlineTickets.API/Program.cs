@@ -1,4 +1,5 @@
 using AirlineTickets.API.Mapper.Profiles;
+using AirlineTickets.API.Middleware;
 using AirlineTickets.API.Validation.Validators;
 using AirlineTickets.API.ViewModels.AirlineTicket;
 using AirlineTickets.API.ViewModels.AirlineTicketCity;
@@ -110,6 +111,8 @@ if (app.Environment.IsDevelopment())
         options.OAuthClientSecret("client_secret_swagger");
     });
 }
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
