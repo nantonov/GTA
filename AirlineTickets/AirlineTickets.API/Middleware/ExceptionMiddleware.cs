@@ -23,12 +23,12 @@ namespace AirlineTickets.API.Middleware
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error occured: {ex}");
-                await HandleExceptionAsync(httpContext, ex);
+                _logger.LogError(ex, "Error occured");
+                await HandleExceptionAsync(httpContext);
             }
         }
 
-        private async Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private static async Task HandleExceptionAsync(HttpContext context)
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;

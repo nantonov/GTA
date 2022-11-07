@@ -87,12 +87,6 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddBLLLogicDependencies(configurationBuilder);
 
-builder.Services.AddLogging(config =>
-{
-    config.AddDebug();
-    config.AddConsole();
-});
-
 builder.Services.AddScoped<IValidator<CreateUpdateTicketCityViewModel>, AirlineTicketCityValidator>()
     .AddScoped<IValidator<CreateUpdateTicketViewModel>, AirlineTicketValidator>()
     .AddScoped<IValidator<CreateUpdateCityViewModel>, CityValidator>()
