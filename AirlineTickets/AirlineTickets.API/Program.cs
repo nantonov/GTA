@@ -1,4 +1,5 @@
 using AirlineTickets.API.Mapper.Profiles;
+using AirlineTickets.API.Middleware;
 using AirlineTickets.API.Validation.Validators;
 using AirlineTickets.API.ViewModels.AirlineTicket;
 using AirlineTickets.API.ViewModels.AirlineTicketCity;
@@ -86,6 +87,12 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddBLLLogicDependencies(configurationBuilder);
 
+builder.Services.AddLogging(config =>
+{
+    config.AddDebug();
+    config.AddConsole();
+});
+
 builder.Services.AddScoped<IValidator<CreateUpdateTicketCityViewModel>, AirlineTicketCityValidator>()
     .AddScoped<IValidator<CreateUpdateTicketViewModel>, AirlineTicketValidator>()
     .AddScoped<IValidator<CreateUpdateCityViewModel>, CityValidator>()
@@ -110,6 +117,8 @@ if (app.Environment.IsDevelopment())
         options.OAuthClientSecret("client_secret_swagger");
     });
 }
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
