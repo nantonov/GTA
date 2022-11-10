@@ -2,7 +2,7 @@
 
 namespace AirlineTickets.API.Tests.TestEntities
 {
-    public class AirlineTicketEntities
+    internal static class AirlineTicketEntities
     {
         public static AirlineTicketEntity TicketEntity = new()
         {

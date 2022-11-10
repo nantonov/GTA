@@ -1,8 +1,6 @@
-﻿using AirlineTickets.DAL.Entities;
-
-namespace AirlineTickets.BLL.Tests.TestObjects.Entities
+﻿namespace AirlineTickets.BLL.Tests.TestObjects.Entities
 {
-    internal class AirlineTicketEntities
+    internal static class AirlineTicketEntities
     {
         public static AirlineTicketEntity TicketEntity = new()
         {

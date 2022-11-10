@@ -2,21 +2,23 @@
 using Microsoft.AspNetCore.Authorization.Policy;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Net.Mime;
+using System.Text;
 
 namespace AirlineTickets.API.Tests
 {
     public class APITestsBase : IDisposable
     {
         protected readonly HttpClient _httpClient;
-        protected readonly WebApplicationFactory<Program> _appFactory;
-        protected ApplicationDbContext _context;
+        private readonly WebApplicationFactory<Program> _appFactory;
+        protected readonly ApplicationDbContext _context;
+        private readonly IConfiguration _configuration;
 
-        protected APITestsBase()
+        public APITestsBase()
         {
             _appFactory = new WebApplicationFactory<Program>().WithWebHostBuilder(builder =>
                 builder.ConfigureServices(services =>
@@ -31,7 +33,28 @@ namespace AirlineTickets.API.Tests
                 }));
 
             _httpClient = _appFactory.CreateClient();
-            _context = _appFactory.Services.CreateScope().ServiceProvider.GetService<ApplicationDbContext>();
+
+            var services = _appFactory.Services.CreateScope().ServiceProvider;
+
+            _configuration = services.GetService<IConfiguration>();
+            _context = services.GetService<ApplicationDbContext>();
+
+            _httpClient.DefaultRequestHeaders.Authorization = new("Bearer",
+                Convert.ToBase64String(Encoding.ASCII.GetBytes(_configuration["Jwt:Key"])));
+        }
+
+        protected static HttpContent SerializeObjectToHttpContent(object objectToParse)
+        {
+            string jsonString = JsonConvert.SerializeObject(objectToParse, Formatting.None, new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+
+            ByteArrayContent content = new StringContent(jsonString);
+
+            content.Headers.ContentType = new MediaTypeHeaderValue(MediaTypeNames.Application.Json);
+
+            return content;
         }
 
         public void Dispose()

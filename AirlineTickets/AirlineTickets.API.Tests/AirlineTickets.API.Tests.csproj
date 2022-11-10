@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AirlineTickets.API\AirlineTickets.API.csproj" />
     <ProjectReference Include="..\AirlineTickets.DAL\AirlineTickets.DAL.csproj" />
   </ItemGroup>
 
