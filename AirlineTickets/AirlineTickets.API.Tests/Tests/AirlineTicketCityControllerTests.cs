@@ -12,7 +12,7 @@
             _context.AirlineTicketCities.AddRange(AirlineTicketCityEntities.TicketCityEntitiesList);
             await _context.SaveChangesAsync();
 
-            var response = await _httpClient.GetAsync("/AirlineTicketCity");
+            var response = await _httpClient.GetAsync(RequestUris.DefaultTicketCityUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
             response.Content.ReadAsAsync<List<AirlineTicketCityEntity>>().Result.ShouldNotBeEmpty();
@@ -23,7 +23,7 @@
         {
             await _context.Database.EnsureDeletedAsync();
 
-            var response = await _httpClient.GetAsync("/AirlineTicketCity/Ticket/1/City/1");
+            var response = await _httpClient.GetAsync(RequestUris.GetDeleteTicketCityUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NoContent);
             response.Content.ReadAsAsync<AirlineTicketEntity>().Result.ShouldBeNull();
@@ -39,7 +39,7 @@
             _context.AirlineTicketCities.Add(AirlineTicketCityEntities.TicketCityEntity);
             await _context.SaveChangesAsync();
 
-            var response = await _httpClient.GetAsync("/AirlineTicketCity/Ticket/1/City/1");
+            var response = await _httpClient.GetAsync(RequestUris.GetDeleteTicketCityUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
             response.Content.ReadAsAsync<AirlineTicketCityEntity>().Result.StayingStatus
@@ -51,7 +51,7 @@
         {
             await _context.Database.EnsureDeletedAsync();
 
-            var response = await _httpClient.PostAsync("/AirlineTicketCity",
+            var response = await _httpClient.PostAsync(RequestUris.DefaultTicketCityUri,
                 SerializeObjectToHttpContent(AirlineTicketCityEntities.TicketCityEntity));
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
@@ -63,7 +63,7 @@
         {
             await _context.Database.EnsureDeletedAsync();
 
-            var response = await _httpClient.DeleteAsync("/AirlineTicketCity/Ticket/1/City/1");
+            var response = await _httpClient.DeleteAsync(RequestUris.GetDeleteTicketCityUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
             response.Content.ReadAsAsync<AirlineTicketCityEntity>().Result.ShouldBeNull();
@@ -79,7 +79,7 @@
             _context.AirlineTicketCities.Add(AirlineTicketCityEntities.TicketCityEntity);
             await _context.SaveChangesAsync();
 
-            var response = await _httpClient.DeleteAsync("/AirlineTicketCity/Ticket/1/City/1");
+            var response = await _httpClient.DeleteAsync(RequestUris.GetDeleteTicketCityUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
         }
@@ -89,7 +89,7 @@
         {
             await _context.Database.EnsureDeletedAsync();
 
-            var response = await _httpClient.PutAsync("/AirlineTicketCity",
+            var response = await _httpClient.PutAsync(RequestUris.DefaultTicketCityUri,
                 SerializeObjectToHttpContent(AirlineTicketCityEntities.TicketCityEntity));
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.InternalServerError);
@@ -105,7 +105,7 @@
             var ticketCityToUpdate = AirlineTicketCityEntities.TicketCityEntity;
             ticketCityToUpdate.StayingStatus = Core.Enums.CityStayingStatus.Departure;
 
-            var response = await _httpClient.PutAsync("/AirlineTicketCity",
+            var response = await _httpClient.PutAsync(RequestUris.DefaultTicketCityUri,
                 SerializeObjectToHttpContent(ticketCityToUpdate));
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);

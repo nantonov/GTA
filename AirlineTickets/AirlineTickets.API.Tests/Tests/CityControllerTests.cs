@@ -10,7 +10,7 @@
             _context.Cities.AddRange(CityEntities.CityEntitiesList);
             await _context.SaveChangesAsync();
 
-            var response = await _httpClient.GetAsync("/City");
+            var response = await _httpClient.GetAsync(RequestUris.DefaultCityUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
             response.Content.ReadAsAsync<List<CityEntity>>().Result.ShouldNotBeEmpty();
@@ -21,7 +21,7 @@
         {
             await _context.Database.EnsureDeletedAsync();
 
-            var response = await _httpClient.GetAsync("/City/1");
+            var response = await _httpClient.GetAsync(RequestUris.GetDeleteUpdateCityUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NoContent);
             response.Content.ReadAsAsync<CityEntity>().Result.ShouldBeNull();
@@ -35,7 +35,7 @@
             _context.Cities.Add(CityEntities.CityEntity);
             await _context.SaveChangesAsync();
 
-            var response = await _httpClient.GetAsync("/City/1");
+            var response = await _httpClient.GetAsync(RequestUris.GetDeleteUpdateCityUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
             var result = response.Content.ReadAsAsync<CityEntity>().Result;
@@ -48,7 +48,7 @@
         {
             await _context.Database.EnsureDeletedAsync();
 
-            var response = await _httpClient.PostAsync("/City",
+            var response = await _httpClient.PostAsync(RequestUris.DefaultCityUri,
                 SerializeObjectToHttpContent(CityEntities.CityEntity));
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
@@ -60,7 +60,7 @@
         {
             await _context.Database.EnsureDeletedAsync();
 
-            var response = await _httpClient.DeleteAsync("/City/1");
+            var response = await _httpClient.DeleteAsync(RequestUris.GetDeleteUpdateCityUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
             response.Content.ReadAsAsync<CityEntity>().Result.ShouldBeNull();
@@ -74,7 +74,7 @@
             _context.Cities.Add(CityEntities.CityEntity);
             await _context.SaveChangesAsync();
 
-            var response = await _httpClient.DeleteAsync("/City/1");
+            var response = await _httpClient.DeleteAsync(RequestUris.GetDeleteUpdateCityUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
         }
@@ -84,7 +84,7 @@
         {
             await _context.Database.EnsureDeletedAsync();
 
-            var response = await _httpClient.PutAsync("/City/1", SerializeObjectToHttpContent(CityEntities.CityEntity));
+            var response = await _httpClient.PutAsync(RequestUris.GetDeleteUpdateCityUri, SerializeObjectToHttpContent(CityEntities.CityEntity));
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.InternalServerError);
         }
@@ -99,7 +99,7 @@
             var cityToUpdate = CityEntities.CityEntity;
             cityToUpdate.Population = 200_000;
 
-            var response = await _httpClient.PutAsync("/City/1", SerializeObjectToHttpContent(cityToUpdate));
+            var response = await _httpClient.PutAsync(RequestUris.GetDeleteUpdateCityUri, SerializeObjectToHttpContent(cityToUpdate));
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
             response.Content.ReadAsAsync<CityEntity>().Result.Population.ShouldBe(cityToUpdate.Population);

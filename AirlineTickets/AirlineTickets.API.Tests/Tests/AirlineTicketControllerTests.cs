@@ -10,7 +10,7 @@ namespace AirlineTickets.API.Tests.Tests
             _context.AirlineTickets.AddRange(AirlineTicketEntities.TicketEntitiesList);
             await _context.SaveChangesAsync();
 
-            var response = await _httpClient.GetAsync("/AirlineTicket");
+            var response = await _httpClient.GetAsync(RequestUris.DefaultTicketUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
             response.Content.ReadAsAsync<List<AirlineTicketEntity>>().Result.ShouldNotBeEmpty();
@@ -21,7 +21,7 @@ namespace AirlineTickets.API.Tests.Tests
         {
             await _context.Database.EnsureDeletedAsync();
 
-            var response = await _httpClient.GetAsync("/AirlineTicket/1");
+            var response = await _httpClient.GetAsync(RequestUris.GetDeleteUpdateTicketUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NoContent);
             response.Content.ReadAsAsync<AirlineTicketEntity>().Result.ShouldBeNull();
@@ -35,7 +35,7 @@ namespace AirlineTickets.API.Tests.Tests
             _context.AirlineTickets.Add(AirlineTicketEntities.TicketEntity);
             await _context.SaveChangesAsync();
 
-            var response = await _httpClient.GetAsync("/AirlineTicket/1");
+            var response = await _httpClient.GetAsync(RequestUris.GetDeleteUpdateTicketUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
             var result = response.Content.ReadAsAsync<AirlineTicketEntity>().Result;
@@ -48,7 +48,7 @@ namespace AirlineTickets.API.Tests.Tests
         {
             await _context.Database.EnsureDeletedAsync();
 
-            var response = await _httpClient.PostAsync("/AirlineTicket",
+            var response = await _httpClient.PostAsync(RequestUris.DefaultTicketUri,
                 SerializeObjectToHttpContent(AirlineTicketEntities.TicketEntity));
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
@@ -60,7 +60,7 @@ namespace AirlineTickets.API.Tests.Tests
         {
             await _context.Database.EnsureDeletedAsync();
 
-            var response = await _httpClient.DeleteAsync("/AirlineTicket/1");
+            var response = await _httpClient.DeleteAsync(RequestUris.GetDeleteUpdateTicketUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
             response.Content.ReadAsAsync<AirlineTicketEntity>().Result.ShouldBeNull();
@@ -74,7 +74,7 @@ namespace AirlineTickets.API.Tests.Tests
             _context.AirlineTickets.Add(AirlineTicketEntities.TicketEntity);
             await _context.SaveChangesAsync();
 
-            var response = await _httpClient.DeleteAsync("/AirlineTicket/1");
+            var response = await _httpClient.DeleteAsync(RequestUris.GetDeleteUpdateTicketUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
         }
@@ -84,7 +84,7 @@ namespace AirlineTickets.API.Tests.Tests
         {
             await _context.Database.EnsureDeletedAsync();
 
-            var response = await _httpClient.PutAsync("/AirlineTicket/1",
+            var response = await _httpClient.PutAsync(RequestUris.GetDeleteUpdateTicketUri,
                 SerializeObjectToHttpContent(AirlineTicketEntities.TicketEntity));
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.InternalServerError);
@@ -100,7 +100,7 @@ namespace AirlineTickets.API.Tests.Tests
             var ticketToUpdate = AirlineTicketEntities.TicketEntity;
             ticketToUpdate.Price = 200;
 
-            var response = await _httpClient.PutAsync("/AirlineTicket/1", SerializeObjectToHttpContent(ticketToUpdate));
+            var response = await _httpClient.PutAsync(RequestUris.GetDeleteUpdateTicketUri, SerializeObjectToHttpContent(ticketToUpdate));
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
             response.Content.ReadAsAsync<AirlineTicketEntity>().Result.Price.ShouldBe(ticketToUpdate.Price);

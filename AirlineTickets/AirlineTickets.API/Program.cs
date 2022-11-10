@@ -123,10 +123,7 @@ app.MapControllers();
 
 app.Run();
 
-namespace AirlineTickets.API
+public partial class Program
 {
-    public partial class Program 
-    {
-        protected Program() { }
-    }
+    protected Program() { }
 }
