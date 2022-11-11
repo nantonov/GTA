@@ -13,7 +13,8 @@ namespace AirlineTickets.API.Tests.Tests
             var response = await _httpClient.GetAsync(RequestUris.DefaultTicketUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            response.Content.ReadAsAsync<List<AirlineTicketEntity>>().Result.ShouldNotBeEmpty();
+            var result = await response.Content.ReadAsAsync<List<AirlineTicketEntity>>();
+            result.ShouldNotBeEmpty();
         }
 
         [Fact]
@@ -24,7 +25,8 @@ namespace AirlineTickets.API.Tests.Tests
             var response = await _httpClient.GetAsync(RequestUris.GetDeleteUpdateTicketUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NoContent);
-            response.Content.ReadAsAsync<AirlineTicketEntity>().Result.ShouldBeNull();
+            var result = await response.Content.ReadAsAsync<AirlineTicketEntity>();
+            result.ShouldBeNull();
         }
 
         [Fact]
@@ -38,7 +40,7 @@ namespace AirlineTickets.API.Tests.Tests
             var response = await _httpClient.GetAsync(RequestUris.GetDeleteUpdateTicketUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            var result = response.Content.ReadAsAsync<AirlineTicketEntity>().Result;
+            var result = await response.Content.ReadAsAsync<AirlineTicketEntity>();
             result.Price.ShouldBe(AirlineTicketEntities.TicketEntity.Price);
             result.PassengerCredentials.ShouldBe(AirlineTicketEntities.TicketEntity.PassengerCredentials);
         }
@@ -52,7 +54,8 @@ namespace AirlineTickets.API.Tests.Tests
                 SerializeObjectToHttpContent(AirlineTicketEntities.TicketEntity));
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            response.Content.ReadAsAsync<AirlineTicketEntity>().Result.ShouldNotBeNull();
+            var result = await response.Content.ReadAsAsync<AirlineTicketEntity>();
+            result.ShouldNotBeNull();
         }
 
         [Fact]
@@ -63,7 +66,8 @@ namespace AirlineTickets.API.Tests.Tests
             var response = await _httpClient.DeleteAsync(RequestUris.GetDeleteUpdateTicketUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            response.Content.ReadAsAsync<AirlineTicketEntity>().Result.ShouldBeNull();
+            var result = await response.Content.ReadAsAsync<AirlineTicketEntity>();
+            result.ShouldBeNull();
         }
 
         [Fact]
@@ -103,7 +107,8 @@ namespace AirlineTickets.API.Tests.Tests
             var response = await _httpClient.PutAsync(RequestUris.GetDeleteUpdateTicketUri, SerializeObjectToHttpContent(ticketToUpdate));
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            response.Content.ReadAsAsync<AirlineTicketEntity>().Result.Price.ShouldBe(ticketToUpdate.Price);
+            var result = await response.Content.ReadAsAsync<AirlineTicketEntity>();
+            result.Price.ShouldBe(ticketToUpdate.Price);
         }
     }
 }

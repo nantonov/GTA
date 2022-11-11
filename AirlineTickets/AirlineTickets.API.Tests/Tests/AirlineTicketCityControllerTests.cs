@@ -15,7 +15,8 @@
             var response = await _httpClient.GetAsync(RequestUris.DefaultTicketCityUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            response.Content.ReadAsAsync<List<AirlineTicketCityEntity>>().Result.ShouldNotBeEmpty();
+            var result = await response.Content.ReadAsAsync<List<AirlineTicketCityEntity>>();
+            result.ShouldNotBeEmpty();
         }
 
         [Fact]
@@ -26,7 +27,8 @@
             var response = await _httpClient.GetAsync(RequestUris.GetDeleteTicketCityUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NoContent);
-            response.Content.ReadAsAsync<AirlineTicketEntity>().Result.ShouldBeNull();
+            var result = await response.Content.ReadAsAsync<AirlineTicketEntity>();
+            result.ShouldBeNull();
         }
 
         [Fact]
@@ -42,8 +44,8 @@
             var response = await _httpClient.GetAsync(RequestUris.GetDeleteTicketCityUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            response.Content.ReadAsAsync<AirlineTicketCityEntity>().Result.StayingStatus
-                .ShouldBe(AirlineTicketCityEntities.TicketCityEntity.StayingStatus);
+            var result = await response.Content.ReadAsAsync<AirlineTicketCityEntity>();
+            result.StayingStatus.ShouldBe(AirlineTicketCityEntities.TicketCityEntity.StayingStatus);
         }
 
         [Fact]
@@ -55,7 +57,8 @@
                 SerializeObjectToHttpContent(AirlineTicketCityEntities.TicketCityEntity));
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            response.Content.ReadAsAsync<AirlineTicketCityEntity>().Result.ShouldNotBeNull();
+            var result = await response.Content.ReadAsAsync<AirlineTicketCityEntity>();
+            result.ShouldNotBeNull();
         }
 
         [Fact]
@@ -66,7 +69,8 @@
             var response = await _httpClient.DeleteAsync(RequestUris.GetDeleteTicketCityUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            response.Content.ReadAsAsync<AirlineTicketCityEntity>().Result.ShouldBeNull();
+            var result = await response.Content.ReadAsAsync<AirlineTicketCityEntity>();
+            result.ShouldBeNull();
         }
 
         [Fact]
@@ -109,8 +113,8 @@
                 SerializeObjectToHttpContent(ticketCityToUpdate));
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            response.Content.ReadAsAsync<AirlineTicketCityEntity>().Result.StayingStatus
-                .ShouldBe(ticketCityToUpdate.StayingStatus);
+            var result = await response.Content.ReadAsAsync<AirlineTicketCityEntity>();
+            result.StayingStatus.ShouldBe(ticketCityToUpdate.StayingStatus);
         }
     }
 }

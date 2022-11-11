@@ -13,7 +13,8 @@
             var response = await _httpClient.GetAsync(RequestUris.DefaultCityUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            response.Content.ReadAsAsync<List<CityEntity>>().Result.ShouldNotBeEmpty();
+            var result = await response.Content.ReadAsAsync<List<CityEntity>>();
+            result.ShouldNotBeEmpty();
         }
 
         [Fact]
@@ -24,7 +25,8 @@
             var response = await _httpClient.GetAsync(RequestUris.GetDeleteUpdateCityUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NoContent);
-            response.Content.ReadAsAsync<CityEntity>().Result.ShouldBeNull();
+            var result = await response.Content.ReadAsAsync<CityEntity>();
+            result.ShouldBeNull();
         }
 
         [Fact]
@@ -38,7 +40,7 @@
             var response = await _httpClient.GetAsync(RequestUris.GetDeleteUpdateCityUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            var result = response.Content.ReadAsAsync<CityEntity>().Result;
+            var result = await response.Content.ReadAsAsync<CityEntity>();
             result.Name.ShouldBe(CityEntities.CityEntity.Name);
             result.Population.ShouldBe(CityEntities.CityEntity.Population);
         }
@@ -52,7 +54,8 @@
                 SerializeObjectToHttpContent(CityEntities.CityEntity));
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            response.Content.ReadAsAsync<CityEntity>().Result.ShouldNotBeNull();
+            var result = await response.Content.ReadAsAsync<CityEntity>();
+            result.ShouldNotBeNull();
         }
 
         [Fact]
@@ -63,7 +66,8 @@
             var response = await _httpClient.DeleteAsync(RequestUris.GetDeleteUpdateCityUri);
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            response.Content.ReadAsAsync<CityEntity>().Result.ShouldBeNull();
+            var result = await response.Content.ReadAsAsync<CityEntity>();
+            result.ShouldBeNull();
         }
 
         [Fact]
@@ -102,7 +106,8 @@
             var response = await _httpClient.PutAsync(RequestUris.GetDeleteUpdateCityUri, SerializeObjectToHttpContent(cityToUpdate));
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            response.Content.ReadAsAsync<CityEntity>().Result.Population.ShouldBe(cityToUpdate.Population);
+            var result = await response.Content.ReadAsAsync<CityEntity>();
+            result.Population.ShouldBe(cityToUpdate.Population);
         }
     }
 }
