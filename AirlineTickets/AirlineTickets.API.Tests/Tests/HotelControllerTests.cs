@@ -12,9 +12,9 @@
             await _context.SaveChangesAsync();
 
             var response = await _httpClient.GetAsync(RequestUris.DefaultHotelUri);
+            var result = await response.Content.ReadAsAsync<List<HotelEntity>>();
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            var result = await response.Content.ReadAsAsync<List<HotelEntity>>();
             result.ShouldNotBeEmpty();
         }
 
@@ -24,9 +24,9 @@
             await _context.Database.EnsureDeletedAsync();
 
             var response = await _httpClient.GetAsync(RequestUris.GetDeleteUpdateHotelUri);
+            var result = await response.Content.ReadAsAsync<HotelEntity>();
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.NoContent);
-            var result = await response.Content.ReadAsAsync<HotelEntity>();
             result.ShouldBeNull();
         }
 
@@ -40,9 +40,9 @@
             await _context.SaveChangesAsync();
 
             var response = await _httpClient.GetAsync(RequestUris.GetDeleteUpdateHotelUri);
+            var result = await response.Content.ReadAsAsync<HotelEntity>();
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            var result = await response.Content.ReadAsAsync<HotelEntity>();
             result.Name.ShouldBe(HotelEntities.HotelEntity.Name);
             result.RoomsNumber.ShouldBe(HotelEntities.HotelEntity.RoomsNumber);
         }
@@ -54,9 +54,9 @@
 
             var response = await _httpClient.PostAsync(RequestUris.DefaultHotelUri,
                 SerializeObjectToHttpContent(HotelEntities.HotelEntity));
+            var result = await response.Content.ReadAsAsync<HotelEntity>();
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            var result = await response.Content.ReadAsAsync<HotelEntity>();
             result.ShouldNotBeNull();
         }
 
@@ -66,9 +66,9 @@
             await _context.Database.EnsureDeletedAsync();
 
             var response = await _httpClient.DeleteAsync(RequestUris.GetDeleteUpdateHotelUri);
+            var result = await response.Content.ReadAsAsync<HotelEntity>();
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            var result = await response.Content.ReadAsAsync<HotelEntity>();
             result.ShouldBeNull();
         }
 
@@ -106,10 +106,11 @@
             var hotelToUpdate = HotelEntities.HotelEntity;
             hotelToUpdate.RoomsNumber = 25;
 
-            var response = await _httpClient.PutAsync(RequestUris.GetDeleteUpdateHotelUri, SerializeObjectToHttpContent(hotelToUpdate));
+            var response = await _httpClient.PutAsync(RequestUris.GetDeleteUpdateHotelUri, 
+                SerializeObjectToHttpContent(hotelToUpdate));
+            var result = await response.Content.ReadAsAsync<HotelEntity>();
 
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-            var result = await response.Content.ReadAsAsync<HotelEntity>();
             result.RoomsNumber.ShouldBe(hotelToUpdate.RoomsNumber);
         }
     }
