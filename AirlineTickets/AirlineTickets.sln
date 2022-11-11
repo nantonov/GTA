@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlineTickets.API", "AirlineTickets.API\AirlineTickets.API.csproj", "{0F84515A-23EF-401C-8C02-C836467B1304}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlineTickets.API", "AirlineTickets.API\AirlineTickets.API.csproj", "{0F84515A-23EF-401C-8C02-C836467B1304}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlineTickets.BLL", "AirlineTickets.BLL\AirlineTickets.BLL.csproj", "{2F217ACC-BBB1-4086-B94A-8B182D704184}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlineTickets.BLL", "AirlineTickets.BLL\AirlineTickets.BLL.csproj", "{2F217ACC-BBB1-4086-B94A-8B182D704184}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlineTickets.DAL", "AirlineTickets.DAL\AirlineTickets.DAL.csproj", "{BE023D1A-4D3F-4DA3-9038-B1A31A02AC3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlineTickets.DAL", "AirlineTickets.DAL\AirlineTickets.DAL.csproj", "{BE023D1A-4D3F-4DA3-9038-B1A31A02AC3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlineTickets.Core", "AirlineTickets.Core\AirlineTickets.Core.csproj", "{92B41DFC-468F-4FE6-99B8-2DC3008858FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlineTickets.Core", "AirlineTickets.Core\AirlineTickets.Core.csproj", "{92B41DFC-468F-4FE6-99B8-2DC3008858FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlineTickets.DAL.Tests", "AirlineTickets.DAL.Tests\AirlineTickets.DAL.Tests.csproj", "{6167A08B-ED18-4371-BB1C-6076A3EB4325}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlineTickets.DAL.Tests", "AirlineTickets.DAL.Tests\AirlineTickets.DAL.Tests.csproj", "{6167A08B-ED18-4371-BB1C-6076A3EB4325}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlineTickets.BLL.Tests", "AirlineTickets.BLL.Tests\AirlineTickets.BLL.Tests.csproj", "{C5B68046-B624-4266-8301-E92D2A0D6DFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlineTickets.BLL.Tests", "AirlineTickets.BLL.Tests\AirlineTickets.BLL.Tests.csproj", "{C5B68046-B624-4266-8301-E92D2A0D6DFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlineTickets.API.Tests", "AirlineTickets.API.Tests\AirlineTickets.API.Tests.csproj", "{E1962EF3-DA2D-43D5-B1F4-D1BA7BCAD36D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{C5B68046-B624-4266-8301-E92D2A0D6DFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5B68046-B624-4266-8301-E92D2A0D6DFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5B68046-B624-4266-8301-E92D2A0D6DFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1962EF3-DA2D-43D5-B1F4-D1BA7BCAD36D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1962EF3-DA2D-43D5-B1F4-D1BA7BCAD36D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1962EF3-DA2D-43D5-B1F4-D1BA7BCAD36D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1962EF3-DA2D-43D5-B1F4-D1BA7BCAD36D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

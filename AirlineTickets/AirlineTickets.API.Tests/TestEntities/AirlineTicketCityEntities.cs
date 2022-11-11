@@ -1,6 +1,7 @@
 ﻿using AirlineTickets.Core.Enums;
+using AirlineTickets.DAL.Entities;
 
-namespace AirlineTickets.BLL.Tests.TestObjects.Entities
+namespace AirlineTickets.API.Tests.TestEntities
 {
     internal static class AirlineTicketCityEntities
     {

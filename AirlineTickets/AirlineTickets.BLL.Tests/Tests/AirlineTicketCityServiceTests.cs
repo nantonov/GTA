@@ -1,9 +1,4 @@
-﻿using AirlineTickets.BLL.Interfaces;
-using AirlineTickets.BLL.Models;
-using AirlineTickets.DAL.Entities;
-using AirlineTickets.DAL.Interfaces;
-
-namespace AirlineTickets.BLL.Tests.Tests
+﻿namespace AirlineTickets.BLL.Tests.Tests
 {
     public class AirlineTicketCityServiceTests
     {

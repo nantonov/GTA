@@ -1,4 +1,6 @@
-﻿namespace AirlineTickets.BLL.Tests.TestObjects.Entities
+﻿using AirlineTickets.DAL.Entities;
+
+namespace AirlineTickets.API.Tests.TestEntities
 {
     internal static class AirlineTicketEntities
     {
@@ -11,7 +13,7 @@
             PassengerCredentials = "Passenger"
         };
 
-        public static List<AirlineTicketEntity> TicketEntitiesList = new()
+        public static IEnumerable<AirlineTicketEntity> TicketEntitiesList = new List<AirlineTicketEntity>()
         {
             new AirlineTicketEntity()
             {

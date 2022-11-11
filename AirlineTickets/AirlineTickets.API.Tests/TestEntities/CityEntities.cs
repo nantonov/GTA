@@ -1,4 +1,6 @@
-﻿namespace AirlineTickets.BLL.Tests.TestObjects.Entities
+﻿using AirlineTickets.DAL.Entities;
+
+namespace AirlineTickets.API.Tests.TestEntities
 {
     internal static class CityEntities
     {
