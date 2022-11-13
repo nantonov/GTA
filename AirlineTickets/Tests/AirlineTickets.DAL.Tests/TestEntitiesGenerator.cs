@@ -45,7 +45,7 @@ namespace AirlineTickets.DAL.Tests
             var initialTicketList = _fixtureBuilder.Build<AirlineTicketEntity>().Without(t => t.AirlineTicketCities)
                 .CreateMany(3).ToList();
 
-            for (int i = 0; i < initialTicketCityList.Count(); i++)
+            for (int i = 0; i < initialTicketCityList.Count; i++)
             {
                 initialTicketCityList[i].City = initialCityList[i];
                 initialTicketCityList[i].AirlineTicket = initialTicketList[i];
@@ -70,7 +70,7 @@ namespace AirlineTickets.DAL.Tests
             var initialCityList = _fixtureBuilder.Build<CityEntity>().Without(c => c.AirlineTicketCities)
                 .Without(c => c.Hotels).CreateMany(3).ToList();
 
-            for (int i = 0; i < initialHotelList.Count(); i++)
+            for (int i = 0; i < initialHotelList.Count; i++)
             {
                 initialHotelList[i].City = initialCityList[i];
             }
