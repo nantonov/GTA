@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlineTickets.DAL.Tests", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlineTickets.BLL.Tests", "AirlineTickets.BLL.Tests\AirlineTickets.BLL.Tests.csproj", "{C5B68046-B624-4266-8301-E92D2A0D6DFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlineTickets.API.Tests", "AirlineTickets.API.Tests\AirlineTickets.API.Tests.csproj", "{E1962EF3-DA2D-43D5-B1F4-D1BA7BCAD36D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlineTickets.API.Tests", "AirlineTickets.API.Tests\AirlineTickets.API.Tests.csproj", "{E1962EF3-DA2D-43D5-B1F4-D1BA7BCAD36D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6277679D-EED9-4987-9DDE-75113E0FC759}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +56,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6167A08B-ED18-4371-BB1C-6076A3EB4325} = {6277679D-EED9-4987-9DDE-75113E0FC759}
+		{C5B68046-B624-4266-8301-E92D2A0D6DFD} = {6277679D-EED9-4987-9DDE-75113E0FC759}
+		{E1962EF3-DA2D-43D5-B1F4-D1BA7BCAD36D} = {6277679D-EED9-4987-9DDE-75113E0FC759}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2886D42B-C989-47CE-A5D6-5612A4BBF438}
