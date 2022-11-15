@@ -1,11 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Tickets from './pages/Tickets';
-import { routes } from './routes';
+import Tickets from '../../routing/pages/Tickets';
+import { routes } from '../../routing/routes';
+import AppNavBar from './AppNavBar';
 
 const AppRouter = () => {
     return (
         <Router>
+            <AppNavBar/>
             <Routes>
             <Route index element={ <Tickets />} />
             {routes.map(route =>
