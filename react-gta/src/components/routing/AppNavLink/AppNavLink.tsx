@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
-import classes from './AppNavLink.module.css'
+import './AppNavLink.css'
 
-const AppNavLink = (props) => {
+const AppNavLink = (props: { path: string; content: string }) => {
     return (
-        <NavLink className={classes.navlink} to={props.path}>
+        <NavLink className="navlink" to={props.path}>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 {props.content}
             </Typography>
