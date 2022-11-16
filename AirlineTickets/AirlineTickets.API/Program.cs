@@ -19,6 +19,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 var configurationBuilder = builder.Configuration;
 
+builder.Services.AddCors(config =>
+{
+    config.AddPolicy("DefaultPolicy",
+        builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+});
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.Authority = configurationBuilder["Urls:Authority"];
@@ -118,6 +124,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseCors("DefaultPolicy");
 
 app.MapControllers();
 
