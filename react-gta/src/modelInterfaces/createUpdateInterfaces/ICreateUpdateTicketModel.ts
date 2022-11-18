@@ -1,6 +1,6 @@
 export interface ICreateUpdateTicketModel {
-    departureTime: Date,
-    arrivalTime: Date,
+    departureTime: string,
+    arrivalTime: string,
     price: number,
     passengerCredentials: string
 }

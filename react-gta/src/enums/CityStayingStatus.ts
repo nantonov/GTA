@@ -1,5 +1,5 @@
-export const enum CityStayingStatus {
-    Departure,
-    Arrival,
-    Transit
+export enum cityStayingStatus {
+    departure,
+    arrival, 
+    transit
 }

@@ -1,6 +1,7 @@
 import axios from "axios"
 import { axiosConfig } from "../configuration/axiosConfig"; 
-import { ICreateUpdateCityModel } from "../models/ICreateUpdateCityModel";
+import { ICreateUpdateCityModel } from "../modelInterfaces/createUpdateInterfaces/ICreateUpdateCityModel";
+import { ICityGetModel } from "../modelInterfaces/getInterfaces/ICityGetModel";
 
 export default class CityService {
     static async delete(id: number) {
@@ -15,9 +16,9 @@ export default class CityService {
         return response.data
     }
     
-    static async getAll() {
-        const response = await axios.get(`${axiosConfig.ticketsAPIUrl}/city`)
-        return response.data
+    static async getAll() : Promise<Array<ICityGetModel>> {
+        const response = await axios.get(`${axiosConfig.ticketsAPIUrl}/city`).then((response) => response.data)
+        return response
     }
 
     static async update(id: number, city: ICreateUpdateCityModel) {

@@ -1,6 +1,6 @@
 import axios from "axios"
 import { axiosConfig } from "../configuration/axiosConfig"; 
-import { ICreateUpdateTicketCityModel } from "../models/ICreateUpdateTicketCityModel";
+import { ICreateUpdateTicketCityModel } from "../modelInterfaces/createUpdateInterfaces/ICreateUpdateTicketCityModel";
 
 export default class TicketCityService {
     static async delete(ticketId: number, cityId: number) {

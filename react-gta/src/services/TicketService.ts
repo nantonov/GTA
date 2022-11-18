@@ -1,6 +1,6 @@
 import axios from "axios"
 import { axiosConfig } from "../configuration/axiosConfig"; 
-import { ICreateUpdateTicketModel } from "../models/ICreateUpdateTicketModel";
+import { ICreateUpdateTicketModel } from "../modelInterfaces/createUpdateInterfaces/ICreateUpdateTicketModel";
 
 export default class TicketService {
 

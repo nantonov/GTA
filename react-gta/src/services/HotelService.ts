@@ -1,6 +1,6 @@
 import axios from "axios"
 import { axiosConfig } from "../configuration/axiosConfig"; 
-import { ICreateUpdateHotelModel } from "../models/ICreateUpdateHotelModel";
+import { ICreateUpdateHotelModel } from "../modelInterfaces/createUpdateInterfaces/ICreateUpdateHotelModel";
 
 export default class HotelService {
     static async delete(id: number) {
