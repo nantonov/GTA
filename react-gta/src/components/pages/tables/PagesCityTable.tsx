@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -21,6 +23,10 @@ const PagesCityTable = () => {
         setCities(response)
     }
 
+    const deleteCity = async (cityId : number) => {
+        await CityService.delete(cityId)
+    }
+
     getCities()
 
     return (
@@ -33,6 +39,7 @@ const PagesCityTable = () => {
                         <TableCell align="right">Name</TableCell>
                         <TableCell align="right">Population</TableCell>
                         <TableCell align="right">Area</TableCell>
+                        <TableCell align="right"></TableCell>
                     </TableRow>
                     </TableHead>
                     <TableBody>
@@ -48,6 +55,9 @@ const PagesCityTable = () => {
                         <TableCell align="right">{city.name}</TableCell>
                         <TableCell align="right">{city.population}</TableCell>
                         <TableCell align="right">{city.area}</TableCell>
+                        <TableCell align="right">
+                            <Button variant="outlined" onClick={() => deleteCity(city.id)} startIcon={<DeleteIcon />}>Delete</Button>
+                        </TableCell>
                         </TableRow>
                     ))}
                     </TableBody>

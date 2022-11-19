@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -18,6 +20,10 @@ const PagesTicketCityTable = () => {
         setTicketCities(response)
     }
 
+    const deleteTicketCity = async (ticketId : number, cityId: number) => {
+        await TicketCityService.delete(ticketId, cityId)
+    }
+
     getTicketCities()
 
     return (
@@ -29,22 +35,24 @@ const PagesTicketCityTable = () => {
                         <TableCell width={100}>Ticket ID</TableCell>
                         <TableCell width= {100}>City ID</TableCell>
                         <TableCell align="right">City Staying Status</TableCell>
+                        <TableCell align="right"></TableCell>
                     </TableRow>
                     </TableHead>
                     <TableBody>
                     {
                         ticketCities.map((ticketCity) => (
                         <TableRow
-                        key={ticketCity.airlineTicketId + ticketCity.cityId + Math.random()}
+                        key={ticketCity.airlineTicketId + ticketCity.cityId}
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                         <TableCell component="th" scope="row">
                             {ticketCity.airlineTicketId}
                         </TableCell>
-                        <TableCell align="right">
-                            {ticketCity.cityId}
-                        </TableCell>
+                        <TableCell align="right">{ticketCity.cityId}</TableCell>
                         <TableCell align="right">{ticketCity.stayingStatus}</TableCell>
+                        <TableCell align="right">
+                        <Button variant="outlined" onClick={() => deleteTicketCity(ticketCity.airlineTicketId, ticketCity.cityId)} startIcon={<DeleteIcon />}>Delete</Button>
+                        </TableCell>
                         </TableRow>
                     ))}
                     </TableBody>

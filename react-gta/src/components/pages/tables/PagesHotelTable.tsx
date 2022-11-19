@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -18,6 +20,10 @@ const PagesHotelTable = () => {
         setHotels(response)
     }
 
+    const deleteHotel = async (hotelId : number) => {
+        await HotelService.delete(hotelId)
+    }
+
     getHotels()
 
     return (
@@ -31,6 +37,7 @@ const PagesHotelTable = () => {
                         <TableCell align="right">Stars number</TableCell>
                         <TableCell align="right">Rooms number</TableCell>
                         <TableCell align="right">City ID</TableCell>
+                        <TableCell align="right"></TableCell>
                     </TableRow>
                     </TableHead>
                     <TableBody>
@@ -47,6 +54,9 @@ const PagesHotelTable = () => {
                         <TableCell align="right">{hotel.starsNumber}</TableCell>
                         <TableCell align="right">{hotel.roomsNumber}</TableCell>
                         <TableCell align="right">{hotel.city.id}</TableCell>
+                        <TableCell align="right">
+                            <Button variant="outlined" onClick={() => deleteHotel(hotel.id)} startIcon={<DeleteIcon />}>Delete</Button>
+                        </TableCell>
                         </TableRow>
                     ))}
                     </TableBody>

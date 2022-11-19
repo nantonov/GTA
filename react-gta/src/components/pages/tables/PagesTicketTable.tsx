@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -18,6 +20,10 @@ const PagesTicketTable = () => {
         setTickets(response)
     }
 
+    const deleteTicket = async (ticketId : number) => {
+        await TicketService.delete(ticketId)
+    }
+
     getTickets()
 
     return (
@@ -31,6 +37,7 @@ const PagesTicketTable = () => {
                         <TableCell align="right">Arrival time</TableCell>
                         <TableCell align="right">Price</TableCell>
                         <TableCell align="right">Passenger credentials</TableCell>
+                        <TableCell align="right"></TableCell>
                     </TableRow>
                     </TableHead>
                     <TableBody>
@@ -47,6 +54,9 @@ const PagesTicketTable = () => {
                         <TableCell align="right">{String(ticket.arrivalTime)}</TableCell>
                         <TableCell align="right">{ticket.price}</TableCell>
                         <TableCell align="right">{ticket.passengerCredentials}</TableCell>
+                        <TableCell align="right">
+                            <Button variant="outlined" onClick={() => deleteTicket(ticket.id)} startIcon={<DeleteIcon />}>Delete</Button>
+                        </TableCell>
                         </TableRow>
                     ))}
                     </TableBody>
