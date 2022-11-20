@@ -4,7 +4,7 @@ import PagesHotelTable from '../../components/pages/tables/PagesHotelTable';
 const Hotels = () => {
     return (
         <div>
-            <PagesHotelInput/>
+            <PagesHotelInput creatingInput={true} id={0}/>
             
             <PagesHotelTable/>
         </div>

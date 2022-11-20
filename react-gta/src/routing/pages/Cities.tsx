@@ -5,7 +5,7 @@ import PagesCityTable from '../../components/pages/tables/PagesCityTable';
 const Cities = () => {
     return (
         <div>
-            <PagesCityInput/>
+            <PagesCityInput creatingInput={true} id={0}/>
             
             <PagesCityTable/>
         </div>

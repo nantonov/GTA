@@ -4,9 +4,9 @@ import { ICreateUpdateHotelModel } from '../../../modelInterfaces/createUpdateIn
 import { TextField, Button } from '@mui/material';
 import HotelService from '../../../services/HotelService';
 
-const PagesHotelInput = () => {
+const PagesHotelInput = ({creatingInput, id} : {creatingInput: boolean, id: number}) => {
 
-    const [hotel, setHotel] = useState({name: "", starsNumber: "", roomsNumber: "", cityId: ""})
+    const [hotel, setHotel] = useState({id: id, name: "", starsNumber: "", roomsNumber: "", cityId: ""})
 
     const addNewHotel = (e: React.SyntheticEvent) => {
         e.preventDefault();
@@ -16,15 +16,29 @@ const PagesHotelInput = () => {
             roomsNumber: Number(hotel.roomsNumber),
             cityId: Number(hotel.cityId)
         }
+
         HotelService.create(hotelToCreate)
-        setHotel({name: "", starsNumber: "", roomsNumber: "", cityId: ""})
+        setHotel({id: 0, name: "", starsNumber: "", roomsNumber: "", cityId: ""})
+    }
+
+    const updateHotel = (e: React.SyntheticEvent) => {
+        e.preventDefault();
+        const hotelToUpdate : ICreateUpdateHotelModel = {
+            name: hotel.name,
+            starsNumber: Number(hotel.starsNumber),
+            roomsNumber: Number(hotel.roomsNumber),
+            cityId: Number(hotel.cityId)
+        }
+
+        HotelService.update(id, hotelToUpdate)
+        setHotel({id: 0, name: "", starsNumber: "", roomsNumber: "", cityId: ""})
     }
 
     return (
         <div>
             <form onSubmit={addNewHotel}>
                 <div>
-                    <PagesTypography>Create a new hotel</PagesTypography>
+                    <PagesTypography>{creatingInput ? "Create a new" : "Update"} hotel</PagesTypography>
                     <div>
                         <TextField 
                         name="name"
@@ -66,7 +80,13 @@ const PagesHotelInput = () => {
                         />
                     </div>
                     <div style={{margin:"10px 280px"}}>
-                        <Button type="submit" onClick={addNewHotel} variant="contained">Create</Button>
+                        <Button 
+                        type="submit" 
+                        onClick={creatingInput ? addNewHotel : updateHotel} 
+                        variant="contained"
+                        >
+                            {creatingInput ? "Create" : "Update"}
+                        </Button>
                     </div>
                 </div>
             </form>

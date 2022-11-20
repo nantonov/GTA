@@ -5,9 +5,9 @@ import { TextField, Button } from '@mui/material';
 import CityService from '../../../services/CityService';
 
 
-const PagesCityInput = () => {
+const PagesCityInput = ({creatingInput, id} : {creatingInput: boolean, id: number}) => {
 
-    const [city, setCity] = useState({name: "", population: "", area: ""})
+    const [city, setCity] = useState({id: id, name: "", population: "", area: ""})
 
     const addNewCity = (e: React.SyntheticEvent) => {
         e.preventDefault();
@@ -16,15 +16,28 @@ const PagesCityInput = () => {
             population: Number(city.population),
             area: Number(city.area)
         }
+
         CityService.create(cityToCreate)
-        setCity({name: "", population: "", area: ""})
+        setCity({id: 0, name: "", population: "", area: ""})
+    }
+
+    const updateCity = (e: React.SyntheticEvent) => {
+        e.preventDefault();
+        const cityToUpdate : ICreateUpdateCityModel = {
+            name: city.name,
+            population: Number(city.population),
+            area: Number(city.area)
+        }
+
+        CityService.update(id, cityToUpdate)
+        setCity({id: 0, name: "", population: "", area: ""})
     }
 
     return (
         <div>
             <form onSubmit={addNewCity}>
                 <div>
-                    <PagesTypography>Create a new city</PagesTypography>
+                    <PagesTypography>{creatingInput ? "Create a new" : "Update"} city</PagesTypography>
                     <div>
                         <TextField 
                         name="name"
@@ -42,7 +55,7 @@ const PagesCityInput = () => {
                         id="outlined-basic" 
                         label="Population" 
                         variant="outlined" 
-                        onChange={e => setCity({...city, population: e.target.value})}
+                        onChange={e => setCity({...city, population: String(e.target.value)})}
                         />
 
                         <TextField 
@@ -52,11 +65,17 @@ const PagesCityInput = () => {
                         id="outlined-basic" 
                         label="Area" 
                         variant="outlined" 
-                        onChange={e => setCity({...city, area: e.target.value})}
+                        onChange={e => setCity({...city, area: String(e.target.value)})}
                         />
                     </div>
                     <div style={{margin:"10px 280px"}}>
-                        <Button type="submit" onClick={addNewCity} variant="contained">Create</Button>
+                        <Button 
+                        type="submit" 
+                        onClick={creatingInput ? addNewCity : updateCity} 
+                        variant="contained"
+                        >
+                            {creatingInput ? "Create" : "Update"}
+                        </Button>
                     </div>
                 </div>
             </form>
