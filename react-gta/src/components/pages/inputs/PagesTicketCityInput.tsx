@@ -6,15 +6,8 @@ import TicketCityService from "../../../services/TicketCityService";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
-const PagesTicketCityInput = ({
-  creatingInput,
-  ticketId,
-  cityId,
-}: {
-  creatingInput: boolean;
-  ticketId: number;
-  cityId: number;
-}) => {
+const PagesTicketCityInput = ({ creatingInput, ticketId, cityId, }: { creatingInput: boolean; ticketId: number; cityId: number; }) => {
+  
   const [ticketCity, setTicketCity] = useState({
     status: 0,
     airlineTicketId: String(ticketId),

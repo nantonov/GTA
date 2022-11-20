@@ -17,25 +17,18 @@ import PagesTicketCityInput from "../inputs/PagesTicketCityInput";
 import "./Tables.css";
 
 const PagesTicketCityTable = () => {
-  const [ticketCities, setTicketCities] = useState(
-    new Array<ITicketCityGetModel>()
-  );
+
+  const [ticketCities, setTicketCities] = useState(new Array<ITicketCityGetModel>());
   const [open, setOpen] = useState(false);
   const [updateTicketId, setUpdateTicketId] = useState(0);
   const [updateCityId, setUpdateCityId] = useState(0);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const getTicketCities = async () => {
     const response = await TicketCityService.getAll();
     setTicketCities(response);
   };
 
-  const deleteTicketCity = async (ticketId: number, cityId: number) => {
-    await TicketCityService.delete(ticketId, cityId);
-  };
+  getTicketCities();
 
   const openEditingTicketCityModalWindow = async (
     updateTicketId: number,
@@ -45,8 +38,6 @@ const PagesTicketCityTable = () => {
     setUpdateTicketId(updateTicketId);
     setUpdateCityId(updateCityId);
   };
-
-  getTicketCities();
 
   return (
     <div>
@@ -75,8 +66,8 @@ const PagesTicketCityTable = () => {
                 <TableCell align="right">
                   <Button
                     variant="outlined"
-                    onClick={() =>
-                      deleteTicketCity(
+                    onClick={async () =>
+                      await TicketCityService.delete(
                         ticketCity.airlineTicketId,
                         ticketCity.cityId
                       )
@@ -107,7 +98,7 @@ const PagesTicketCityTable = () => {
       </TableContainer>
       <Modal
         open={open}
-        onClose={() => handleClose()}
+        onClose={() => setOpen(false)}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >

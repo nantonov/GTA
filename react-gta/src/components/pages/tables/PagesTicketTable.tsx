@@ -17,29 +17,22 @@ import PagesTicketInput from "../inputs/PagesTicketInput";
 import "./Tables.css";
 
 const PagesTicketTable = () => {
+  
   const [tickets, setTickets] = useState(new Array<ITicketGetModel>());
   const [open, setOpen] = useState(false);
   const [updateTicketId, setUpdateTicketId] = useState(0);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const getTickets = async () => {
     const response = await TicketService.getAll();
     setTickets(response);
   };
 
-  const deleteTicket = async (ticketId: number) => {
-    await TicketService.delete(ticketId);
-  };
+  getTickets();
 
   const openEditingTicketModalWindow = async (updateTicketId: number) => {
     setOpen(true);
     setUpdateTicketId(updateTicketId);
   };
-
-  getTickets();
 
   return (
     <div>
@@ -78,7 +71,7 @@ const PagesTicketTable = () => {
                 <TableCell align="right">
                   <Button
                     variant="outlined"
-                    onClick={() => deleteTicket(ticket.id)}
+                    onClick={async () => await TicketService.delete(ticket.id)}
                     startIcon={<DeleteIcon />}
                   >
                     Delete
@@ -100,7 +93,7 @@ const PagesTicketTable = () => {
       </TableContainer>
       <Modal
         open={open}
-        onClose={() => handleClose()}
+        onClose={() => setOpen(false)}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >

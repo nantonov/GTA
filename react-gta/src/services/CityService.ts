@@ -5,24 +5,24 @@ import { ICityGetModel } from "../modelInterfaces/getInterfaces/ICityGetModel";
 
 export default class CityService {
     static async delete(id: number) {
-        const response = await axios.delete(`${axiosConfig.ticketsAPIUrl}/city/${id}`)
+        const response = await axios.delete(`${axiosConfig.cityUrl}/${id}`)
         return response.data
     }
 
     static async create(city: ICreateUpdateCityModel) {
-        const response = await axios.post(`${axiosConfig.ticketsAPIUrl}/city`, city, {
+        const response = await axios.post(`${axiosConfig.cityUrl}`, city, {
             headers: {         'Content-Type': 'application/json'     }
         })
         return response.data
     }
     
     static async getAll() : Promise<Array<ICityGetModel>> {
-        const response = await axios.get(`${axiosConfig.ticketsAPIUrl}/city`).then((response) => response.data)
+        const response = await axios.get(`${axiosConfig.cityUrl}`).then((response) => response.data)
         return response
     }
 
     static async update(id: number, city: ICreateUpdateCityModel) {
-        const response = await axios.put(`${axiosConfig.ticketsAPIUrl}/city/${id}`, city, {
+        const response = await axios.put(`${axiosConfig.cityUrl}/${id}`, city, {
             headers: {         'Content-Type': 'application/json'     }
         })
         return response.data

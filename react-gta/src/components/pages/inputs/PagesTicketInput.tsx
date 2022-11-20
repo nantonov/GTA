@@ -4,13 +4,8 @@ import PagesTypography from "../PagesTypography";
 import { ICreateUpdateTicketModel } from "../../../modelInterfaces/createUpdateInterfaces/ICreateUpdateTicketModel";
 import TicketService from "../../../services/TicketService";
 
-const PagesTicketInput = ({
-  creatingInput,
-  id,
-}: {
-  creatingInput: boolean;
-  id: number;
-}) => {
+const PagesTicketInput = ({ creatingInput, id, }: { creatingInput: boolean; id: number; }) => {
+  
   const [ticket, setTicket] = useState({
     id: id,
     departureTime: "",

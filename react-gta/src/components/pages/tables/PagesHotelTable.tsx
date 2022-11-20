@@ -17,29 +17,22 @@ import PagesHotelInput from "../inputs/PagesHotelInput";
 import "./Tables.css";
 
 const PagesHotelTable = () => {
+  
   const [hotels, setHotels] = useState(new Array<IHotelGetModel>());
   const [open, setOpen] = useState(false);
   const [updateHotelId, setUpdateHotelId] = useState(0);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const getHotels = async () => {
     const response = await HotelService.getAll();
     setHotels(response);
   };
 
-  const deleteHotel = async (hotelId: number) => {
-    await HotelService.delete(hotelId);
-  };
+  getHotels();
 
   const openEditingCityModalWindow = async (updateHotelId: number) => {
     setOpen(true);
     setUpdateHotelId(updateHotelId);
   };
-
-  getHotels();
 
   return (
     <div>
@@ -72,7 +65,7 @@ const PagesHotelTable = () => {
                 <TableCell align="right">
                   <Button
                     variant="outlined"
-                    onClick={() => deleteHotel(hotel.id)}
+                    onClick={async () => await HotelService.delete(hotel.id)}
                     startIcon={<DeleteIcon />}
                   >
                     Delete
@@ -94,7 +87,7 @@ const PagesHotelTable = () => {
       </TableContainer>
       <Modal
         open={open}
-        onClose={() => handleClose()}
+        onClose={() => setOpen(false)}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >

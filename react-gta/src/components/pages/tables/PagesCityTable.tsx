@@ -17,29 +17,22 @@ import PagesCityInput from "../inputs/PagesCityInput";
 import "./Tables.css";
 
 const PagesCityTable = () => {
+  
   const [cities, setCities] = useState(new Array<ICityGetModel>());
   const [open, setOpen] = useState(false);
   const [updateCityId, setUpdateCityId] = useState(0);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const getCities = async () => {
     const response = await CityService.getAll();
     setCities(response);
   };
 
-  const deleteCity = async (cityId: number) => {
-    await CityService.delete(cityId);
-  };
+  getCities();
 
   const openEditingCityModalWindow = async (updateCityId: number) => {
     setOpen(true);
     setUpdateCityId(updateCityId);
   };
-
-  getCities();
 
   return (
     <div>
@@ -70,7 +63,7 @@ const PagesCityTable = () => {
                 <TableCell align="right">
                   <Button
                     variant="outlined"
-                    onClick={() => deleteCity(city.id)}
+                    onClick={async () => await CityService.delete(city.id)}
                     startIcon={<DeleteIcon />}
                   >
                     Delete
@@ -92,11 +85,11 @@ const PagesCityTable = () => {
       </TableContainer>
       <Modal
         open={open}
-        onClose={() => handleClose()}
+        onClose={() => setOpen(false)}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box className="modal" sx={{ width: 400 }}>
+        <Box className="modalBox" sx={{ width: 400 }}>
           <PagesCityInput creatingInput={false} id={updateCityId} />
         </Box>
       </Modal>
