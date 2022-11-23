@@ -40,6 +40,27 @@ namespace IdentityServer
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile
                     }
+                },
+
+                new Client
+                {
+                    ClientId = "client_id_react",
+                    ClientName = "React app client",
+                    ClientUri = "http://localhost:3000",
+                    RequireClientSecret = false,
+                    RequireConsent = false,
+                    RequirePkce = true,
+                    AllowedGrantTypes = GrantTypes.Code,
+                    AllowedCorsOrigins = {"http://localhost:3000"},
+                    RedirectUris = { "http://localhost:3000/callback", "http://localhost:3000/refresh" },
+                    PostLogoutRedirectUris = { "http://localhost:3000/logout" },
+                    AllowOfflineAccess = true,
+                    AllowedScopes =
+                    {
+                        "AirlineTicketsAPI",
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile
+                    }
                 }
             };
     }
