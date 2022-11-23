@@ -1,12 +1,8 @@
-import axios from "axios"
-import { axiosConfig } from "../configuration/axiosConfig"; 
 import { ICreateUpdateCityModel } from "../modelInterfaces/createUpdateInterfaces/ICreateUpdateCityModel";
 import { ICityGetModel } from "../modelInterfaces/getInterfaces/ICityGetModel";
 import UserService from "./UserService";
+import axiosInstance from "../instances/axiosInstance"
 
-const axiosInstance = axios.create({
-    baseURL:axiosConfig.baseUrl
-});
 
 axiosInstance.interceptors.request.use(
     async (config: any) => {
