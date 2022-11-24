@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Table from "@mui/material/Table";
@@ -17,17 +17,17 @@ import PagesTicketInput from "../inputs/PagesTicketInput";
 import "./Tables.css";
 
 const PagesTicketTable = () => {
-  
   const [tickets, setTickets] = useState(new Array<ITicketGetModel>());
   const [open, setOpen] = useState(false);
   const [updateTicketId, setUpdateTicketId] = useState(0);
 
-  const getTickets = async () => {
-    const response = await TicketService.getAll();
-    setTickets(response);
-  };
-
-  getTickets();
+  useEffect(() => {
+    async function getTickets() {
+      const response = await TicketService.getAll();
+      setTickets(response);
+    }
+    getTickets();
+  }, [tickets]);
 
   const openEditingTicketModalWindow = async (updateTicketId: number) => {
     setOpen(true);

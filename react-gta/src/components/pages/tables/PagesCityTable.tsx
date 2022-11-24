@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Table from "@mui/material/Table";
@@ -17,17 +17,17 @@ import PagesCityInput from "../inputs/PagesCityInput";
 import "./Tables.css";
 
 const PagesCityTable = () => {
-  
   const [cities, setCities] = useState(new Array<ICityGetModel>());
   const [open, setOpen] = useState(false);
   const [updateCityId, setUpdateCityId] = useState(0);
 
-  const getCities = async () => {
-    const response = await CityService.getAll();
-    setCities(response);
-  };
-
-  getCities();
+  useEffect(() => {
+    async function getCities() {
+      const response = await CityService.getAll();
+      setCities(response);
+    }
+    getCities();
+  }, [cities]);
 
   const openEditingCityModalWindow = async (updateCityId: number) => {
     setOpen(true);

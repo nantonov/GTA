@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Table from "@mui/material/Table";
@@ -17,17 +17,17 @@ import PagesHotelInput from "../inputs/PagesHotelInput";
 import "./Tables.css";
 
 const PagesHotelTable = () => {
-  
   const [hotels, setHotels] = useState(new Array<IHotelGetModel>());
   const [open, setOpen] = useState(false);
   const [updateHotelId, setUpdateHotelId] = useState(0);
 
-  const getHotels = async () => {
-    const response = await HotelService.getAll();
-    setHotels(response);
-  };
-
-  getHotels();
+  useEffect(() => {
+    async function getHotels() {
+      const response = await HotelService.getAll();
+      setHotels(response);
+    }
+    getHotels();
+  }, [hotels]);
 
   const openEditingCityModalWindow = async (updateHotelId: number) => {
     setOpen(true);
