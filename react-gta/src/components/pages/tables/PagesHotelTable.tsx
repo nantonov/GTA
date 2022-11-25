@@ -34,8 +34,8 @@ const PagesHotelTable = () => {
     getHotels();
   }, [hotels]);
 
-  const openEditingCityModalWindow = async (updateHotelId: number) => {
-    dispatch({ type: ModalActionTypes.ShowModal });
+  const openEditingHotelModalWindow = async (updateHotelId: number) => {
+    dispatch({ type: ModalActionTypes.ShowUpdateModal });
     setUpdateHotelId(updateHotelId);
   };
 
@@ -79,7 +79,7 @@ const PagesHotelTable = () => {
                 <TableCell align="right">
                   <Button
                     variant="outlined"
-                    onClick={() => openEditingCityModalWindow(hotel.id)}
+                    onClick={() => openEditingHotelModalWindow(hotel.id)}
                     startIcon={<EditIcon />}
                   >
                     Edit
@@ -91,8 +91,8 @@ const PagesHotelTable = () => {
         </Table>
       </TableContainer>
       <PagesModalWrapper
-        open={openModal.modal}
-        onClose={() => dispatch({ type: ModalActionTypes.HideModal })}
+        open={openModal.updateModal}
+        onClose={() => dispatch({ type: ModalActionTypes.HideUpdateModal })}
       >
         <PagesHotelInput creatingInput={false} id={updateHotelId} />
       </PagesModalWrapper>

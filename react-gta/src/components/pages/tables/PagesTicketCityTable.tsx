@@ -41,7 +41,7 @@ const PagesTicketCityTable = () => {
     updateTicketId: number,
     updateCityId: number
   ) => {
-    dispatch({ type: ModalActionTypes.ShowModal });
+    dispatch({ type: ModalActionTypes.ShowUpdateModal });
     setUpdateTicketId(updateTicketId);
     setUpdateCityId(updateCityId);
   };
@@ -104,8 +104,8 @@ const PagesTicketCityTable = () => {
         </Table>
       </TableContainer>
       <PagesModalWrapper
-        open={openModal.modal}
-        onClose={() => dispatch({ type: ModalActionTypes.HideModal })}
+        open={openModal.updateModal}
+        onClose={() => dispatch({ type: ModalActionTypes.HideUpdateModal })}
       >
         <PagesTicketCityInput
           creatingInput={false}

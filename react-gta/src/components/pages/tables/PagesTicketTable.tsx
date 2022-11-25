@@ -35,7 +35,7 @@ const PagesTicketTable = () => {
   }, [tickets]);
 
   const openEditingTicketModalWindow = async (updateTicketId: number) => {
-    dispatch({ type: ModalActionTypes.ShowModal });
+    dispatch({ type: ModalActionTypes.ShowUpdateModal });
     setUpdateTicketId(updateTicketId);
   };
 
@@ -97,8 +97,8 @@ const PagesTicketTable = () => {
         </Table>
       </TableContainer>
       <PagesModalWrapper
-        open={openModal.modal}
-        onClose={() => dispatch({ type: ModalActionTypes.HideModal })}
+        open={openModal.updateModal}
+        onClose={() => dispatch({ type: ModalActionTypes.HideUpdateModal })}
       >
         <PagesTicketInput creatingInput={false} id={updateTicketId} />
       </PagesModalWrapper>

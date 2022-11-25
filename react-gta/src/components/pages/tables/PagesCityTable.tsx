@@ -35,7 +35,8 @@ const PagesCityTable = () => {
   }, [cities]);
 
   const openEditingCityModalWindow = async (updateCityId: number) => {
-    dispatch({ type: ModalActionTypes.ShowModal });
+    console.log(openModal);
+    dispatch({ type: ModalActionTypes.ShowUpdateModal });
     setUpdateCityId(updateCityId);
   };
 
@@ -89,8 +90,11 @@ const PagesCityTable = () => {
         </Table>
       </TableContainer>
       <PagesModalWrapper
-        open={openModal.modal}
-        onClose={() => dispatch({ type: ModalActionTypes.HideModal })}
+        open={openModal.updateModal}
+        onClose={() => {
+          console.log(openModal);
+          dispatch({ type: ModalActionTypes.HideUpdateModal });
+        }}
       >
         <PagesCityInput creatingInput={false} id={updateCityId} />
       </PagesModalWrapper>

@@ -1,27 +1,38 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { ModalAction, ModalActionTypes } from './actions';
 
-const initialState = {
-  modal: false,
+const initialModalState = {
+  updateModal: false,
+  createModal: false
 };
 
-function modalReducer(state = initialState, action: ModalAction) {
+function ModalReducer(state = initialModalState, action: ModalAction) {
   switch (action.type) {
-    case ModalActionTypes.ShowModal:
+    case ModalActionTypes.ShowUpdateModal:
       return {
         ...state,
-        modal: true,
+        updateModal: true,
       };
-    case ModalActionTypes.HideModal:
+    case ModalActionTypes.HideUpdateModal:
       return {
         ...state,
-        modal: false,
+        updateModal: false,
       };
+    case ModalActionTypes.ShowCreateModal:
+    return {
+      ...state,
+      createModal: true,
+    };
+  case ModalActionTypes.HideCreateModal:
+    return {
+      ...state,
+      createModal: false,
+    };
     default:
       return state;
   }
 }
 
-const rootReducer = combineReducers({ modal: modalReducer });
+const rootReducer = combineReducers({ modal: ModalReducer });
 export type RootState = ReturnType<typeof rootReducer>;
 export default rootReducer;

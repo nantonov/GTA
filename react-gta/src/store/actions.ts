@@ -1,6 +1,8 @@
 export enum ModalActionTypes {
-    ShowModal,
-    HideModal,
+    ShowUpdateModal,
+    HideUpdateModal,
+    ShowCreateModal,
+    HideCreateModal,
   }
   
   export interface ModalAction {
@@ -8,14 +10,26 @@ export enum ModalActionTypes {
     payload?: any;
   }
   
-  export function showModal(): ModalAction {
+  export function showUpdateModal(): ModalAction {
     return {
-      type: ModalActionTypes.ShowModal,
+      type: ModalActionTypes.ShowUpdateModal,
     };
   }
   
-  export function hideModal(): ModalAction {
+  export function hideUpdateModal(): ModalAction {
     return {
-      type: ModalActionTypes.HideModal,
+      type: ModalActionTypes.HideUpdateModal,
+    };
+  }
+
+  export function showCreateModal(): ModalAction {
+    return {
+      type: ModalActionTypes.ShowCreateModal,
+    };
+  }
+  
+  export function hideCreateModal(): ModalAction {
+    return {
+      type: ModalActionTypes.HideCreateModal,
     };
   }
