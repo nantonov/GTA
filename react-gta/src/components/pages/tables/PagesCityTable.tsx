@@ -15,7 +15,7 @@ import PagesCityInput from "../inputs/PagesCityInput";
 import "./Tables.css";
 import PagesModalWrapper from "../PagesModalWrapper";
 import { useSelector } from "react-redux";
-import { ModalActionTypes } from "../../../store/actions";
+import { ModalActionTypes } from "../../../store/modalActions";
 import { RootState } from "../../../store/reducers";
 import { useDispatch } from "react-redux";
 import PagesTypography from "../PagesTypography";

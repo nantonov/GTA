@@ -2,7 +2,7 @@ import PagesTicketCityInput from "../../components/pages/inputs/PagesTicketCityI
 import PagesTicketCityTable from "../../components/pages/tables/PagesTicketCityTable";
 import PagesModalWrapper from "../../components/pages/PagesModalWrapper";
 import { useSelector } from "react-redux";
-import { ModalActionTypes } from "../../store/actions";
+import { ModalActionTypes } from "../../store/modalActions";
 import { RootState } from "../../store/reducers";
 import { useDispatch } from "react-redux";
 import AddCircleIcon from "@mui/icons-material/AddCircle";

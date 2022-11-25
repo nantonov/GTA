@@ -17,7 +17,7 @@ import PagesModalWrapper from "../PagesModalWrapper";
 import { RootState } from "../../../store/reducers";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { ModalActionTypes } from "../../../store/actions";
+import { ModalActionTypes } from "../../../store/modalActions";
 import PagesTypography from "../PagesTypography";
 
 const PagesTicketTable = () => {

@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../authorization/AuthProvider";
+import React, { useContext, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,9 +10,23 @@ import { Button } from "@mui/material";
 import UserService from "../../services/UserService";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { RootState } from "../../store/reducers";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { AuthActionTypes } from "../../store/authActions";
 
 const AppNavBar = () => {
-  const context = useContext(AuthContext);
+  const auth = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const getUser = async () => {
+      const user = await UserService.getUser();
+      user && dispatch({ type: AuthActionTypes.SetIsAuth, isAuth: true });
+    };
+
+    getUser();
+  }, [dispatch]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -35,9 +48,11 @@ const AppNavBar = () => {
           <AppNavLink path="/cities" content="Cities" />
           <AppNavLink path="/hotels" content="Hotels" />
           <AppNavLink path="/ticketCities" content="TicketCities" />
-          {!context.isAuth ? (
+          {!auth.isAuth ? (
             <Button
-              onClick={async () => await UserService.signIn()}
+              onClick={async () => {
+                await UserService.signIn();
+              }}
               color="inherit"
               startIcon={<LoginIcon />}
             >

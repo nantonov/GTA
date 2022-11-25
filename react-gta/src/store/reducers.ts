@@ -1,10 +1,16 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import { ModalAction, ModalActionTypes } from './actions';
+import UserService from '../services/UserService';
+import { AuthAction, AuthActionTypes } from './authActions';
+import { ModalAction, ModalActionTypes } from './modalActions';
 
 const initialModalState = {
   updateModal: false,
   createModal: false,
   deleteModal: false
+};
+
+const initialAuthState = {
+  isAuth: false
 };
 
 function ModalReducer(state = initialModalState, action: ModalAction) {
@@ -44,6 +50,18 @@ function ModalReducer(state = initialModalState, action: ModalAction) {
   }
 }
 
-const rootReducer = combineReducers({ modal: ModalReducer });
+function AuthReducer(state = initialAuthState, action: AuthAction) {
+  switch (action.type) {
+    case AuthActionTypes.SetIsAuth:
+    return {
+      ...state,
+      isAuth: action.isAuth
+    };
+    default:
+      return state;
+  }
+}
+
+const rootReducer = combineReducers({ modal: ModalReducer, auth: AuthReducer });
 export type RootState = ReturnType<typeof rootReducer>;
 export default rootReducer;
