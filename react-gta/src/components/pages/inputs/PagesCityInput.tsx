@@ -4,8 +4,13 @@ import { ICreateUpdateCityModel } from "../../../modelInterfaces/createUpdateInt
 import { TextField, Button } from "@mui/material";
 import CityService from "../../../services/CityService";
 
-const PagesCityInput = ({ creatingInput, id, }: { creatingInput: boolean; id: number; }) => {
-    
+const PagesCityInput = ({
+  creatingInput,
+  id,
+}: {
+  creatingInput: boolean;
+  id: number;
+}) => {
   const [city, setCity] = useState({
     id: id,
     name: "",

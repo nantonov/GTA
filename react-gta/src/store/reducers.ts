@@ -3,7 +3,8 @@ import { ModalAction, ModalActionTypes } from './actions';
 
 const initialModalState = {
   updateModal: false,
-  createModal: false
+  createModal: false,
+  deleteModal: false
 };
 
 function ModalReducer(state = initialModalState, action: ModalAction) {
@@ -23,10 +24,20 @@ function ModalReducer(state = initialModalState, action: ModalAction) {
       ...state,
       createModal: true,
     };
-  case ModalActionTypes.HideCreateModal:
+    case ModalActionTypes.HideCreateModal:
     return {
       ...state,
       createModal: false,
+    };
+    case ModalActionTypes.ShowDeleteModal:
+    return {
+      ...state,
+      deleteModal: true,
+    };
+    case ModalActionTypes.HideDeleteModal:
+    return {
+      ...state,
+      deleteModal: false,
     };
     default:
       return state;

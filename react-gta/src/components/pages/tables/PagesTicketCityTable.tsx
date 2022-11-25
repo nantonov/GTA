@@ -18,6 +18,7 @@ import { useSelector } from "react-redux";
 import { ModalActionTypes } from "../../../store/actions";
 import { RootState } from "../../../store/reducers";
 import { useDispatch } from "react-redux";
+import PagesTypography from "../PagesTypography";
 
 const PagesTicketCityTable = () => {
   const [ticketCities, setTicketCities] = useState(
@@ -25,6 +26,8 @@ const PagesTicketCityTable = () => {
   );
   const [updateTicketId, setUpdateTicketId] = useState(0);
   const [updateCityId, setUpdateCityId] = useState(0);
+  const [deleteTicketId, setDeleteTicketId] = useState(0);
+  const [deleteCityId, setDeleteCityId] = useState(0);
 
   const openModal = useSelector((state: RootState) => state.modal);
   const dispatch = useDispatch();
@@ -44,6 +47,15 @@ const PagesTicketCityTable = () => {
     dispatch({ type: ModalActionTypes.ShowUpdateModal });
     setUpdateTicketId(updateTicketId);
     setUpdateCityId(updateCityId);
+  };
+
+  const openDeletingTicketCityModalWindow = (
+    deleteTicketId: number,
+    deleteCityId: number
+  ) => {
+    dispatch({ type: ModalActionTypes.ShowDeleteModal });
+    setDeleteTicketId(deleteTicketId);
+    setDeleteCityId(deleteCityId);
   };
 
   return (
@@ -73,8 +85,8 @@ const PagesTicketCityTable = () => {
                 <TableCell align="right">
                   <Button
                     variant="outlined"
-                    onClick={async () =>
-                      await TicketCityService.delete(
+                    onClick={() =>
+                      openDeletingTicketCityModalWindow(
                         ticketCity.airlineTicketId,
                         ticketCity.cityId
                       )
@@ -112,6 +124,31 @@ const PagesTicketCityTable = () => {
           ticketId={updateTicketId}
           cityId={updateCityId}
         />
+      </PagesModalWrapper>
+      <PagesModalWrapper
+        open={openModal.deleteModal}
+        onClose={() => {
+          dispatch({ type: ModalActionTypes.HideDeleteModal });
+        }}
+      >
+        <PagesTypography align="center">
+          <div>Delete the ticket-city?</div>
+          <Button
+            variant="outlined"
+            onClick={async () => {
+              await TicketCityService.delete(deleteTicketId, deleteCityId);
+              dispatch({ type: ModalActionTypes.HideDeleteModal });
+            }}
+          >
+            Yes
+          </Button>
+          <Button
+            variant="outlined"
+            onClick={() => dispatch({ type: ModalActionTypes.HideDeleteModal })}
+          >
+            No
+          </Button>
+        </PagesTypography>
       </PagesModalWrapper>
     </div>
   );

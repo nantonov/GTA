@@ -18,10 +18,12 @@ import { useSelector } from "react-redux";
 import { ModalActionTypes } from "../../../store/actions";
 import { RootState } from "../../../store/reducers";
 import { useDispatch } from "react-redux";
+import PagesTypography from "../PagesTypography";
 
 const PagesCityTable = () => {
   const [cities, setCities] = useState(new Array<ICityGetModel>());
   const [updateCityId, setUpdateCityId] = useState(0);
+  const [deleteCityId, setDeleteCityId] = useState(0);
 
   const openModal = useSelector((state: RootState) => state.modal);
   const dispatch = useDispatch();
@@ -35,9 +37,13 @@ const PagesCityTable = () => {
   }, [cities]);
 
   const openEditingCityModalWindow = async (updateCityId: number) => {
-    console.log(openModal);
     dispatch({ type: ModalActionTypes.ShowUpdateModal });
     setUpdateCityId(updateCityId);
+  };
+
+  const openDeletingCityModalWindow = (deleteCityId: number) => {
+    setDeleteCityId(deleteCityId);
+    dispatch({ type: ModalActionTypes.ShowDeleteModal });
   };
 
   return (
@@ -69,7 +75,7 @@ const PagesCityTable = () => {
                 <TableCell align="right">
                   <Button
                     variant="outlined"
-                    onClick={async () => await CityService.delete(city.id)}
+                    onClick={() => openDeletingCityModalWindow(city.id)}
                     startIcon={<DeleteIcon />}
                   >
                     Delete
@@ -92,11 +98,35 @@ const PagesCityTable = () => {
       <PagesModalWrapper
         open={openModal.updateModal}
         onClose={() => {
-          console.log(openModal);
           dispatch({ type: ModalActionTypes.HideUpdateModal });
         }}
       >
         <PagesCityInput creatingInput={false} id={updateCityId} />
+      </PagesModalWrapper>
+      <PagesModalWrapper
+        open={openModal.deleteModal}
+        onClose={() => {
+          dispatch({ type: ModalActionTypes.HideDeleteModal });
+        }}
+      >
+        <PagesTypography align="center">
+          <div>Delete the city?</div>
+          <Button
+            variant="outlined"
+            onClick={async () => {
+              await CityService.delete(deleteCityId);
+              dispatch({ type: ModalActionTypes.HideDeleteModal });
+            }}
+          >
+            Yes
+          </Button>
+          <Button
+            variant="outlined"
+            onClick={() => dispatch({ type: ModalActionTypes.HideDeleteModal })}
+          >
+            No
+          </Button>
+        </PagesTypography>
       </PagesModalWrapper>
     </div>
   );

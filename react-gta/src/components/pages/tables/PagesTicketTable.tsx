@@ -18,10 +18,12 @@ import { RootState } from "../../../store/reducers";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { ModalActionTypes } from "../../../store/actions";
+import PagesTypography from "../PagesTypography";
 
 const PagesTicketTable = () => {
   const [tickets, setTickets] = useState(new Array<ITicketGetModel>());
   const [updateTicketId, setUpdateTicketId] = useState(0);
+  const [deleteTicketId, setDeleteTicketId] = useState(0);
 
   const openModal = useSelector((state: RootState) => state.modal);
   const dispatch = useDispatch();
@@ -37,6 +39,11 @@ const PagesTicketTable = () => {
   const openEditingTicketModalWindow = async (updateTicketId: number) => {
     dispatch({ type: ModalActionTypes.ShowUpdateModal });
     setUpdateTicketId(updateTicketId);
+  };
+
+  const openDeletingTicketModalWindow = (deleteTicketId: number) => {
+    setDeleteTicketId(deleteTicketId);
+    dispatch({ type: ModalActionTypes.ShowDeleteModal });
   };
 
   return (
@@ -76,7 +83,9 @@ const PagesTicketTable = () => {
                 <TableCell align="right">
                   <Button
                     variant="outlined"
-                    onClick={async () => await TicketService.delete(ticket.id)}
+                    onClick={async () =>
+                      openDeletingTicketModalWindow(ticket.id)
+                    }
                     startIcon={<DeleteIcon />}
                   >
                     Delete
@@ -101,6 +110,31 @@ const PagesTicketTable = () => {
         onClose={() => dispatch({ type: ModalActionTypes.HideUpdateModal })}
       >
         <PagesTicketInput creatingInput={false} id={updateTicketId} />
+      </PagesModalWrapper>
+      <PagesModalWrapper
+        open={openModal.deleteModal}
+        onClose={() => {
+          dispatch({ type: ModalActionTypes.HideDeleteModal });
+        }}
+      >
+        <PagesTypography align="center">
+          <div>Delete the ticket?</div>
+          <Button
+            variant="outlined"
+            onClick={async () => {
+              await TicketService.delete(deleteTicketId);
+              dispatch({ type: ModalActionTypes.HideDeleteModal });
+            }}
+          >
+            Yes
+          </Button>
+          <Button
+            variant="outlined"
+            onClick={() => dispatch({ type: ModalActionTypes.HideDeleteModal })}
+          >
+            No
+          </Button>
+        </PagesTypography>
       </PagesModalWrapper>
     </div>
   );

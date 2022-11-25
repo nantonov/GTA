@@ -18,10 +18,12 @@ import { RootState } from "../../../store/reducers";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { ModalActionTypes } from "../../../store/actions";
+import PagesTypography from "../PagesTypography";
 
 const PagesHotelTable = () => {
   const [hotels, setHotels] = useState(new Array<IHotelGetModel>());
   const [updateHotelId, setUpdateHotelId] = useState(0);
+  const [deleteHotelId, setDeleteHotelId] = useState(0);
 
   const openModal = useSelector((state: RootState) => state.modal);
   const dispatch = useDispatch();
@@ -37,6 +39,11 @@ const PagesHotelTable = () => {
   const openEditingHotelModalWindow = async (updateHotelId: number) => {
     dispatch({ type: ModalActionTypes.ShowUpdateModal });
     setUpdateHotelId(updateHotelId);
+  };
+
+  const openDeletingHotelModalWindow = (deleteHotelId: number) => {
+    setDeleteHotelId(deleteHotelId);
+    dispatch({ type: ModalActionTypes.ShowDeleteModal });
   };
 
   return (
@@ -70,7 +77,7 @@ const PagesHotelTable = () => {
                 <TableCell align="right">
                   <Button
                     variant="outlined"
-                    onClick={async () => await HotelService.delete(hotel.id)}
+                    onClick={() => openDeletingHotelModalWindow(hotel.id)}
                     startIcon={<DeleteIcon />}
                   >
                     Delete
@@ -95,6 +102,31 @@ const PagesHotelTable = () => {
         onClose={() => dispatch({ type: ModalActionTypes.HideUpdateModal })}
       >
         <PagesHotelInput creatingInput={false} id={updateHotelId} />
+      </PagesModalWrapper>
+      <PagesModalWrapper
+        open={openModal.deleteModal}
+        onClose={() => {
+          dispatch({ type: ModalActionTypes.HideDeleteModal });
+        }}
+      >
+        <PagesTypography align="center">
+          <div>Delete the hotel?</div>
+          <Button
+            variant="outlined"
+            onClick={async () => {
+              await HotelService.delete(deleteHotelId);
+              dispatch({ type: ModalActionTypes.HideDeleteModal });
+            }}
+          >
+            Yes
+          </Button>
+          <Button
+            variant="outlined"
+            onClick={() => dispatch({ type: ModalActionTypes.HideDeleteModal })}
+          >
+            No
+          </Button>
+        </PagesTypography>
       </PagesModalWrapper>
     </div>
   );
