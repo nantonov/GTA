@@ -11,15 +11,20 @@ import Paper from "@mui/material/Paper";
 import HotelService from "../../../services/HotelService";
 import IHotelGetModel from "../../../modelInterfaces/getInterfaces/IHotelGetModel";
 import EditIcon from "@mui/icons-material/Edit";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
 import PagesHotelInput from "../inputs/PagesHotelInput";
 import "./Tables.css";
+import PagesModalWrapper from "../PagesModalWrapper";
+import { RootState } from "../../../store/reducers";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { ModalActionTypes } from "../../../store/actions";
 
 const PagesHotelTable = () => {
   const [hotels, setHotels] = useState(new Array<IHotelGetModel>());
-  const [open, setOpen] = useState(false);
   const [updateHotelId, setUpdateHotelId] = useState(0);
+
+  const openModal = useSelector((state: RootState) => state.modal);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     async function getHotels() {
@@ -30,7 +35,7 @@ const PagesHotelTable = () => {
   }, [hotels]);
 
   const openEditingCityModalWindow = async (updateHotelId: number) => {
-    setOpen(true);
+    dispatch({ type: ModalActionTypes.ShowModal });
     setUpdateHotelId(updateHotelId);
   };
 
@@ -85,16 +90,12 @@ const PagesHotelTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Modal
-        open={open}
-        onClose={() => setOpen(false)}
-        aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"
+      <PagesModalWrapper
+        open={openModal.modal}
+        onClose={() => dispatch({ type: ModalActionTypes.HideModal })}
       >
-        <Box className="modalBox" sx={{ width: 400 }}>
-          <PagesHotelInput creatingInput={false} id={updateHotelId} />
-        </Box>
-      </Modal>
+        <PagesHotelInput creatingInput={false} id={updateHotelId} />
+      </PagesModalWrapper>
     </div>
   );
 };

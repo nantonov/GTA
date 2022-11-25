@@ -11,18 +11,23 @@ import Paper from "@mui/material/Paper";
 import TicketCityService from "../../../services/TicketCityService";
 import ITicketCityGetModel from "../../../modelInterfaces/getInterfaces/ITicketCityGetModel";
 import EditIcon from "@mui/icons-material/Edit";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
 import PagesTicketCityInput from "../inputs/PagesTicketCityInput";
 import "./Tables.css";
+import PagesModalWrapper from "../PagesModalWrapper";
+import { useSelector } from "react-redux";
+import { ModalActionTypes } from "../../../store/actions";
+import { RootState } from "../../../store/reducers";
+import { useDispatch } from "react-redux";
 
 const PagesTicketCityTable = () => {
   const [ticketCities, setTicketCities] = useState(
     new Array<ITicketCityGetModel>()
   );
-  const [open, setOpen] = useState(false);
   const [updateTicketId, setUpdateTicketId] = useState(0);
   const [updateCityId, setUpdateCityId] = useState(0);
+
+  const openModal = useSelector((state: RootState) => state.modal);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     async function getTicketCities() {
@@ -36,7 +41,7 @@ const PagesTicketCityTable = () => {
     updateTicketId: number,
     updateCityId: number
   ) => {
-    setOpen(true);
+    dispatch({ type: ModalActionTypes.ShowModal });
     setUpdateTicketId(updateTicketId);
     setUpdateCityId(updateCityId);
   };
@@ -98,20 +103,16 @@ const PagesTicketCityTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Modal
-        open={open}
-        onClose={() => setOpen(false)}
-        aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"
+      <PagesModalWrapper
+        open={openModal.modal}
+        onClose={() => dispatch({ type: ModalActionTypes.HideModal })}
       >
-        <Box className="modalBox" sx={{ width: 400 }}>
-          <PagesTicketCityInput
-            creatingInput={false}
-            ticketId={updateTicketId}
-            cityId={updateCityId}
-          />
-        </Box>
-      </Modal>
+        <PagesTicketCityInput
+          creatingInput={false}
+          ticketId={updateTicketId}
+          cityId={updateCityId}
+        />
+      </PagesModalWrapper>
     </div>
   );
 };

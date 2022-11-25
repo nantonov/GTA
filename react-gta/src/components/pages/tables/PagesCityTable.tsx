@@ -11,15 +11,20 @@ import Paper from "@mui/material/Paper";
 import CityService from "../../../services/CityService";
 import { ICityGetModel } from "../../../modelInterfaces/getInterfaces/ICityGetModel";
 import EditIcon from "@mui/icons-material/Edit";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
 import PagesCityInput from "../inputs/PagesCityInput";
 import "./Tables.css";
+import PagesModalWrapper from "../PagesModalWrapper";
+import { useSelector } from "react-redux";
+import { ModalActionTypes } from "../../../store/actions";
+import { RootState } from "../../../store/reducers";
+import { useDispatch } from "react-redux";
 
 const PagesCityTable = () => {
   const [cities, setCities] = useState(new Array<ICityGetModel>());
-  const [open, setOpen] = useState(false);
   const [updateCityId, setUpdateCityId] = useState(0);
+
+  const openModal = useSelector((state: RootState) => state.modal);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     async function getCities() {
@@ -30,7 +35,7 @@ const PagesCityTable = () => {
   }, [cities]);
 
   const openEditingCityModalWindow = async (updateCityId: number) => {
-    setOpen(true);
+    dispatch({ type: ModalActionTypes.ShowModal });
     setUpdateCityId(updateCityId);
   };
 
@@ -83,16 +88,12 @@ const PagesCityTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Modal
-        open={open}
-        onClose={() => setOpen(false)}
-        aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"
+      <PagesModalWrapper
+        open={openModal.modal}
+        onClose={() => dispatch({ type: ModalActionTypes.HideModal })}
       >
-        <Box className="modalBox" sx={{ width: 400 }}>
-          <PagesCityInput creatingInput={false} id={updateCityId} />
-        </Box>
-      </Modal>
+        <PagesCityInput creatingInput={false} id={updateCityId} />
+      </PagesModalWrapper>
     </div>
   );
 };
