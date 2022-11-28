@@ -16,16 +16,16 @@ import { useDispatch } from "react-redux";
 import { AuthActionTypes } from "../../store/authActions";
 
 const AppNavBar = () => {
-  const auth = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const getUser = async () => {
       const user = await UserService.getUser();
-      user && dispatch({ type: AuthActionTypes.SetIsAuth, isAuth: true });
+      user && dispatch({ type: AuthActionTypes.SetIsAuth, payload: true });
+      !user && (await UserService.signIn());
     };
 
-    getUser();
+    setTimeout(() => getUser(), 150);
   }, [dispatch]);
 
   return (
@@ -48,39 +48,20 @@ const AppNavBar = () => {
           <AppNavLink path="/cities" content="Cities" />
           <AppNavLink path="/hotels" content="Hotels" />
           <AppNavLink path="/ticketCities" content="TicketCities" />
-          {!auth.isAuth ? (
-            <Button
-              onClick={async () => {
-                await UserService.signIn();
-              }}
-              color="inherit"
-              startIcon={<LoginIcon />}
+          <Button
+            onClick={async () => await UserService.signOut()}
+            color="inherit"
+            startIcon={<LogoutIcon />}
+          >
+            <Typography
+              color="cyan"
+              variant="subtitle1"
+              component="div"
+              sx={{ flexGrow: 1 }}
             >
-              <Typography
-                color="cyan"
-                variant="subtitle1"
-                component="div"
-                sx={{ flexGrow: 1 }}
-              >
-                Login
-              </Typography>
-            </Button>
-          ) : (
-            <Button
-              onClick={async () => await UserService.signOut()}
-              color="inherit"
-              startIcon={<LogoutIcon />}
-            >
-              <Typography
-                color="cyan"
-                variant="subtitle1"
-                component="div"
-                sx={{ flexGrow: 1 }}
-              >
-                Logout
-              </Typography>
-            </Button>
-          )}
+              Logout
+            </Typography>
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>
