@@ -3,9 +3,16 @@ import React, { useState } from "react";
 import PagesTypography from "../PagesTypography";
 import { ICreateUpdateTicketModel } from "../../../modelInterfaces/createUpdateInterfaces/ICreateUpdateTicketModel";
 import TicketService from "../../../services/TicketService";
+import { postTicket, updateTicket } from "../../../redux/thunk/ticketThunk";
+import { useDispatch } from "react-redux";
 
-const PagesTicketInput = ({ creatingInput, id, }: { creatingInput: boolean; id: number; }) => {
-  
+const PagesTicketInput = ({
+  creatingInput,
+  id,
+}: {
+  creatingInput: boolean;
+  id: number;
+}) => {
   const [ticket, setTicket] = useState({
     id: id,
     departureTime: "",
@@ -13,8 +20,9 @@ const PagesTicketInput = ({ creatingInput, id, }: { creatingInput: boolean; id: 
     price: "",
     passengerCredentials: "",
   });
+  const dispatch = useDispatch();
 
-  const addNewTicket = (e: React.SyntheticEvent) => {
+  const create = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const ticketToCreate: ICreateUpdateTicketModel = {
       departureTime: ticket.departureTime,
@@ -22,7 +30,7 @@ const PagesTicketInput = ({ creatingInput, id, }: { creatingInput: boolean; id: 
       price: Number(ticket.price),
       passengerCredentials: ticket.passengerCredentials,
     };
-    TicketService.create(ticketToCreate);
+    dispatch(postTicket(ticketToCreate));
     setTicket({
       id: 0,
       departureTime: "",
@@ -32,7 +40,7 @@ const PagesTicketInput = ({ creatingInput, id, }: { creatingInput: boolean; id: 
     });
   };
 
-  const updateTicket = (e: React.SyntheticEvent) => {
+  const update = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const ticketToUpdate: ICreateUpdateTicketModel = {
       departureTime: ticket.departureTime,
@@ -41,7 +49,7 @@ const PagesTicketInput = ({ creatingInput, id, }: { creatingInput: boolean; id: 
       passengerCredentials: ticket.passengerCredentials,
     };
 
-    TicketService.update(id, ticketToUpdate);
+    dispatch(updateTicket(id, ticketToUpdate));
     setTicket({
       id: 0,
       departureTime: "",
@@ -53,7 +61,7 @@ const PagesTicketInput = ({ creatingInput, id, }: { creatingInput: boolean; id: 
 
   return (
     <div>
-      <form onSubmit={addNewTicket}>
+      <form onSubmit={create}>
         <div>
           <PagesTypography>
             {creatingInput ? "Create a new" : "Update"} ticket
@@ -107,7 +115,7 @@ const PagesTicketInput = ({ creatingInput, id, }: { creatingInput: boolean; id: 
           <div style={{ margin: "10px 280px" }}>
             <Button
               type="submit"
-              onClick={creatingInput ? addNewTicket : updateTicket}
+              onClick={creatingInput ? create : update}
               variant="contained"
             >
               {creatingInput ? "Create" : "Update"}

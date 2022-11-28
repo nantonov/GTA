@@ -8,8 +8,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import CityService from "../../../services/CityService";
-import { ICityGetModel } from "../../../modelInterfaces/getInterfaces/ICityGetModel";
 import EditIcon from "@mui/icons-material/Edit";
 import PagesCityInput from "../inputs/PagesCityInput";
 import "./Tables.css";
@@ -19,22 +17,19 @@ import { ModalActionTypes } from "../../../store/modalActions";
 import { RootState } from "../../../store/reducers";
 import { useDispatch } from "react-redux";
 import PagesTypography from "../PagesTypography";
+import { deleteCity, getAllCities } from "../../../redux/thunk/cityThunk";
 
 const PagesCityTable = () => {
-  const [cities, setCities] = useState(new Array<ICityGetModel>());
   const [updateCityId, setUpdateCityId] = useState(0);
   const [deleteCityId, setDeleteCityId] = useState(0);
 
   const openModal = useSelector((state: RootState) => state.modal);
+  const cities = useSelector((state: RootState) => state.city.cities);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    async function getCities() {
-      const response = await CityService.getAll();
-      setCities(response);
-    }
-    getCities();
-  }, [cities]);
+    dispatch(getAllCities());
+  });
 
   const openEditingCityModalWindow = async (updateCityId: number) => {
     dispatch({ type: ModalActionTypes.ShowUpdateModal });
@@ -114,7 +109,7 @@ const PagesCityTable = () => {
           <Button
             variant="outlined"
             onClick={async () => {
-              await CityService.delete(deleteCityId);
+              dispatch(deleteCity(deleteCityId));
               dispatch({ type: ModalActionTypes.HideDeleteModal });
             }}
           >

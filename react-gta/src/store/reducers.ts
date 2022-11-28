@@ -1,7 +1,8 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import UserService from '../services/UserService';
 import { AuthAction, AuthActionTypes } from './authActions';
 import { ModalAction, ModalActionTypes } from './modalActions';
+import cityReducer from '../redux/reducers/cityReducer'
+import ticketReducer from '../redux/reducers/ticketReducer';
 
 const initialModalState = {
   updateModal: false,
@@ -62,6 +63,6 @@ function AuthReducer(state = initialAuthState, action: AuthAction) {
   }
 }
 
-const rootReducer = combineReducers({ modal: ModalReducer, auth: AuthReducer });
+const rootReducer = combineReducers({ modal: ModalReducer, auth: AuthReducer, city: cityReducer, ticket: ticketReducer });
 export type RootState = ReturnType<typeof rootReducer>;
 export default rootReducer;

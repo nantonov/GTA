@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import PagesTypography from "../PagesTypography";
 import { ICreateUpdateCityModel } from "../../../modelInterfaces/createUpdateInterfaces/ICreateUpdateCityModel";
 import { TextField, Button } from "@mui/material";
-import CityService from "../../../services/CityService";
+import { useDispatch } from "react-redux";
+import { postCity, updateCity } from "../../../redux/thunk/cityThunk";
 
 const PagesCityInput = ({
   creatingInput,
@@ -17,8 +18,9 @@ const PagesCityInput = ({
     population: "",
     area: "",
   });
+  const dispatch = useDispatch();
 
-  const addNewCity = (e: React.SyntheticEvent) => {
+  const create = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const cityToCreate: ICreateUpdateCityModel = {
       name: city.name,
@@ -26,11 +28,11 @@ const PagesCityInput = ({
       area: Number(city.area),
     };
 
-    CityService.create(cityToCreate);
+    dispatch(postCity(cityToCreate));
     setCity({ id: 0, name: "", population: "", area: "" });
   };
 
-  const updateCity = (e: React.SyntheticEvent) => {
+  const update = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const cityToUpdate: ICreateUpdateCityModel = {
       name: city.name,
@@ -38,13 +40,13 @@ const PagesCityInput = ({
       area: Number(city.area),
     };
 
-    CityService.update(id, cityToUpdate);
+    dispatch(updateCity(id, cityToUpdate));
     setCity({ id: 0, name: "", population: "", area: "" });
   };
 
   return (
     <div>
-      <form onSubmit={addNewCity}>
+      <form onSubmit={create}>
         <div>
           <PagesTypography>
             {creatingInput ? "Create a new" : "Update"} city
@@ -86,7 +88,7 @@ const PagesCityInput = ({
           <div style={{ margin: "10px 280px" }}>
             <Button
               type="submit"
-              onClick={creatingInput ? addNewCity : updateCity}
+              onClick={creatingInput ? create : update}
               variant="contained"
             >
               {creatingInput ? "Create" : "Update"}

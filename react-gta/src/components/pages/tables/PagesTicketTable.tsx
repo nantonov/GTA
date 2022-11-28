@@ -8,8 +8,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import TicketService from "../../../services/TicketService";
-import { ITicketGetModel } from "../../../modelInterfaces/getInterfaces/ITicketGetModel";
 import EditIcon from "@mui/icons-material/Edit";
 import PagesTicketInput from "../inputs/PagesTicketInput";
 import "./Tables.css";
@@ -19,22 +17,19 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { ModalActionTypes } from "../../../store/modalActions";
 import PagesTypography from "../PagesTypography";
+import { deleteTicket, getAllTickets } from "../../../redux/thunk/ticketThunk";
 
 const PagesTicketTable = () => {
-  const [tickets, setTickets] = useState(new Array<ITicketGetModel>());
   const [updateTicketId, setUpdateTicketId] = useState(0);
   const [deleteTicketId, setDeleteTicketId] = useState(0);
 
   const openModal = useSelector((state: RootState) => state.modal);
+  const tickets = useSelector((state: RootState) => state.ticket.tickets);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    async function getTickets() {
-      const response = await TicketService.getAll();
-      setTickets(response);
-    }
-    getTickets();
-  }, [tickets]);
+    dispatch(getAllTickets());
+  });
 
   const openEditingTicketModalWindow = async (updateTicketId: number) => {
     dispatch({ type: ModalActionTypes.ShowUpdateModal });
@@ -122,7 +117,7 @@ const PagesTicketTable = () => {
           <Button
             variant="outlined"
             onClick={async () => {
-              await TicketService.delete(deleteTicketId);
+              dispatch(deleteTicket(deleteTicketId));
               dispatch({ type: ModalActionTypes.HideDeleteModal });
             }}
           >
