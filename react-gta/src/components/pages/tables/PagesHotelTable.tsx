@@ -8,8 +8,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import HotelService from "../../../services/HotelService";
-import IHotelGetModel from "../../../modelInterfaces/getInterfaces/IHotelGetModel";
 import EditIcon from "@mui/icons-material/Edit";
 import PagesHotelInput from "../inputs/PagesHotelInput";
 import "./Tables.css";
@@ -19,22 +17,19 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { ModalActionTypes } from "../../../store/modalActions";
 import PagesTypography from "../PagesTypography";
+import { deleteHotel, getAllHotels } from "../../../redux/thunk/hotelThunk";
 
 const PagesHotelTable = () => {
-  const [hotels, setHotels] = useState(new Array<IHotelGetModel>());
   const [updateHotelId, setUpdateHotelId] = useState(0);
   const [deleteHotelId, setDeleteHotelId] = useState(0);
 
   const openModal = useSelector((state: RootState) => state.modal);
+  const hotels = useSelector((state: RootState) => state.hotel.hotels);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    async function getHotels() {
-      const response = await HotelService.getAll();
-      setHotels(response);
-    }
-    getHotels();
-  }, [hotels]);
+    dispatch(getAllHotels());
+  });
 
   const openEditingHotelModalWindow = async (updateHotelId: number) => {
     dispatch({ type: ModalActionTypes.ShowUpdateModal });
@@ -114,7 +109,7 @@ const PagesHotelTable = () => {
           <Button
             variant="outlined"
             onClick={async () => {
-              await HotelService.delete(deleteHotelId);
+              dispatch(deleteHotel(deleteHotelId));
               dispatch({ type: ModalActionTypes.HideDeleteModal });
             }}
           >

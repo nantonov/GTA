@@ -2,7 +2,6 @@ import { TextField, Button } from "@mui/material";
 import React, { useState } from "react";
 import PagesTypography from "../PagesTypography";
 import { ICreateUpdateTicketModel } from "../../../modelInterfaces/createUpdateInterfaces/ICreateUpdateTicketModel";
-import TicketService from "../../../services/TicketService";
 import { postTicket, updateTicket } from "../../../redux/thunk/ticketThunk";
 import { useDispatch } from "react-redux";
 

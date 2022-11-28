@@ -2,30 +2,42 @@ import { TextField, Button } from "@mui/material";
 import React, { useState } from "react";
 import PagesTypography from "../PagesTypography";
 import { ICreateUpdateTicketCityModel } from "../../../modelInterfaces/createUpdateInterfaces/ICreateUpdateTicketCityModel";
-import TicketCityService from "../../../services/TicketCityService";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+import {
+  postTicketCity,
+  updateTicketCity,
+} from "../../../redux/thunk/ticketCityThunk";
+import { useDispatch } from "react-redux";
 
-const PagesTicketCityInput = ({ creatingInput, ticketId, cityId, }: { creatingInput: boolean; ticketId: number; cityId: number; }) => {
-  
+const PagesTicketCityInput = ({
+  creatingInput,
+  ticketId,
+  cityId,
+}: {
+  creatingInput: boolean;
+  ticketId: number;
+  cityId: number;
+}) => {
   const [ticketCity, setTicketCity] = useState({
     status: 0,
     airlineTicketId: String(ticketId),
     cityId: String(cityId),
   });
+  const dispatch = useDispatch();
 
-  const addNewTicketCity = (e: React.SyntheticEvent) => {
+  const create = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const ticketCityToCreate: ICreateUpdateTicketCityModel = {
       stayingStatus: Number(ticketCity.status),
       airlineTicketId: Number(ticketCity.airlineTicketId),
       cityId: Number(ticketCity.cityId),
     };
-    TicketCityService.create(ticketCityToCreate);
+    dispatch(postTicketCity(ticketCityToCreate));
     setTicketCity({ status: 0, airlineTicketId: "", cityId: "" });
   };
 
-  const updateTicketCity = (e: React.SyntheticEvent) => {
+  const update = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const ticketCityToUpdate: ICreateUpdateTicketCityModel = {
       stayingStatus: Number(ticketCity.status),
@@ -33,13 +45,13 @@ const PagesTicketCityInput = ({ creatingInput, ticketId, cityId, }: { creatingIn
       cityId: Number(ticketCity.cityId),
     };
 
-    TicketCityService.update(ticketCityToUpdate);
+    dispatch(updateTicketCity(ticketCityToUpdate));
     setTicketCity({ status: 0, airlineTicketId: "", cityId: "" });
   };
 
   return (
     <div>
-      <form onSubmit={addNewTicketCity}>
+      <form onSubmit={create}>
         <div>
           <PagesTypography>
             {creatingInput ? "Create a new" : "Update"} ticket-city
@@ -92,7 +104,7 @@ const PagesTicketCityInput = ({ creatingInput, ticketId, cityId, }: { creatingIn
           <div style={{ margin: "10px 280px" }}>
             <Button
               type="submit"
-              onClick={creatingInput ? addNewTicketCity : updateTicketCity}
+              onClick={creatingInput ? create : update}
               variant="contained"
             >
               {creatingInput ? "Create" : "Update"}

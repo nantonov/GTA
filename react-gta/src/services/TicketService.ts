@@ -17,33 +17,6 @@ axiosInstance.interceptors.request.use(
     }
 );
 
-export default class TicketService {
-
-    static async delete(id: number) {
-        const response = await axiosInstance.delete(`/airlineticket/${id}`)
-        return response.data
-    }
-
-    static async create(ticket: ICreateUpdateTicketModel) {
-        const response = await axiosInstance.post(`/airlineticket`, ticket, {
-            headers: {         'Content-Type': 'application/json'     }
-        })
-        return response.data
-    }
-    
-    static async getAll(): Promise<Array<ITicketGetModel>> {
-        const response = await axiosInstance.get(`/airlineticket`)
-        return response.data
-    }
-
-    static async update(id: number, ticket: ICreateUpdateTicketModel) {
-        const response = await axiosInstance.put(`/airlineticket/${id}`, ticket, {
-            headers: {         'Content-Type': 'application/json'     }
-        })
-        return response.data
-    }
-}
-
 export const getAllTicketsService = async() : Promise<Array<ITicketGetModel>> => {
     const response = await axiosInstance.get(`/airlineticket`)
     return response.data

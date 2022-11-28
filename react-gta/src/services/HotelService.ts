@@ -17,28 +17,26 @@ axiosInstance.interceptors.request.use(
     }
 );
 
-export default class HotelService {
-    static async delete(id: number) {
-        const response = await axiosInstance.delete(`/hotel/${id}`)
-        return response.data
-    }
+export const getAllHotelsService = async() : Promise<Array<IHotelGetModel>> => {
+    const response = await axiosInstance.get(`/hotel`)
+    return response.data
+}
 
-    static async create(hotel: ICreateUpdateHotelModel) {
-        const response = await axiosInstance.post(`/hotel`, hotel, {
-            headers: {         'Content-Type': 'application/json'     }
-        })
-        return response.data
-    }
-    
-    static async getAll(): Promise<Array<IHotelGetModel>> {
-        const response = await axiosInstance.get(`/hotel`)
-        return response.data
-    }
+export const createHotelService = async(hotel : ICreateUpdateHotelModel) : Promise<Array<IHotelGetModel>> => {
+    const response = await axiosInstance.post(`/hotel`, hotel, {
+        headers: {         'Content-Type': 'application/json'     }
+    })
+    return response.data
+}
 
-    static async update(id: number, hotel: ICreateUpdateHotelModel) {
-        const response = await axiosInstance.put(`/hotel/${id}`, hotel, {
-            headers: {         'Content-Type': 'application/json'     }
-        })
-        return response.data
-    }
+export const deleteHotelService = async(id : number) : Promise<Array<IHotelGetModel>> => {
+    const response = await axiosInstance.delete(`/hotel/${id}`)
+    return response.data
+}
+
+export const updateHotelService = async(id: number, hotel: ICreateUpdateHotelModel) : Promise<Array<IHotelGetModel>> => {
+    const response = await axiosInstance.put(`/hotel/${id}`, hotel, {
+        headers: {         'Content-Type': 'application/json'     }
+    })
+    return response.data
 }

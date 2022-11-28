@@ -8,8 +8,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import TicketCityService from "../../../services/TicketCityService";
-import ITicketCityGetModel from "../../../modelInterfaces/getInterfaces/ITicketCityGetModel";
 import EditIcon from "@mui/icons-material/Edit";
 import PagesTicketCityInput from "../inputs/PagesTicketCityInput";
 import "./Tables.css";
@@ -19,26 +17,26 @@ import { ModalActionTypes } from "../../../store/modalActions";
 import { RootState } from "../../../store/reducers";
 import { useDispatch } from "react-redux";
 import PagesTypography from "../PagesTypography";
+import {
+  deleteTicketCity,
+  getAllTicketCities,
+} from "../../../redux/thunk/ticketCityThunk";
 
 const PagesTicketCityTable = () => {
-  const [ticketCities, setTicketCities] = useState(
-    new Array<ITicketCityGetModel>()
-  );
   const [updateTicketId, setUpdateTicketId] = useState(0);
   const [updateCityId, setUpdateCityId] = useState(0);
   const [deleteTicketId, setDeleteTicketId] = useState(0);
   const [deleteCityId, setDeleteCityId] = useState(0);
 
   const openModal = useSelector((state: RootState) => state.modal);
+  const ticketCities = useSelector(
+    (state: RootState) => state.ticketCity.ticketCities
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
-    async function getTicketCities() {
-      const response = await TicketCityService.getAll();
-      setTicketCities(response);
-    }
-    getTicketCities();
-  }, [ticketCities]);
+    dispatch(getAllTicketCities());
+  });
 
   const openEditingTicketCityModalWindow = async (
     updateTicketId: number,
@@ -136,7 +134,7 @@ const PagesTicketCityTable = () => {
           <Button
             variant="outlined"
             onClick={async () => {
-              await TicketCityService.delete(deleteTicketId, deleteCityId);
+              dispatch(deleteTicketCity(deleteTicketId, deleteCityId));
               dispatch({ type: ModalActionTypes.HideDeleteModal });
             }}
           >

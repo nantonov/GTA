@@ -2,10 +2,16 @@ import React, { useState } from "react";
 import PagesTypography from "../PagesTypography";
 import { ICreateUpdateHotelModel } from "../../../modelInterfaces/createUpdateInterfaces/ICreateUpdateHotelModel";
 import { TextField, Button } from "@mui/material";
-import HotelService from "../../../services/HotelService";
+import { postHotel, updateHotel } from "../../../redux/thunk/hotelThunk";
+import { useDispatch } from "react-redux";
 
-const PagesHotelInput = ({ creatingInput, id, }: { creatingInput: boolean; id: number; }) => {
-    
+const PagesHotelInput = ({
+  creatingInput,
+  id,
+}: {
+  creatingInput: boolean;
+  id: number;
+}) => {
   const [hotel, setHotel] = useState({
     id: id,
     name: "",
@@ -13,8 +19,9 @@ const PagesHotelInput = ({ creatingInput, id, }: { creatingInput: boolean; id: n
     roomsNumber: "",
     cityId: "",
   });
+  const dispatch = useDispatch();
 
-  const addNewHotel = (e: React.SyntheticEvent) => {
+  const create = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const hotelToCreate: ICreateUpdateHotelModel = {
       name: hotel.name,
@@ -23,11 +30,11 @@ const PagesHotelInput = ({ creatingInput, id, }: { creatingInput: boolean; id: n
       cityId: Number(hotel.cityId),
     };
 
-    HotelService.create(hotelToCreate);
+    dispatch(postHotel(hotelToCreate));
     setHotel({ id: 0, name: "", starsNumber: "", roomsNumber: "", cityId: "" });
   };
 
-  const updateHotel = (e: React.SyntheticEvent) => {
+  const update = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const hotelToUpdate: ICreateUpdateHotelModel = {
       name: hotel.name,
@@ -36,13 +43,13 @@ const PagesHotelInput = ({ creatingInput, id, }: { creatingInput: boolean; id: n
       cityId: Number(hotel.cityId),
     };
 
-    HotelService.update(id, hotelToUpdate);
+    dispatch(updateHotel(id, hotelToUpdate));
     setHotel({ id: 0, name: "", starsNumber: "", roomsNumber: "", cityId: "" });
   };
 
   return (
     <div>
-      <form onSubmit={addNewHotel}>
+      <form onSubmit={create}>
         <div>
           <PagesTypography>
             {creatingInput ? "Create a new" : "Update"} hotel
@@ -94,7 +101,7 @@ const PagesHotelInput = ({ creatingInput, id, }: { creatingInput: boolean; id: n
           <div style={{ margin: "10px 280px" }}>
             <Button
               type="submit"
-              onClick={creatingInput ? addNewHotel : updateHotel}
+              onClick={creatingInput ? create : update}
               variant="contained"
             >
               {creatingInput ? "Create" : "Update"}

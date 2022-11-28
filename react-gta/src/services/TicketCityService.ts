@@ -17,28 +17,26 @@ axiosInstance.interceptors.request.use(
     }
 );
 
-export default class TicketCityService {
-    static async delete(ticketId: number, cityId: number) {
-        const response = await axiosInstance.delete(`/airlineticketcity/ticket/${ticketId}/city/${cityId}`)
-        return response.data
-    }
+export const getAllTicketCitiesService = async() : Promise<Array<ITicketCityGetModel>> => {
+    const response = await axiosInstance.get(`/airlineticketcity`)
+    return response.data
+}
 
-    static async create(ticketCity: ICreateUpdateTicketCityModel) {
-        const response = await axiosInstance.post(`/airlineticketcity`, ticketCity, {
-            headers: {         'Content-Type': 'application/json'     }
-        })
-        return response.data
-    }
-    
-    static async getAll(): Promise<Array<ITicketCityGetModel>> {
-        const response = await axiosInstance.get(`/airlineticketcity`)
-        return response.data
-    }
+export const createTicketCityService = async(ticketCity : ICreateUpdateTicketCityModel) : Promise<Array<ITicketCityGetModel>> => {
+    const response = await axiosInstance.post(`/airlineticketcity`, ticketCity, {
+        headers: {         'Content-Type': 'application/json'     }
+    })
+    return response.data
+}
 
-    static async update(ticketCity: ICreateUpdateTicketCityModel) {
-        const response = await axiosInstance.put(`/airlineticketcity`, ticketCity, {
-            headers: {         'Content-Type': 'application/json'     }
-        })
-        return response.data
-    }
+export const deleteTicketCityService = async(ticketId : number, cityId : number) : Promise<Array<ITicketCityGetModel>> => {
+    const response = await axiosInstance.delete(`/airlineticketcity/ticket/${ticketId}/city/${cityId}`)
+    return response.data
+}
+
+export const updateTicketCityService = async(ticketCity: ICreateUpdateTicketCityModel) : Promise<Array<ITicketCityGetModel>> => {
+    const response = await axiosInstance.put(`/airlineticketcity`, ticketCity, {
+        headers: {         'Content-Type': 'application/json'     }
+    })
+    return response.data
 }
