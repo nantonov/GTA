@@ -1,23 +1,17 @@
-import { TextField, Button } from "@mui/material";
-import React, { useState } from "react";
-import PagesTypography from "../PagesTypography";
-import { ICreateUpdateTicketModel } from "../../../modelInterfaces/createUpdateInterfaces/ICreateUpdateTicketModel";
-import { postTicket, updateTicket } from "../../../redux/thunk/ticketThunk";
-import { useDispatch } from "react-redux";
+import { TextField, Button } from '@mui/material';
+import React, { useState } from 'react';
+import PagesTypography from '../PagesTypography';
+import { ICreateUpdateTicketModel } from '../../../modelInterfaces/createUpdateInterfaces/ICreateUpdateTicketModel';
+import { postTicket, updateTicket } from '../../../redux/thunk/ticketThunk';
+import { useDispatch } from 'react-redux';
 
-const PagesTicketInput = ({
-  creatingInput,
-  id,
-}: {
-  creatingInput: boolean;
-  id: number;
-}) => {
+const PagesTicketInput = ({ creatingInput, id }: { creatingInput: boolean; id: number }) => {
   const [ticket, setTicket] = useState({
     id: id,
-    departureTime: "",
-    arrivalTime: "",
-    price: "",
-    passengerCredentials: "",
+    departureTime: '',
+    arrivalTime: '',
+    price: '',
+    passengerCredentials: '',
   });
   const dispatch = useDispatch();
 
@@ -32,10 +26,10 @@ const PagesTicketInput = ({
     dispatch(postTicket(ticketToCreate));
     setTicket({
       id: 0,
-      departureTime: "",
-      arrivalTime: "",
-      price: "",
-      passengerCredentials: "",
+      departureTime: '',
+      arrivalTime: '',
+      price: '',
+      passengerCredentials: '',
     });
   };
 
@@ -51,10 +45,10 @@ const PagesTicketInput = ({
     dispatch(updateTicket(id, ticketToUpdate));
     setTicket({
       id: 0,
-      departureTime: "",
-      arrivalTime: "",
-      price: "",
-      passengerCredentials: "",
+      departureTime: '',
+      arrivalTime: '',
+      price: '',
+      passengerCredentials: '',
     });
   };
 
@@ -62,9 +56,7 @@ const PagesTicketInput = ({
     <div>
       <form onSubmit={create}>
         <div>
-          <PagesTypography>
-            {creatingInput ? "Create a new" : "Update"} ticket
-          </PagesTypography>
+          <PagesTypography>{creatingInput ? 'Create a new' : 'Update'} ticket</PagesTypography>
           <div>
             <TextField
               name="departureTime"
@@ -73,9 +65,7 @@ const PagesTicketInput = ({
               id="outlined-basic"
               label="Departure Time"
               variant="outlined"
-              onChange={(e) =>
-                setTicket({ ...ticket, departureTime: e.target.value })
-              }
+              onChange={(e) => setTicket({ ...ticket, departureTime: e.target.value })}
             />
 
             <TextField
@@ -85,9 +75,7 @@ const PagesTicketInput = ({
               id="outlined-basic"
               label="Arrival Time"
               variant="outlined"
-              onChange={(e) =>
-                setTicket({ ...ticket, arrivalTime: e.target.value })
-              }
+              onChange={(e) => setTicket({ ...ticket, arrivalTime: e.target.value })}
             />
 
             <TextField
@@ -106,18 +94,12 @@ const PagesTicketInput = ({
               id="outlined-basic"
               label="Passenger Credentials"
               variant="outlined"
-              onChange={(e) =>
-                setTicket({ ...ticket, passengerCredentials: e.target.value })
-              }
+              onChange={(e) => setTicket({ ...ticket, passengerCredentials: e.target.value })}
             />
           </div>
-          <div style={{ margin: "10px 280px" }}>
-            <Button
-              type="submit"
-              onClick={creatingInput ? create : update}
-              variant="contained"
-            >
-              {creatingInput ? "Create" : "Update"}
+          <div style={{ margin: '10px 280px' }}>
+            <Button type="submit" onClick={creatingInput ? create : update} variant="contained">
+              {creatingInput ? 'Create' : 'Update'}
             </Button>
           </div>
         </div>

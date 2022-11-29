@@ -1,11 +1,11 @@
-import { ICityGetModel } from "./ICityGetModel";
-import { ITicketGetModel } from "./ITicketGetModel";
+import { ICityGetModel } from './ICityGetModel';
+import { ITicketGetModel } from './ITicketGetModel';
 
 export default interface ITicketCityGetModel {
-    stayingStatus: number,
+  stayingStatus: number;
 
-    airlineTicketId: number,
-    ticket: ITicketGetModel,
-    cityId: number,
-    city: ICityGetModel
+  airlineTicketId: number;
+  ticket: ITicketGetModel;
+  cityId: number;
+  city: ICityGetModel;
 }

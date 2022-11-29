@@ -1,23 +1,17 @@
-import React, { useState } from "react";
-import PagesTypography from "../PagesTypography";
-import { ICreateUpdateHotelModel } from "../../../modelInterfaces/createUpdateInterfaces/ICreateUpdateHotelModel";
-import { TextField, Button } from "@mui/material";
-import { postHotel, updateHotel } from "../../../redux/thunk/hotelThunk";
-import { useDispatch } from "react-redux";
+import React, { useState } from 'react';
+import PagesTypography from '../PagesTypography';
+import { ICreateUpdateHotelModel } from '../../../modelInterfaces/createUpdateInterfaces/ICreateUpdateHotelModel';
+import { TextField, Button } from '@mui/material';
+import { postHotel, updateHotel } from '../../../redux/thunk/hotelThunk';
+import { useDispatch } from 'react-redux';
 
-const PagesHotelInput = ({
-  creatingInput,
-  id,
-}: {
-  creatingInput: boolean;
-  id: number;
-}) => {
+const PagesHotelInput = ({ creatingInput, id }: { creatingInput: boolean; id: number }) => {
   const [hotel, setHotel] = useState({
     id: id,
-    name: "",
-    starsNumber: "",
-    roomsNumber: "",
-    cityId: "",
+    name: '',
+    starsNumber: '',
+    roomsNumber: '',
+    cityId: '',
   });
   const dispatch = useDispatch();
 
@@ -31,7 +25,7 @@ const PagesHotelInput = ({
     };
 
     dispatch(postHotel(hotelToCreate));
-    setHotel({ id: 0, name: "", starsNumber: "", roomsNumber: "", cityId: "" });
+    setHotel({ id: 0, name: '', starsNumber: '', roomsNumber: '', cityId: '' });
   };
 
   const update = (e: React.SyntheticEvent) => {
@@ -44,16 +38,14 @@ const PagesHotelInput = ({
     };
 
     dispatch(updateHotel(id, hotelToUpdate));
-    setHotel({ id: 0, name: "", starsNumber: "", roomsNumber: "", cityId: "" });
+    setHotel({ id: 0, name: '', starsNumber: '', roomsNumber: '', cityId: '' });
   };
 
   return (
     <div>
       <form onSubmit={create}>
         <div>
-          <PagesTypography>
-            {creatingInput ? "Create a new" : "Update"} hotel
-          </PagesTypography>
+          <PagesTypography>{creatingInput ? 'Create a new' : 'Update'} hotel</PagesTypography>
           <div>
             <TextField
               name="name"
@@ -71,9 +63,7 @@ const PagesHotelInput = ({
               id="outlined-basic"
               label="StartNumber"
               variant="outlined"
-              onChange={(e) =>
-                setHotel({ ...hotel, starsNumber: e.target.value })
-              }
+              onChange={(e) => setHotel({ ...hotel, starsNumber: e.target.value })}
             />
 
             <TextField
@@ -83,9 +73,7 @@ const PagesHotelInput = ({
               id="outlined-basic"
               label="RoomsNumber"
               variant="outlined"
-              onChange={(e) =>
-                setHotel({ ...hotel, roomsNumber: e.target.value })
-              }
+              onChange={(e) => setHotel({ ...hotel, roomsNumber: e.target.value })}
             />
 
             <TextField
@@ -98,13 +86,9 @@ const PagesHotelInput = ({
               onChange={(e) => setHotel({ ...hotel, cityId: e.target.value })}
             />
           </div>
-          <div style={{ margin: "10px 280px" }}>
-            <Button
-              type="submit"
-              onClick={creatingInput ? create : update}
-              variant="contained"
-            >
-              {creatingInput ? "Create" : "Update"}
+          <div style={{ margin: '10px 280px' }}>
+            <Button type="submit" onClick={creatingInput ? create : update} variant="contained">
+              {creatingInput ? 'Create' : 'Update'}
             </Button>
           </div>
         </div>

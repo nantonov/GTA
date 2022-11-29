@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { Button } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import EditIcon from "@mui/icons-material/Edit";
-import PagesCityInput from "../inputs/PagesCityInput";
-import "./Tables.css";
-import PagesModalWrapper from "../PagesModalWrapper";
-import { useSelector } from "react-redux";
-import { ModalActionTypes } from "../../../store/modalActions";
-import { RootState } from "../../../store/reducers";
-import { useDispatch } from "react-redux";
-import PagesTypography from "../PagesTypography";
-import { deleteCity, getAllCities } from "../../../redux/thunk/cityThunk";
+import React, { useEffect, useState } from 'react';
+import { Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import EditIcon from '@mui/icons-material/Edit';
+import PagesCityInput from '../inputs/PagesCityInput';
+import './Tables.css';
+import PagesModalWrapper from '../PagesModalWrapper';
+import { useSelector } from 'react-redux';
+import { ModalActionTypes } from '../../../store/modalActions';
+import { RootState } from '../../../store/reducers';
+import { useDispatch } from 'react-redux';
+import PagesTypography from '../PagesTypography';
+import { deleteCity, getAllCities } from '../../../redux/thunk/cityThunk';
 
 const PagesCityTable = () => {
   const [updateCityId, setUpdateCityId] = useState(0);
@@ -57,10 +57,7 @@ const PagesCityTable = () => {
           </TableHead>
           <TableBody>
             {cities.map((city) => (
-              <TableRow
-                key={city.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
+              <TableRow key={city.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell component="th" scope="row">
                   {city.id}
                 </TableCell>

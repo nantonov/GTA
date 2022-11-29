@@ -1,19 +1,19 @@
-import React, { useContext, useEffect } from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import Typography from "@mui/material/Typography";
-import AppNavLink from "./AppNavLink/AppNavLink";
-import { Button } from "@mui/material";
-import UserService from "../../services/UserService";
-import LoginIcon from "@mui/icons-material/Login";
-import LogoutIcon from "@mui/icons-material/Logout";
-import { RootState } from "../../store/reducers";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { AuthActionTypes } from "../../store/authActions";
+import React, { useContext, useEffect } from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import Typography from '@mui/material/Typography';
+import AppNavLink from './AppNavLink/AppNavLink';
+import { Button } from '@mui/material';
+import UserService from '../../services/UserService';
+import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { RootState } from '../../store/reducers';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { AuthActionTypes } from '../../store/authActions';
 
 const AppNavBar = () => {
   const dispatch = useDispatch();
@@ -32,13 +32,7 @@ const AppNavBar = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
+          <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -53,12 +47,7 @@ const AppNavBar = () => {
             color="inherit"
             startIcon={<LogoutIcon />}
           >
-            <Typography
-              color="cyan"
-              variant="subtitle1"
-              component="div"
-              sx={{ flexGrow: 1 }}
-            >
+            <Typography color="cyan" variant="subtitle1" component="div" sx={{ flexGrow: 1 }}>
               Logout
             </Typography>
           </Button>

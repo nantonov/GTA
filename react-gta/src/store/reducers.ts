@@ -1,7 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { AuthAction, AuthActionTypes } from './authActions';
 import { ModalAction, ModalActionTypes } from './modalActions';
-import cityReducer from '../redux/reducers/cityReducer'
+import cityReducer from '../redux/reducers/cityReducer';
 import ticketReducer from '../redux/reducers/ticketReducer';
 import hotelReducer from '../redux/reducers/hotelReducer';
 import ticketCityReducer from '../redux/reducers/ticketCityReducer';
@@ -9,11 +9,11 @@ import ticketCityReducer from '../redux/reducers/ticketCityReducer';
 const initialModalState = {
   updateModal: false,
   createModal: false,
-  deleteModal: false
+  deleteModal: false,
 };
 
 const initialAuthState = {
-  isAuth: false
+  isAuth: false,
 };
 
 function ModalReducer(state = initialModalState, action: ModalAction) {
@@ -29,25 +29,25 @@ function ModalReducer(state = initialModalState, action: ModalAction) {
         updateModal: false,
       };
     case ModalActionTypes.ShowCreateModal:
-    return {
-      ...state,
-      createModal: true,
-    };
+      return {
+        ...state,
+        createModal: true,
+      };
     case ModalActionTypes.HideCreateModal:
-    return {
-      ...state,
-      createModal: false,
-    };
+      return {
+        ...state,
+        createModal: false,
+      };
     case ModalActionTypes.ShowDeleteModal:
-    return {
-      ...state,
-      deleteModal: true,
-    };
+      return {
+        ...state,
+        deleteModal: true,
+      };
     case ModalActionTypes.HideDeleteModal:
-    return {
-      ...state,
-      deleteModal: false,
-    };
+      return {
+        ...state,
+        deleteModal: false,
+      };
     default:
       return state;
   }
@@ -56,16 +56,22 @@ function ModalReducer(state = initialModalState, action: ModalAction) {
 function AuthReducer(state = initialAuthState, action: AuthAction) {
   switch (action.type) {
     case AuthActionTypes.SetIsAuth:
-    return {
-      ...state,
-      isAuth: action.isAuth
-    };
+      return {
+        ...state,
+        isAuth: action.isAuth,
+      };
     default:
       return state;
   }
 }
 
-const rootReducer = combineReducers({ modal: ModalReducer, auth: AuthReducer, city: cityReducer, 
-  ticket: ticketReducer, hotel: hotelReducer, ticketCity: ticketCityReducer });
+const rootReducer = combineReducers({
+  modal: ModalReducer,
+  auth: AuthReducer,
+  city: cityReducer,
+  ticket: ticketReducer,
+  hotel: hotelReducer,
+  ticketCity: ticketCityReducer,
+});
 export type RootState = ReturnType<typeof rootReducer>;
 export default rootReducer;

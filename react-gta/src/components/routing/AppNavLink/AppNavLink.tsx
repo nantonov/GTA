@@ -1,7 +1,7 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import Typography from "@mui/material/Typography";
-import "./AppNavLink.css";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import Typography from '@mui/material/Typography';
+import './AppNavLink.css';
 
 const AppNavLink = (props: { path: string; content: string }) => {
   return (

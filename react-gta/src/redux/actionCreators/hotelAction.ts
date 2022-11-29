@@ -1,16 +1,16 @@
-import { HotelActionTypes, HotelAction } from "../actionTypes/hotelTypes";
-import IHotelGetModel from "../../modelInterfaces/getInterfaces/IHotelGetModel";
+import { HotelActionTypes, HotelAction } from '../actionTypes/hotelTypes';
+import IHotelGetModel from '../../modelInterfaces/getInterfaces/IHotelGetModel';
 
 export const setHotelStart = (): HotelAction => ({
-    type: HotelActionTypes.HOTEL_START
-})
+  type: HotelActionTypes.HOTEL_START,
+});
 
 export const setHotelSuccess = (hotels: IHotelGetModel[]): HotelAction => ({
-    type: HotelActionTypes.HOTEL_SUCCESS,
-    payload: hotels
-})
+  type: HotelActionTypes.HOTEL_SUCCESS,
+  payload: hotels,
+});
 
 export const setHotelFail = (error: string): HotelAction => ({
-    type: HotelActionTypes.HOTEL_FAIL,
-    payload: error
-})
+  type: HotelActionTypes.HOTEL_FAIL,
+  payload: error,
+});

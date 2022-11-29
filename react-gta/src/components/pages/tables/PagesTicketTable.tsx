@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { Button } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import EditIcon from "@mui/icons-material/Edit";
-import PagesTicketInput from "../inputs/PagesTicketInput";
-import "./Tables.css";
-import PagesModalWrapper from "../PagesModalWrapper";
-import { RootState } from "../../../store/reducers";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { ModalActionTypes } from "../../../store/modalActions";
-import PagesTypography from "../PagesTypography";
-import { deleteTicket, getAllTickets } from "../../../redux/thunk/ticketThunk";
+import React, { useEffect, useState } from 'react';
+import { Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import EditIcon from '@mui/icons-material/Edit';
+import PagesTicketInput from '../inputs/PagesTicketInput';
+import './Tables.css';
+import PagesModalWrapper from '../PagesModalWrapper';
+import { RootState } from '../../../store/reducers';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { ModalActionTypes } from '../../../store/modalActions';
+import PagesTypography from '../PagesTypography';
+import { deleteTicket, getAllTickets } from '../../../redux/thunk/ticketThunk';
 
 const PagesTicketTable = () => {
   const [updateTicketId, setUpdateTicketId] = useState(0);
@@ -58,29 +58,18 @@ const PagesTicketTable = () => {
           </TableHead>
           <TableBody>
             {tickets.map((ticket) => (
-              <TableRow
-                key={ticket.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
+              <TableRow key={ticket.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell component="th" scope="row">
                   {ticket.id}
                 </TableCell>
-                <TableCell align="right">
-                  {String(ticket.departureTime)}
-                </TableCell>
-                <TableCell align="right">
-                  {String(ticket.arrivalTime)}
-                </TableCell>
+                <TableCell align="right">{String(ticket.departureTime)}</TableCell>
+                <TableCell align="right">{String(ticket.arrivalTime)}</TableCell>
                 <TableCell align="right">{ticket.price}</TableCell>
-                <TableCell align="right">
-                  {ticket.passengerCredentials}
-                </TableCell>
+                <TableCell align="right">{ticket.passengerCredentials}</TableCell>
                 <TableCell align="right">
                   <Button
                     variant="outlined"
-                    onClick={async () =>
-                      openDeletingTicketModalWindow(ticket.id)
-                    }
+                    onClick={async () => openDeletingTicketModalWindow(ticket.id)}
                     startIcon={<DeleteIcon />}
                   >
                     Delete

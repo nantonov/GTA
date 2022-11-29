@@ -1,5 +1,5 @@
 export enum cityStayingStatus {
-    departure,
-    arrival, 
-    transit
+  departure,
+  arrival,
+  transit,
 }

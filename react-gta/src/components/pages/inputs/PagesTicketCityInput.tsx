@@ -1,14 +1,11 @@
-import { TextField, Button } from "@mui/material";
-import React, { useState } from "react";
-import PagesTypography from "../PagesTypography";
-import { ICreateUpdateTicketCityModel } from "../../../modelInterfaces/createUpdateInterfaces/ICreateUpdateTicketCityModel";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import {
-  postTicketCity,
-  updateTicketCity,
-} from "../../../redux/thunk/ticketCityThunk";
-import { useDispatch } from "react-redux";
+import { TextField, Button } from '@mui/material';
+import React, { useState } from 'react';
+import PagesTypography from '../PagesTypography';
+import { ICreateUpdateTicketCityModel } from '../../../modelInterfaces/createUpdateInterfaces/ICreateUpdateTicketCityModel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import { postTicketCity, updateTicketCity } from '../../../redux/thunk/ticketCityThunk';
+import { useDispatch } from 'react-redux';
 
 const PagesTicketCityInput = ({
   creatingInput,
@@ -34,7 +31,7 @@ const PagesTicketCityInput = ({
       cityId: Number(ticketCity.cityId),
     };
     dispatch(postTicketCity(ticketCityToCreate));
-    setTicketCity({ status: 0, airlineTicketId: "", cityId: "" });
+    setTicketCity({ status: 0, airlineTicketId: '', cityId: '' });
   };
 
   const update = (e: React.SyntheticEvent) => {
@@ -46,25 +43,21 @@ const PagesTicketCityInput = ({
     };
 
     dispatch(updateTicketCity(ticketCityToUpdate));
-    setTicketCity({ status: 0, airlineTicketId: "", cityId: "" });
+    setTicketCity({ status: 0, airlineTicketId: '', cityId: '' });
   };
 
   return (
     <div>
       <form onSubmit={create}>
         <div>
-          <PagesTypography>
-            {creatingInput ? "Create a new" : "Update"} ticket-city
-          </PagesTypography>
+          <PagesTypography>{creatingInput ? 'Create a new' : 'Update'} ticket-city</PagesTypography>
           <div>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={ticketCity.status}
               label="Staying status"
-              onChange={(e) =>
-                setTicketCity({ ...ticketCity, status: Number(e.target.value) })
-              }
+              onChange={(e) => setTicketCity({ ...ticketCity, status: Number(e.target.value) })}
             >
               <MenuItem value={0}>Departure</MenuItem>
               <MenuItem value={1}>Arrival</MenuItem>
@@ -101,13 +94,9 @@ const PagesTicketCityInput = ({
               }
             />
           </div>
-          <div style={{ margin: "10px 280px" }}>
-            <Button
-              type="submit"
-              onClick={creatingInput ? create : update}
-              variant="contained"
-            >
-              {creatingInput ? "Create" : "Update"}
+          <div style={{ margin: '10px 280px' }}>
+            <Button type="submit" onClick={creatingInput ? create : update} variant="contained">
+              {creatingInput ? 'Create' : 'Update'}
             </Button>
           </div>
         </div>

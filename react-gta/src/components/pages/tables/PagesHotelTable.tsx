@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { Button } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import EditIcon from "@mui/icons-material/Edit";
-import PagesHotelInput from "../inputs/PagesHotelInput";
-import "./Tables.css";
-import PagesModalWrapper from "../PagesModalWrapper";
-import { RootState } from "../../../store/reducers";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { ModalActionTypes } from "../../../store/modalActions";
-import PagesTypography from "../PagesTypography";
-import { deleteHotel, getAllHotels } from "../../../redux/thunk/hotelThunk";
+import React, { useEffect, useState } from 'react';
+import { Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import EditIcon from '@mui/icons-material/Edit';
+import PagesHotelInput from '../inputs/PagesHotelInput';
+import './Tables.css';
+import PagesModalWrapper from '../PagesModalWrapper';
+import { RootState } from '../../../store/reducers';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { ModalActionTypes } from '../../../store/modalActions';
+import PagesTypography from '../PagesTypography';
+import { deleteHotel, getAllHotels } from '../../../redux/thunk/hotelThunk';
 
 const PagesHotelTable = () => {
   const [updateHotelId, setUpdateHotelId] = useState(0);
@@ -58,10 +58,7 @@ const PagesHotelTable = () => {
           </TableHead>
           <TableBody>
             {hotels.map((hotel) => (
-              <TableRow
-                key={hotel.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
+              <TableRow key={hotel.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell component="th" scope="row">
                   {hotel.id}
                 </TableCell>

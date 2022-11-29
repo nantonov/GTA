@@ -1,26 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { Button } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import EditIcon from "@mui/icons-material/Edit";
-import PagesTicketCityInput from "../inputs/PagesTicketCityInput";
-import "./Tables.css";
-import PagesModalWrapper from "../PagesModalWrapper";
-import { useSelector } from "react-redux";
-import { ModalActionTypes } from "../../../store/modalActions";
-import { RootState } from "../../../store/reducers";
-import { useDispatch } from "react-redux";
-import PagesTypography from "../PagesTypography";
-import {
-  deleteTicketCity,
-  getAllTicketCities,
-} from "../../../redux/thunk/ticketCityThunk";
+import React, { useEffect, useState } from 'react';
+import { Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import EditIcon from '@mui/icons-material/Edit';
+import PagesTicketCityInput from '../inputs/PagesTicketCityInput';
+import './Tables.css';
+import PagesModalWrapper from '../PagesModalWrapper';
+import { useSelector } from 'react-redux';
+import { ModalActionTypes } from '../../../store/modalActions';
+import { RootState } from '../../../store/reducers';
+import { useDispatch } from 'react-redux';
+import PagesTypography from '../PagesTypography';
+import { deleteTicketCity, getAllTicketCities } from '../../../redux/thunk/ticketCityThunk';
 
 const PagesTicketCityTable = () => {
   const [updateTicketId, setUpdateTicketId] = useState(0);
@@ -29,28 +26,20 @@ const PagesTicketCityTable = () => {
   const [deleteCityId, setDeleteCityId] = useState(0);
 
   const openModal = useSelector((state: RootState) => state.modal);
-  const ticketCities = useSelector(
-    (state: RootState) => state.ticketCity.ticketCities
-  );
+  const ticketCities = useSelector((state: RootState) => state.ticketCity.ticketCities);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllTicketCities());
   });
 
-  const openEditingTicketCityModalWindow = async (
-    updateTicketId: number,
-    updateCityId: number
-  ) => {
+  const openEditingTicketCityModalWindow = async (updateTicketId: number, updateCityId: number) => {
     dispatch({ type: ModalActionTypes.ShowUpdateModal });
     setUpdateTicketId(updateTicketId);
     setUpdateCityId(updateCityId);
   };
 
-  const openDeletingTicketCityModalWindow = (
-    deleteTicketId: number,
-    deleteCityId: number
-  ) => {
+  const openDeletingTicketCityModalWindow = (deleteTicketId: number, deleteCityId: number) => {
     dispatch({ type: ModalActionTypes.ShowDeleteModal });
     setDeleteTicketId(deleteTicketId);
     setDeleteCityId(deleteCityId);
@@ -73,7 +62,7 @@ const PagesTicketCityTable = () => {
             {ticketCities.map((ticketCity) => (
               <TableRow
                 key={ticketCity.airlineTicketId + ticketCity.cityId}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
                   {ticketCity.airlineTicketId}

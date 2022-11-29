@@ -1,13 +1,13 @@
-import React from "react";
-import PagesCityInput from "../../components/pages/inputs/PagesCityInput";
-import PagesCityTable from "../../components/pages/tables/PagesCityTable";
-import PagesModalWrapper from "../../components/pages/PagesModalWrapper";
-import { useSelector } from "react-redux";
-import { ModalActionTypes } from "../../store/modalActions";
-import { RootState } from "../../store/reducers";
-import { useDispatch } from "react-redux";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import Button from "@mui/material/Button";
+import React from 'react';
+import PagesCityInput from '../../components/pages/inputs/PagesCityInput';
+import PagesCityTable from '../../components/pages/tables/PagesCityTable';
+import PagesModalWrapper from '../../components/pages/PagesModalWrapper';
+import { useSelector } from 'react-redux';
+import { ModalActionTypes } from '../../store/modalActions';
+import { RootState } from '../../store/reducers';
+import { useDispatch } from 'react-redux';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import Button from '@mui/material/Button';
 
 const Cities = () => {
   const openModal = useSelector((state: RootState) => state.modal);

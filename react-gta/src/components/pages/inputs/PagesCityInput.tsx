@@ -1,22 +1,16 @@
-import React, { useState } from "react";
-import PagesTypography from "../PagesTypography";
-import { ICreateUpdateCityModel } from "../../../modelInterfaces/createUpdateInterfaces/ICreateUpdateCityModel";
-import { TextField, Button } from "@mui/material";
-import { useDispatch } from "react-redux";
-import { postCity, updateCity } from "../../../redux/thunk/cityThunk";
+import React, { useState } from 'react';
+import PagesTypography from '../PagesTypography';
+import { ICreateUpdateCityModel } from '../../../modelInterfaces/createUpdateInterfaces/ICreateUpdateCityModel';
+import { TextField, Button } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { postCity, updateCity } from '../../../redux/thunk/cityThunk';
 
-const PagesCityInput = ({
-  creatingInput,
-  id,
-}: {
-  creatingInput: boolean;
-  id: number;
-}) => {
+const PagesCityInput = ({ creatingInput, id }: { creatingInput: boolean; id: number }) => {
   const [city, setCity] = useState({
     id: id,
-    name: "",
-    population: "",
-    area: "",
+    name: '',
+    population: '',
+    area: '',
   });
   const dispatch = useDispatch();
 
@@ -29,7 +23,7 @@ const PagesCityInput = ({
     };
 
     dispatch(postCity(cityToCreate));
-    setCity({ id: 0, name: "", population: "", area: "" });
+    setCity({ id: 0, name: '', population: '', area: '' });
   };
 
   const update = (e: React.SyntheticEvent) => {
@@ -41,16 +35,14 @@ const PagesCityInput = ({
     };
 
     dispatch(updateCity(id, cityToUpdate));
-    setCity({ id: 0, name: "", population: "", area: "" });
+    setCity({ id: 0, name: '', population: '', area: '' });
   };
 
   return (
     <div>
       <form onSubmit={create}>
         <div>
-          <PagesTypography>
-            {creatingInput ? "Create a new" : "Update"} city
-          </PagesTypography>
+          <PagesTypography>{creatingInput ? 'Create a new' : 'Update'} city</PagesTypography>
           <div>
             <TextField
               name="name"
@@ -68,9 +60,7 @@ const PagesCityInput = ({
               id="outlined-basic"
               label="Population"
               variant="outlined"
-              onChange={(e) =>
-                setCity({ ...city, population: String(e.target.value) })
-              }
+              onChange={(e) => setCity({ ...city, population: String(e.target.value) })}
             />
 
             <TextField
@@ -80,18 +70,12 @@ const PagesCityInput = ({
               id="outlined-basic"
               label="Area"
               variant="outlined"
-              onChange={(e) =>
-                setCity({ ...city, area: String(e.target.value) })
-              }
+              onChange={(e) => setCity({ ...city, area: String(e.target.value) })}
             />
           </div>
-          <div style={{ margin: "10px 280px" }}>
-            <Button
-              type="submit"
-              onClick={creatingInput ? create : update}
-              variant="contained"
-            >
-              {creatingInput ? "Create" : "Update"}
+          <div style={{ margin: '10px 280px' }}>
+            <Button type="submit" onClick={creatingInput ? create : update} variant="contained">
+              {creatingInput ? 'Create' : 'Update'}
             </Button>
           </div>
         </div>

@@ -1,6 +1,6 @@
-import React from "react";
-import { Navigate } from "react-router-dom";
-import UserService from "../../services/UserService";
+import React from 'react';
+import { Navigate } from 'react-router-dom';
+import UserService from '../../services/UserService';
 
 const Callback = () => {
   UserService.signInCallback().then(() => {
@@ -9,7 +9,7 @@ const Callback = () => {
       window.document.title,
       window.location.origin + window.location.pathname
     );
-    (window as Window).location = "http://localhost:3000/";
+    (window as Window).location = 'http://localhost:3000/';
   });
   return (
     <div>
