@@ -10,7 +10,6 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import EditIcon from '@mui/icons-material/Edit';
 import PagesCityInput from '../inputs/PagesCityInput';
-import './Tables.css';
 import PagesModalWrapper from '../PagesModalWrapper';
 import { useSelector } from 'react-redux';
 import { ModalActionTypes } from '../../../store/modalActions';

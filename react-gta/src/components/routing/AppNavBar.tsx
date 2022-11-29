@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Typography from '@mui/material/Typography';
-import AppNavLink from './AppNavLink/AppNavLink';
+import AppNavLink from './AppNavLink';
 import { Button } from '@mui/material';
 import UserService from '../../services/UserService';
 import LoginIcon from '@mui/icons-material/Login';
