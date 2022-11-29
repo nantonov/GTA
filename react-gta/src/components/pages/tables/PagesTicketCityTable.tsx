@@ -18,6 +18,7 @@ import { RootState } from '../../../store/reducers';
 import { useDispatch } from 'react-redux';
 import PagesTypography from '../PagesTypography';
 import { deleteTicketCity, getAllTicketCities } from '../../../redux/thunk/ticketCityThunk';
+import { Link } from 'react-router-dom';
 
 const PagesTicketCityTable = () => {
   const [updateTicketId, setUpdateTicketId] = useState(0);
@@ -65,9 +66,19 @@ const PagesTicketCityTable = () => {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {ticketCity.airlineTicketId}
+                  <Link
+                    to={`/ticketCity/ticket/${ticketCity.airlineTicketId}/city/${ticketCity.cityId}`}
+                  >
+                    {ticketCity.airlineTicketId}
+                  </Link>
                 </TableCell>
-                <TableCell align="right">{ticketCity.cityId}</TableCell>
+                <TableCell align="right">
+                  <Link
+                    to={`/ticketCity/ticket/${ticketCity.airlineTicketId}/city/${ticketCity.cityId}`}
+                  >
+                    {ticketCity.cityId}
+                  </Link>
+                </TableCell>
                 <TableCell align="right">{ticketCity.stayingStatus}</TableCell>
                 <TableCell align="right">
                   <Button

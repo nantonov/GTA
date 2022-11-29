@@ -18,6 +18,7 @@ import { useDispatch } from 'react-redux';
 import { ModalActionTypes } from '../../../store/modalActions';
 import PagesTypography from '../PagesTypography';
 import { deleteHotel, getAllHotels } from '../../../redux/thunk/hotelThunk';
+import { Link } from 'react-router-dom';
 
 const PagesHotelTable = () => {
   const [updateHotelId, setUpdateHotelId] = useState(0);
@@ -60,7 +61,7 @@ const PagesHotelTable = () => {
             {hotels.map((hotel) => (
               <TableRow key={hotel.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell component="th" scope="row">
-                  {hotel.id}
+                  <Link to={`/hotel/${hotel.id}`}>{hotel.id}</Link>
                 </TableCell>
                 <TableCell align="right">{hotel.name}</TableCell>
                 <TableCell align="right">{hotel.starsNumber}</TableCell>

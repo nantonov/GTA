@@ -18,6 +18,7 @@ import { useDispatch } from 'react-redux';
 import { ModalActionTypes } from '../../../store/modalActions';
 import PagesTypography from '../PagesTypography';
 import { deleteTicket, getAllTickets } from '../../../redux/thunk/ticketThunk';
+import { Link } from 'react-router-dom';
 
 const PagesTicketTable = () => {
   const [updateTicketId, setUpdateTicketId] = useState(0);
@@ -60,7 +61,7 @@ const PagesTicketTable = () => {
             {tickets.map((ticket) => (
               <TableRow key={ticket.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell component="th" scope="row">
-                  {ticket.id}
+                  <Link to={`/ticket/${ticket.id}`}>{ticket.id}</Link>
                 </TableCell>
                 <TableCell align="right">{String(ticket.departureTime)}</TableCell>
                 <TableCell align="right">{String(ticket.arrivalTime)}</TableCell>

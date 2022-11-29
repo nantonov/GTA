@@ -18,6 +18,7 @@ import { RootState } from '../../../store/reducers';
 import { useDispatch } from 'react-redux';
 import PagesTypography from '../PagesTypography';
 import { deleteCity, getAllCities } from '../../../redux/thunk/cityThunk';
+import { Link } from 'react-router-dom';
 
 const PagesCityTable = () => {
   const [updateCityId, setUpdateCityId] = useState(0);
@@ -59,7 +60,7 @@ const PagesCityTable = () => {
             {cities.map((city) => (
               <TableRow key={city.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell component="th" scope="row">
-                  {city.id}
+                  <Link to={`/city/${city.id}`}>{city.id}</Link>
                 </TableCell>
                 <TableCell align="right">{city.name}</TableCell>
                 <TableCell align="right">{city.population}</TableCell>
