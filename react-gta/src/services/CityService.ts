@@ -1,20 +1,9 @@
 import { ICreateUpdateCityModel } from '../modelInterfaces/createUpdateInterfaces/ICreateUpdateCityModel';
 import { ICityGetModel } from '../modelInterfaces/getInterfaces/ICityGetModel';
-import UserService from './UserService';
 import axiosInstance from '../instances/axiosInstance';
+import addAxiosInterceptors from './axiosInterceptors';
 
-axiosInstance.interceptors.request.use(
-  async (config: any) => {
-    const token = await UserService.getUser().then((user) => {
-      return user?.access_token;
-    });
-    if (token) config.headers.Authorization = `Bearer ${token}`;
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+addAxiosInterceptors();
 
 export const getAllCitiesService = async (): Promise<Array<ICityGetModel>> => {
   const response = await axiosInstance.get(`/city`).then((response) => response.data);

@@ -1,20 +1,9 @@
 import { ICreateUpdateHotelModel } from '../modelInterfaces/createUpdateInterfaces/ICreateUpdateHotelModel';
 import IHotelGetModel from '../modelInterfaces/getInterfaces/IHotelGetModel';
-import UserService from './UserService';
 import axiosInstance from '../instances/axiosInstance';
+import addAxiosInterceptors from './axiosInterceptors';
 
-axiosInstance.interceptors.request.use(
-  async (config: any) => {
-    const token = await UserService.getUser().then((user) => {
-      return user?.access_token;
-    });
-    if (token) config.headers.Authorization = `Bearer ${token}`;
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+addAxiosInterceptors();
 
 export const getAllHotelsService = async (): Promise<Array<IHotelGetModel>> => {
   const response = await axiosInstance.get(`/hotel`);
