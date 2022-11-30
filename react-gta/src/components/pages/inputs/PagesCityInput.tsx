@@ -40,7 +40,7 @@ const PagesCityInput = ({ creatingInput, id }: { creatingInput: boolean; id: num
 
   return (
     <div>
-      <form onSubmit={create}>
+      <form>
         <div>
           <PagesTypography>{creatingInput ? 'Create a new' : 'Update'} city</PagesTypography>
           <div>
@@ -73,7 +73,7 @@ const PagesCityInput = ({ creatingInput, id }: { creatingInput: boolean; id: num
               onChange={(e) => setCity({ ...city, area: String(e.target.value) })}
             />
           </div>
-          <div style={{ margin: '10px 280px' }}>
+          <div style={{ margin: '10px' }}>
             <Button type="submit" onClick={creatingInput ? create : update} variant="contained">
               {creatingInput ? 'Create' : 'Update'}
             </Button>

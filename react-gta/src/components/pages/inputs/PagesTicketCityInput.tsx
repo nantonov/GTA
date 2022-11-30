@@ -48,7 +48,7 @@ const PagesTicketCityInput = ({
 
   return (
     <div>
-      <form onSubmit={create}>
+      <form>
         <div>
           <PagesTypography>{creatingInput ? 'Create a new' : 'Update'} ticket-city</PagesTypography>
           <div>

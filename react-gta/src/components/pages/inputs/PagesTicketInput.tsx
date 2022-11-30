@@ -54,7 +54,7 @@ const PagesTicketInput = ({ creatingInput, id }: { creatingInput: boolean; id: n
 
   return (
     <div>
-      <form onSubmit={create}>
+      <form>
         <div>
           <PagesTypography>{creatingInput ? 'Create a new' : 'Update'} ticket</PagesTypography>
           <div>

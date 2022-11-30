@@ -5,7 +5,6 @@ const PagesTypography = (props: any) => {
   return (
     <div>
       <Typography
-        marginLeft="200px"
         marginBottom="10px"
         marginTop="10px"
         color="rgb(0, 0, 139)"

@@ -43,7 +43,7 @@ const PagesHotelInput = ({ creatingInput, id }: { creatingInput: boolean; id: nu
 
   return (
     <div>
-      <form onSubmit={create}>
+      <form>
         <div>
           <PagesTypography>{creatingInput ? 'Create a new' : 'Update'} hotel</PagesTypography>
           <div>

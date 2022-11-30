@@ -17,9 +17,7 @@ const ModalWrapperTemplate = (props: {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box className={props.className} sx={{ width: 400 }}>
-          {props.children}
-        </Box>
+        <Box className={props.className}>{props.children}</Box>
       </Modal>
     </div>
   );
@@ -33,11 +31,11 @@ const PagesModalWrapper = styled(ModalWrapperTemplate)`
   border: 2px solid #000;
   background-color: white;
   box-shadow: 24;
-  padding-top: 2;
-  padding-left: 4;
-  padding-right: 4;
-  padding-bottom: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  vertical-align: middle;
 `;
 
 export default PagesModalWrapper;
