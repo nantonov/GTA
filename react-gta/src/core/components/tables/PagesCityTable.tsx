@@ -10,7 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import EditIcon from '@mui/icons-material/Edit';
 import PagesCityInput from '../inputs/PagesCityInput';
-import PagesModalWrapper from '../appModalWrapper/AppModalWrapper';
+import AppModalWrapper from '../appModalWrapper/AppModalWrapper';
 import { useSelector } from 'react-redux';
 import { ModalActionTypes } from '../../redux/actionTypes/modalTypes';
 import { RootState } from '../../redux/reducers/rootReducer';
@@ -31,9 +31,9 @@ const PagesCityTable = () => {
     dispatch(getAllCities());
   });
 
-  const openEditingCityModalWindow = async (updateCityId: number) => {
-    dispatch({ type: ModalActionTypes.ShowUpdateModal });
+  const openEditingCityModalWindow = (updateCityId: number) => {
     setUpdateCityId(updateCityId);
+    dispatch({ type: ModalActionTypes.ShowUpdateModal });
   };
 
   const openDeletingCityModalWindow = (deleteCityId: number) => {
@@ -87,15 +87,15 @@ const PagesCityTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <PagesModalWrapper
+      <AppModalWrapper
         open={openModal.updateModal}
         onClose={() => {
           dispatch({ type: ModalActionTypes.HideUpdateModal });
         }}
       >
         <PagesCityInput creatingInput={false} id={updateCityId} />
-      </PagesModalWrapper>
-      <PagesModalWrapper
+      </AppModalWrapper>
+      <AppModalWrapper
         open={openModal.deleteModal}
         onClose={() => {
           dispatch({ type: ModalActionTypes.HideDeleteModal });
@@ -119,7 +119,7 @@ const PagesCityTable = () => {
             No
           </Button>
         </PagesTypography>
-      </PagesModalWrapper>
+      </AppModalWrapper>
     </div>
   );
 };

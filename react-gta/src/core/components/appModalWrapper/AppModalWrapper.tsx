@@ -23,7 +23,7 @@ const ModalWrapperTemplate = (props: {
   );
 };
 
-const PagesModalWrapper = styled(ModalWrapperTemplate)`
+const AppModalWrapper = styled(ModalWrapperTemplate)`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -38,4 +38,4 @@ const PagesModalWrapper = styled(ModalWrapperTemplate)`
   vertical-align: middle;
 `;
 
-export default PagesModalWrapper;
+export default AppModalWrapper;

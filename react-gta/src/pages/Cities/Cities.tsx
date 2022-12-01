@@ -1,7 +1,7 @@
 import React from 'react';
 import PagesCityInput from '../../core/components/inputs/PagesCityInput';
 import PagesCityTable from '../../core/components/tables/PagesCityTable';
-import PagesModalWrapper from '../../core/components/appModalWrapper/AppModalWrapper';
+import AppModalWrapper from '../../core/components/appModalWrapper/AppModalWrapper';
 import { useSelector } from 'react-redux';
 import { ModalActionTypes } from '../../core/redux/actionTypes/modalTypes';
 import { RootState } from '../../core/redux/reducers/rootReducer';
@@ -15,12 +15,12 @@ const Cities = () => {
 
   return (
     <div>
-      <PagesModalWrapper
+      <AppModalWrapper
         open={openModal.createModal}
         onClose={() => dispatch({ type: ModalActionTypes.HideCreateModal })}
       >
         <PagesCityInput creatingInput={true} id={0} />
-      </PagesModalWrapper>
+      </AppModalWrapper>
       <Button
         variant="outlined"
         onClick={() => dispatch({ type: ModalActionTypes.ShowCreateModal })}

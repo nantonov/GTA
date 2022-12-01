@@ -1,4 +1,6 @@
 export enum ModalActionTypes {
+  ShowModal,
+  HideModal,
   ShowUpdateModal,
   HideUpdateModal,
   ShowCreateModal,

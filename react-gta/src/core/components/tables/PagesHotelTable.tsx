@@ -10,7 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import EditIcon from '@mui/icons-material/Edit';
 import PagesHotelInput from '../inputs/PagesHotelInput';
-import PagesModalWrapper from '../appModalWrapper/AppModalWrapper';
+import AppModalWrapper from '../appModalWrapper/AppModalWrapper';
 import { RootState } from '../../redux/reducers/rootReducer';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -89,13 +89,13 @@ const PagesHotelTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <PagesModalWrapper
+      <AppModalWrapper
         open={openModal.updateModal}
         onClose={() => dispatch({ type: ModalActionTypes.HideUpdateModal })}
       >
         <PagesHotelInput creatingInput={false} id={updateHotelId} />
-      </PagesModalWrapper>
-      <PagesModalWrapper
+      </AppModalWrapper>
+      <AppModalWrapper
         open={openModal.deleteModal}
         onClose={() => {
           dispatch({ type: ModalActionTypes.HideDeleteModal });
@@ -119,7 +119,7 @@ const PagesHotelTable = () => {
             No
           </Button>
         </PagesTypography>
-      </PagesModalWrapper>
+      </AppModalWrapper>
     </div>
   );
 };

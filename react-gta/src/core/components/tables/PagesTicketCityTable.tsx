@@ -10,7 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import EditIcon from '@mui/icons-material/Edit';
 import PagesTicketCityInput from '../inputs/PagesTicketCityInput';
-import PagesModalWrapper from '../appModalWrapper/AppModalWrapper';
+import AppModalWrapper from '../appModalWrapper/AppModalWrapper';
 import { useSelector } from 'react-redux';
 import { ModalActionTypes } from '../../redux/actionTypes/modalTypes';
 import { RootState } from '../../redux/reducers/rootReducer';
@@ -112,17 +112,19 @@ const PagesTicketCityTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <PagesModalWrapper
+      <AppModalWrapper
         open={openModal.updateModal}
-        onClose={() => dispatch({ type: ModalActionTypes.HideUpdateModal })}
+        onClose={() => {
+          dispatch({ type: ModalActionTypes.HideUpdateModal });
+        }}
       >
         <PagesTicketCityInput
           creatingInput={false}
           ticketId={updateTicketId}
           cityId={updateCityId}
         />
-      </PagesModalWrapper>
-      <PagesModalWrapper
+      </AppModalWrapper>
+      <AppModalWrapper
         open={openModal.deleteModal}
         onClose={() => {
           dispatch({ type: ModalActionTypes.HideDeleteModal });
@@ -146,7 +148,7 @@ const PagesTicketCityTable = () => {
             No
           </Button>
         </PagesTypography>
-      </PagesModalWrapper>
+      </AppModalWrapper>
     </div>
   );
 };

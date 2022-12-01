@@ -13,10 +13,13 @@ import TicketCityGetModel from '../../core/interfaces/modelnterfaces/getInterfac
 
 const TicketCity = (props: { ticketCities: TicketCityGetModel[] }) => {
   const { urlTicketId, urlCityId } = useParams();
-  const ticket = props.ticketCities.find(
+  const ticketCity = props.ticketCities.find(
     ({ airlineTicketId, cityId }) =>
       airlineTicketId === Number(urlTicketId) && cityId === Number(urlCityId)
   );
+
+  const ticketId = ticketCity ? ticketCity.airlineTicketId : 1;
+  let cityId = ticketCity ? ticketCity.cityId : 2;
   return (
     <div>
       <TableContainer component={Paper}>
@@ -29,18 +32,16 @@ const TicketCity = (props: { ticketCities: TicketCityGetModel[] }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.ticketCities.map((ticketCity) => (
-              <TableRow
-                key={ticketCity.airlineTicketId + ticketCity.cityId}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {ticketCity.airlineTicketId}
-                </TableCell>
-                <TableCell align="right">{ticketCity.cityId}</TableCell>
-                <TableCell align="right">{ticketCity.stayingStatus}</TableCell>
-              </TableRow>
-            ))}
+            <TableRow
+              key={ticketId + cityId}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {ticketCity?.airlineTicketId}
+              </TableCell>
+              <TableCell align="right">{ticketCity?.cityId}</TableCell>
+              <TableCell align="right">{ticketCity?.stayingStatus}</TableCell>
+            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>

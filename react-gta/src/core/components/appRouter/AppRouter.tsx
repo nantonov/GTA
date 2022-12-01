@@ -10,10 +10,18 @@ import Tickets from '../../../pages/Tickets/Tickets';
 import { routes } from '../../constants/routes';
 import { RootState } from '../../redux/reducers/rootReducer';
 import AppNavBar from '../appNavBar/AppNavBar';
+import { getAllTickets } from '../../redux/thunk/ticketThunk';
+import { getAllTicketCities } from '../../redux/thunk/ticketCityThunk';
+import { getAllHotels } from '../../redux/thunk/hotelThunk';
 
 const AppRouter = () => {
   const dispatch = useDispatch();
+
   dispatch(getAllCities());
+  dispatch(getAllTickets());
+  dispatch(getAllTicketCities());
+  dispatch(getAllHotels());
+
   const cities = useSelector((state: RootState) => state.city.cities);
   const tickets = useSelector((state: RootState) => state.ticket.tickets);
   const ticketCities = useSelector((state: RootState) => state.ticketCity.ticketCities);
