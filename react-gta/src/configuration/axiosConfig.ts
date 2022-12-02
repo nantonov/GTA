@@ -1,3 +1,3 @@
 export const axiosConfig = {
-    baseUrl: "https://localhost:7060/",
-}
+  baseUrl: 'https://localhost:7060/',
+};

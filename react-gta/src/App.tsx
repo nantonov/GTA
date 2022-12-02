@@ -1,14 +1,16 @@
-import { AuthProvider } from "./components/authorization/AuthProvider";
-import AppRouter from "./components/routing/AppRouter";
+import React from 'react';
+import { Provider } from 'react-redux';
+import AppRouter from './core/components/appRouter/AppRouter';
+import store from './core/redux/store';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <AuthProvider>
+      <Provider store={store}>
         <AppRouter />
-      </AuthProvider>
+      </Provider>
     </div>
   );
-}
+};
 
 export default App;
