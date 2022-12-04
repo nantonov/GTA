@@ -1,4 +1,5 @@
 using AirlineTicketsNotifications.API.Mapper.Profiles;
+using AirlineTicketsNotifications.API.Middleware;
 using AirlineTicketsNotifications.API.Validation.Validators;
 using AirlineTicketsNotifications.API.ViewModels.NotificationRequest;
 using AirlineTicketsNotifications.API.ViewModels.TicketInfo;
@@ -31,6 +32,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 

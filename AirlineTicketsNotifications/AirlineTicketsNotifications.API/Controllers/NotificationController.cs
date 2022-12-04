@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AirlineTicketsNotifications.API.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class NotificationController : ControllerBase

@@ -25,10 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Middleware\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\AirlineTicketsNotifications.BLL\AirlineTicketsNotifications.BLL.csproj" />
     <ProjectReference Include="..\AirlineTicketsNotifications.Core\AirlineTicketsNotifications.Core.csproj" />
   </ItemGroup>
