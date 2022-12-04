@@ -3,7 +3,7 @@ using AirlineTicketsNotifications.DAL.Entities;
 
 namespace AirlineTicketsNotifications.DAL.Interfaces
 {
-    internal interface INotificationRepository
+    public interface INotificationRepository
     {
         public Task<NotificationRequestEntity> CreateNotificationRequest(NotificationRequestEntity createRequest,
             CancellationToken cancellationToken);

@@ -10,6 +10,7 @@ namespace AirlineTicketsNotifications.DAL.Context
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
+            //Database.EnsureCreated();
             if (Database.IsRelational()) Database.Migrate();
         }
 
