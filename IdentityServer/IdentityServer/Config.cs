@@ -61,6 +61,19 @@ namespace IdentityServer
 
                 new Client
                 {
+                    ClientId = "client_id_tickets",
+                    ClientSecrets = { new Secret("client_secret_tickets".ToSha256()) },
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowedScopes =
+                    {
+                        "AirlineTicketsNotificationsAPI",
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile
+                    }
+                },
+
+                new Client
+                {
                     ClientId = "client_id_react",
                     ClientName = "React app client",
                     ClientUri = "http://localhost:3000",

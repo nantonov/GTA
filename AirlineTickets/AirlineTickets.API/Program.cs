@@ -19,6 +19,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 var configurationBuilder = builder.Configuration;
 
+builder.Services.AddHttpClient();
+
 builder.Services.AddCors(config =>
 {
     config.AddPolicy("DefaultPolicy",
