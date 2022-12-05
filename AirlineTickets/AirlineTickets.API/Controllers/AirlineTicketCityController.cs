@@ -2,6 +2,7 @@ using AirlineTickets.API.ViewModels.AirlineTicketCity;
 using AirlineTickets.API.ViewModels.TicketInfo;
 using AirlineTickets.BLL.Interfaces;
 using AirlineTickets.BLL.Models;
+using AirlineTickets.Core.Constants;
 using AutoMapper;
 using FluentValidation;
 using IdentityModel.Client;
@@ -62,16 +63,16 @@ namespace AirlineTickets.API.Controllers
                 new ClientCredentialsTokenRequest
                 {
                     Address = discoveryDocument.TokenEndpoint,
-                    ClientId = "client_id_tickets",
-                    ClientSecret = "client_secret_tickets",
-                    Scope = "AirlineTicketsNotificationsAPI"
+                    ClientId = AuthValues.TicketsClientId,
+                    ClientSecret = AuthValues.TicketsClientSecret,
+                    Scope = AuthValues.NotificationsScopeName
                 }, cancellationToken);
 
             var notificationsClient = _httpClientFactory.CreateClient();
 
             notificationsClient.SetBearerToken(tokenResponse.AccessToken);
 
-            await notificationsClient.PostAsJsonAsync("https://localhost:7061/notification/ticketevent", ticketInfo, cancellationToken);
+            await notificationsClient.PostAsJsonAsync(AuthValues.NotificationsEventPath, ticketInfo, cancellationToken);
 
             return _mapper.Map<TicketCityViewModel>(ticketCity);
         }
