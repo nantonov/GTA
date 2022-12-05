@@ -21,15 +21,18 @@ namespace AirlineTickets.API.Controllers
         private readonly IMapper _mapper;
         private readonly IValidator<CreateUpdateTicketCityViewModel> _ticketCityValidator;
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IConfiguration _configuration;
 
         public AirlineTicketCityController(IAirlineTicketCityService ticketCityService, IGenericService<City> cityService,
-            IMapper mapper, IValidator<CreateUpdateTicketCityViewModel> hotelValidator, IHttpClientFactory httpClientFactory)
+            IMapper mapper, IValidator<CreateUpdateTicketCityViewModel> hotelValidator, IHttpClientFactory httpClientFactory,
+            IConfiguration configuration)
         {
             _ticketCityService = ticketCityService;
             _cityService = cityService;
             _mapper = mapper;
             _ticketCityValidator = hotelValidator;
             _httpClientFactory = httpClientFactory;
+            _configuration = configuration;
         }
 
         [HttpGet]
@@ -72,7 +75,7 @@ namespace AirlineTickets.API.Controllers
 
             notificationsClient.SetBearerToken(tokenResponse.AccessToken);
 
-            await notificationsClient.PostAsJsonAsync(AuthValues.NotificationsEventPath, ticketInfo, cancellationToken);
+            await notificationsClient.PostAsJsonAsync(_configuration["Urls:NotificationsEvent"], ticketInfo, cancellationToken);
 
             return _mapper.Map<TicketCityViewModel>(ticketCity);
         }
