@@ -2,6 +2,6 @@
 {
     public interface IHttpClientService
     {
-        public Task<HttpClient> GetAuthNotificationsClientAsync(CancellationToken cancellationToken);
+        Task<HttpClient> GetAuthNotificationsClientAsync(CancellationToken cancellationToken);
     }
 }
