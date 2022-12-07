@@ -20,19 +20,19 @@ namespace AirlineTickets.API.Controllers
         private readonly IGenericService<City> _cityService; 
         private readonly IMapper _mapper;
         private readonly IValidator<CreateUpdateTicketCityViewModel> _ticketCityValidator;
-        private readonly IHttpClientFactory _httpClientFactory;
         private readonly IConfiguration _configuration;
+        private readonly IHttpClientService _httpClientService;
 
         public AirlineTicketCityController(IAirlineTicketCityService ticketCityService, IGenericService<City> cityService,
-            IMapper mapper, IValidator<CreateUpdateTicketCityViewModel> hotelValidator, IHttpClientFactory httpClientFactory,
-            IConfiguration configuration)
+            IMapper mapper, IValidator<CreateUpdateTicketCityViewModel> hotelValidator, IConfiguration configuration, 
+            IHttpClientService httpClientService)
         {
             _ticketCityService = ticketCityService;
             _cityService = cityService;
             _mapper = mapper;
             _ticketCityValidator = hotelValidator;
-            _httpClientFactory = httpClientFactory;
             _configuration = configuration;
+            _httpClientService = httpClientService;
         }
 
         [HttpGet]
@@ -59,21 +59,7 @@ namespace AirlineTickets.API.Controllers
                 CityName = city.Name,
             };
 
-            var authClient = _httpClientFactory.CreateClient();
-            var discoveryDocument = await authClient.GetDiscoveryDocumentAsync("https://localhost:5001", cancellationToken);
-
-            var tokenResponse = await authClient.RequestClientCredentialsTokenAsync(
-                new ClientCredentialsTokenRequest
-                {
-                    Address = discoveryDocument.TokenEndpoint,
-                    ClientId = AuthValues.TicketsClientId,
-                    ClientSecret = AuthValues.TicketsClientSecret,
-                    Scope = AuthValues.NotificationsScopeName
-                }, cancellationToken);
-
-            var notificationsClient = _httpClientFactory.CreateClient();
-
-            notificationsClient.SetBearerToken(tokenResponse.AccessToken);
+            var notificationsClient = await _httpClientService.GetAuthNotificationsClientAsync(cancellationToken);
 
             await notificationsClient.PostAsJsonAsync(_configuration["Urls:NotificationsEvent"], ticketInfo, cancellationToken);
 
