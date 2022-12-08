@@ -10,6 +10,7 @@ namespace IdentityServer
             new ApiResource[]
             {
                 new ApiResource("AirlineTicketsAPI"),
+                new ApiResource("AirlineTicketsNotificationsAPI")
             };
 
         public static IEnumerable<IdentityResource> IdentityResources =>
@@ -22,12 +23,27 @@ namespace IdentityServer
         public static IEnumerable<ApiScope> ApiScopes =>
             new ApiScope[]
             {
-                new ApiScope("AirlineTicketsAPI", "AirlineTickets API")
+                new ApiScope("AirlineTicketsAPI", "AirlineTickets API"),
+                new ApiScope("AirlineTicketsNotificationsAPI", "AirlineTicketsNotifications API")
             };
 
         public static IEnumerable<Client> Clients =>
             new Client[]
             {
+                new Client
+                {
+                    ClientId = "client_id_notifications",
+                    ClientSecrets = { new Secret("client_secret_notifications".ToSha256()) },
+                    AllowedGrantTypes =  GrantTypes.ResourceOwnerPassword,
+                    AllowedCorsOrigins = { "https://localhost:7061" },
+                    AllowedScopes =
+                    {
+                        "AirlineTicketsNotificationsAPI",
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile
+                    }
+                },
+
                 new Client
                 {
                     ClientId = "client_id_swagger",
@@ -37,6 +53,20 @@ namespace IdentityServer
                     AllowedScopes =
                     {
                         "AirlineTicketsAPI",
+                        "AirlineTicketsNotificationsAPI",
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile
+                    }
+                },
+
+                new Client
+                {
+                    ClientId = "client_id_tickets",
+                    ClientSecrets = { new Secret("client_secret_tickets".ToSha256()) },
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowedScopes =
+                    {
+                        "AirlineTicketsNotificationsAPI",
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile
                     }
@@ -58,6 +88,7 @@ namespace IdentityServer
                     AllowedScopes =
                     {
                         "AirlineTicketsAPI",
+                        "AirlineTicketsNotificationsAPI",
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile
                     }

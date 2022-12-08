@@ -1,5 +1,4 @@
 ﻿using AirlineTicketsNotifications.BLL.Models.Requests;
-using AirlineTicketsNotifications.Core.Enums;
 
 namespace AirlineTicketsNotifications.BLL.Interfaces
 {

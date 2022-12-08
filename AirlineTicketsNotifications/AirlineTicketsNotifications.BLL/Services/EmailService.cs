@@ -1,13 +1,10 @@
 ﻿using AirlineTicketsNotifications.BLL.Interfaces;
 using AirlineTicketsNotifications.BLL.Models.Requests;
-using AirlineTicketsNotifications.Core.Enums;
-using System.Net.Mail;
-using System.Net;
-using Microsoft.Extensions.Configuration;
 using AirlineTicketsNotifications.Core.Constants;
+using Microsoft.Extensions.Configuration;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
-using Microsoft.Identity.Client.Platforms.Features.DesktopOs.Kerberos;
-using Microsoft.Extensions.Primitives;
 
 namespace AirlineTicketsNotifications.BLL.Services
 {

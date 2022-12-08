@@ -1,8 +1,11 @@
 using AirlineTickets.API.ViewModels.AirlineTicketCity;
+using AirlineTickets.API.ViewModels.TicketInfo;
 using AirlineTickets.BLL.Interfaces;
 using AirlineTickets.BLL.Models;
+using AirlineTickets.Core.Constants;
 using AutoMapper;
 using FluentValidation;
+using IdentityModel.Client;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,15 +17,22 @@ namespace AirlineTickets.API.Controllers
     public class AirlineTicketCityController : ControllerBase
     {
         private readonly IAirlineTicketCityService _ticketCityService;
+        private readonly IGenericService<City> _cityService; 
         private readonly IMapper _mapper;
         private readonly IValidator<CreateUpdateTicketCityViewModel> _ticketCityValidator;
+        private readonly IConfiguration _configuration;
+        private readonly IHttpClientService _httpClientService;
 
-        public AirlineTicketCityController(IAirlineTicketCityService ticketCityService, IMapper mapper,
-            IValidator<CreateUpdateTicketCityViewModel> hotelValidator)
+        public AirlineTicketCityController(IAirlineTicketCityService ticketCityService, IGenericService<City> cityService,
+            IMapper mapper, IValidator<CreateUpdateTicketCityViewModel> hotelValidator, IConfiguration configuration, 
+            IHttpClientService httpClientService)
         {
             _ticketCityService = ticketCityService;
+            _cityService = cityService;
             _mapper = mapper;
             _ticketCityValidator = hotelValidator;
+            _configuration = configuration;
+            _httpClientService = httpClientService;
         }
 
         [HttpGet]
@@ -41,6 +51,17 @@ namespace AirlineTickets.API.Controllers
             var model = _mapper.Map<AirlineTicketCity>(createModel);
 
             var ticketCity = await _ticketCityService.Create(model, cancellationToken);
+
+            var city = await _cityService.Get(model.CityId, cancellationToken);
+            var ticketInfo = new NewTicketInfoViewModel()
+            {
+                StayingStatus = model.StayingStatus,
+                CityName = city.Name,
+            };
+
+            var notificationsClient = await _httpClientService.GetAuthNotificationsClientAsync(cancellationToken);
+
+            await notificationsClient.PostAsJsonAsync(_configuration["Urls:NotificationsEvent"], ticketInfo, cancellationToken);
 
             return _mapper.Map<TicketCityViewModel>(ticketCity);
         }
