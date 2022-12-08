@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,12 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Context\" />
-    <Folder Include="DI\" />
-    <Folder Include="Entities\" />
-    <Folder Include="EntityConfigurations\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Repositories\" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+    <PackageReference Include="MongoDB.Bson" Version="2.18.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.18.0" />
   </ItemGroup>
 
 </Project>
