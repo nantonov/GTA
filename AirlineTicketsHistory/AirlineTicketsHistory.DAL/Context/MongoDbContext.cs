@@ -8,18 +8,21 @@ namespace AirlineTicketsHistory.DAL.Context
     public class MongoDbContext : IMongoDbContext
     {
         public IMongoCollection<UserTicketsHistoryEntity> UserTicketsCollection { get; set; }
+        private const string _connectionString = "Mongo";
+        private const string _mongoDbName = "Mongo:TicketsHistoryDbName";
+        private const string _ticketsCollectionName = "Mongo:TicketsHistoryCollectionName";
 
         public MongoDbContext(IConfiguration configuration)
         {
-            var mongoClient = new MongoClient(configuration.GetConnectionString("Mongo"));
-            var database = mongoClient.GetDatabase(configuration["Mongo:TicketsHistoryDbName"]);
+            var mongoClient = new MongoClient(configuration.GetConnectionString(_connectionString));
+            var database = mongoClient.GetDatabase(configuration[_mongoDbName]);
 
-            if (database.GetCollection<UserTicketsHistoryEntity>(configuration["Mongo:TicketsHistoryCollectionName"]) is null)
+            if (database.GetCollection<UserTicketsHistoryEntity>(configuration[_ticketsCollectionName]) is null)
             {
-                database.CreateCollection("UserAirlineTickets");
+                database.CreateCollection(configuration[_ticketsCollectionName]);
             }
 
-            UserTicketsCollection = database.GetCollection<UserTicketsHistoryEntity>(configuration["Mongo:TicketsHistoryCollectionName"]);
+            UserTicketsCollection = database.GetCollection<UserTicketsHistoryEntity>(configuration[_ticketsCollectionName]);
         }
     }
 }
