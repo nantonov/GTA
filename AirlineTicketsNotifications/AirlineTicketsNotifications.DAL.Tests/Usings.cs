@@ -1,0 +1,9 @@
+global using AirlineTicketsNotifications.Core.Enums;
+global using AirlineTicketsNotifications.DAL.Context;
+global using AirlineTicketsNotifications.DAL.Entities;
+global using AirlineTicketsNotifications.DAL.Interfaces;
+global using AirlineTicketsNotifications.DAL.Repositories;
+global using AutoFixture;
+global using Microsoft.EntityFrameworkCore;
+global using Shouldly;
+global using Xunit;
