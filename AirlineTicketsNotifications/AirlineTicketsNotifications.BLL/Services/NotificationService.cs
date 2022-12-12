@@ -7,7 +7,7 @@ using AutoMapper;
 
 namespace AirlineTicketsNotifications.BLL.Services
 {
-    internal class NotificationService : INotificationService
+    public class NotificationService : INotificationService
     {
         private readonly IEmailService _emailService;
         private readonly INotificationRepository _notificationRepository;
