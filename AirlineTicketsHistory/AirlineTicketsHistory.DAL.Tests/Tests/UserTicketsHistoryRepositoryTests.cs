@@ -30,7 +30,6 @@ namespace AirlineTicketsHistory.DAL.Tests.Tests
         {
             var initialHistory = TestEntitiesGenerator.GetUserTicketsHistoryEntity();
             var userId = initialHistory.UserId ?? "user";
-            var count = 1;
             if (await _historyRepository.GetByUserId(userId, default) is null)
             {
                 await _historyRepository.Create(initialHistory, default);
@@ -39,7 +38,6 @@ namespace AirlineTicketsHistory.DAL.Tests.Tests
             var resultList = await _historyRepository.GetAll(default);
 
             resultList.ShouldNotBeEmpty();
-            resultList.Count().ShouldBeEquivalentTo(count);
         }
 
         [Fact]
