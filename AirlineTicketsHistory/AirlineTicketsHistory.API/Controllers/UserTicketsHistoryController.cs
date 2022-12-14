@@ -4,11 +4,13 @@ using AirlineTicketsHistory.BLL.Interfaces;
 using AirlineTicketsHistory.BLL.Models;
 using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AirlineTicketsHistory.API.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("History")]
     public class UserTicketsHistoryController : Controller
     {

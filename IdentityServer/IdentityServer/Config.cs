@@ -10,7 +10,8 @@ namespace IdentityServer
             new ApiResource[]
             {
                 new ApiResource("AirlineTicketsAPI"),
-                new ApiResource("AirlineTicketsNotificationsAPI")
+                new ApiResource("AirlineTicketsNotificationsAPI"),
+                new ApiResource("AirlineTicketsHistoryAPI")
             };
 
         public static IEnumerable<IdentityResource> IdentityResources =>
@@ -24,7 +25,8 @@ namespace IdentityServer
             new ApiScope[]
             {
                 new ApiScope("AirlineTicketsAPI", "AirlineTickets API"),
-                new ApiScope("AirlineTicketsNotificationsAPI", "AirlineTicketsNotifications API")
+                new ApiScope("AirlineTicketsNotificationsAPI", "AirlineTicketsNotifications API"),
+                new ApiScope("AirlineTicketsHistoryAPI", "AirlineTicketsHistory API")
             };
 
         public static IEnumerable<Client> Clients =>
@@ -39,6 +41,20 @@ namespace IdentityServer
                     AllowedScopes =
                     {
                         "AirlineTicketsNotificationsAPI",
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile
+                    }
+                },
+
+                new Client
+                {
+                    ClientId = "client_id_history",
+                    ClientSecrets = { new Secret("client_secret_history".ToSha256()) },
+                    AllowedGrantTypes =  GrantTypes.ResourceOwnerPassword,
+                    AllowedCorsOrigins = { "https://localhost:7172" },
+                    AllowedScopes =
+                    {
+                        "AirlineTicketsHistoryAPI",
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile
                     }
@@ -89,6 +105,7 @@ namespace IdentityServer
                     {
                         "AirlineTicketsAPI",
                         "AirlineTicketsNotificationsAPI",
+                        "AirlineTicketsHistoryAPI",
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile
                     }
