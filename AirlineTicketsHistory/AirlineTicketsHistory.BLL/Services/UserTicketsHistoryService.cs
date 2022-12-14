@@ -6,7 +6,7 @@ using AutoMapper;
 
 namespace AirlineTicketsHistory.BLL.Services
 {
-    internal class UserTicketsHistoryService : IUserTicketsHistoryService
+    public class UserTicketsHistoryService : IUserTicketsHistoryService
     {
         private readonly IUserTicketsHistoryRepository _historyRepository;
         private readonly IMapper _mapper;
