@@ -9,7 +9,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlineTicketsNotifications
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlineTicketsNotifications.DAL", "AirlineTicketsNotifications.DAL\AirlineTicketsNotifications.DAL.csproj", "{EB1E23A9-6886-4C77-879A-0E26D5FFC0DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlineTicketsNotifications.Core", "AirlineTicketsNotifications.Core\AirlineTicketsNotifications.Core.csproj", "{9EC48FE0-03DB-4809-A54C-EB40B002ED01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlineTicketsNotifications.Core", "AirlineTicketsNotifications.Core\AirlineTicketsNotifications.Core.csproj", "{9EC48FE0-03DB-4809-A54C-EB40B002ED01}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{701E1A1D-B869-4402-82AD-81DFD5313C78}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlineTicketsNotifications.DAL.Tests", "AirlineTicketsNotifications.DAL.Tests\AirlineTicketsNotifications.DAL.Tests.csproj", "{1591569E-3E66-464B-A5B2-1EAF64865046}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlineTicketsNotifications.BLL.Tests", "AirlineTicketsNotifications.BLL.Tests\AirlineTicketsNotifications.BLL.Tests.csproj", "{139C8622-C649-475D-AD5F-1C30528AF684}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirlineTicketsNotifications.API.Tests", "AirlineTicketsNotifications.API.Tests\AirlineTicketsNotifications.API.Tests.csproj", "{36E23AD7-22B1-4376-B507-3D026FC7FC9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +41,26 @@ Global
 		{9EC48FE0-03DB-4809-A54C-EB40B002ED01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EC48FE0-03DB-4809-A54C-EB40B002ED01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EC48FE0-03DB-4809-A54C-EB40B002ED01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1591569E-3E66-464B-A5B2-1EAF64865046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1591569E-3E66-464B-A5B2-1EAF64865046}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1591569E-3E66-464B-A5B2-1EAF64865046}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1591569E-3E66-464B-A5B2-1EAF64865046}.Release|Any CPU.Build.0 = Release|Any CPU
+		{139C8622-C649-475D-AD5F-1C30528AF684}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{139C8622-C649-475D-AD5F-1C30528AF684}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{139C8622-C649-475D-AD5F-1C30528AF684}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{139C8622-C649-475D-AD5F-1C30528AF684}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36E23AD7-22B1-4376-B507-3D026FC7FC9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36E23AD7-22B1-4376-B507-3D026FC7FC9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36E23AD7-22B1-4376-B507-3D026FC7FC9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36E23AD7-22B1-4376-B507-3D026FC7FC9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1591569E-3E66-464B-A5B2-1EAF64865046} = {701E1A1D-B869-4402-82AD-81DFD5313C78}
+		{139C8622-C649-475D-AD5F-1C30528AF684} = {701E1A1D-B869-4402-82AD-81DFD5313C78}
+		{36E23AD7-22B1-4376-B507-3D026FC7FC9D} = {701E1A1D-B869-4402-82AD-81DFD5313C78}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {07846FD6-05C1-4D32-A2E2-FFA5807A0AB8}
