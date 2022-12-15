@@ -1,0 +1,295 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/AirlineTicket",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7060
+        }
+      ],
+      "UpstreamPathTemplate": "/AirlineTicket",
+      "UpstreamHttpMethod": [ "GET", "POST" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 1
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Identity",
+        "AllowedScopes": [ "AirlineTicketsAPI" ]
+      },
+      "SwaggerKey": "Tickets"
+    },
+    {
+      "DownstreamPathTemplate": "/AirlineTicket/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7060
+        }
+      ],
+      "UpstreamPathTemplate": "/AirlineTicket/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE", "UPDATE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Identity",
+        "AllowedScopes": [ "AirlineTicketsAPI" ]
+      },
+      "SwaggerKey": "Tickets"
+    },
+
+    {
+      "DownstreamPathTemplate": "/City",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7060
+        }
+      ],
+      "UpstreamPathTemplate": "/City",
+      "UpstreamHttpMethod": [ "GET", "POST" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 1
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Identity",
+        "AllowedScopes": [ "AirlineTicketsAPI" ]
+      },
+      "SwaggerKey": "Tickets"
+    },
+    {
+      "DownstreamPathTemplate": "/City/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7060
+        }
+      ],
+      "UpstreamPathTemplate": "/City/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE", "UPDATE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Identity",
+        "AllowedScopes": [ "AirlineTicketsAPI" ]
+      },
+      "SwaggerKey": "Tickets"
+    },
+
+    {
+      "DownstreamPathTemplate": "/Hotel",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7060
+        }
+      ],
+      "UpstreamPathTemplate": "/Hotel",
+      "UpstreamHttpMethod": [ "GET", "POST" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 1
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Identity",
+        "AllowedScopes": []
+      },
+      "SwaggerKey": "Tickets"
+    },
+    {
+      "DownstreamPathTemplate": "/Hotel/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7060
+        }
+      ],
+      "UpstreamPathTemplate": "/Hotel/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE", "UPDATE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Identity",
+        "AllowedScopes": []
+      },
+      "SwaggerKey": "Tickets"
+    },
+
+    {
+      "DownstreamPathTemplate": "/AirlineTicketCity",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7060
+        }
+      ],
+      "UpstreamPathTemplate": "/AirlineTicketCity",
+      "UpstreamHttpMethod": [ "GET", "POST", "UPDATE" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 1
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Identity",
+        "AllowedScopes": []
+      },
+      "SwaggerKey": "Tickets"
+    },
+    {
+      "DownstreamPathTemplate": "/AirlineTicketCity/Ticket/{ticketId}/City/{cityId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7060
+        }
+      ],
+      "UpstreamPathTemplate": "/AirlineTicketCity/Ticket/{ticketId}/City/{cityId}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Identity",
+        "AllowedScopes": []
+      },
+      "SwaggerKey": "Tickets"
+    },
+
+    {
+      "DownstreamPathTemplate": "/Notification/Request",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7061
+        }
+      ],
+      "UpstreamPathTemplate": "/Notification/Request",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Identity",
+        "AllowedScopes": []
+      },
+      "SwaggerKey": "Notifications"
+    },
+    {
+      "DownstreamPathTemplate": "/Notification/TicketEvent",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7061
+        }
+      ],
+      "UpstreamPathTemplate": "/Notification/TicketEvent",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Identity",
+        "AllowedScopes": []
+      },
+      "SwaggerKey": "Notifications"
+    },
+
+    {
+      "DownstreamPathTemplate": "/History",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7172
+        }
+      ],
+      "UpstreamPathTemplate": "/History",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Identity",
+        "AllowedScopes": []
+      },
+      "SwaggerKey": "History"
+    },
+    {
+      "DownstreamPathTemplate": "/History/{userId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7172
+        }
+      ],
+      "UpstreamPathTemplate": "/History/{userId}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Identity",
+        "AllowedScopes": []
+      },
+      "SwaggerKey": "History"
+    },
+    {
+      "DownstreamPathTemplate": "/History/Ticket",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7172
+        }
+      ],
+      "UpstreamPathTemplate": "/History/Ticket",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Identity",
+        "AllowedScopes": []
+      },
+      "SwaggerKey": "History"
+    },
+    {
+      "DownstreamPathTemplate": "/History/Ticket/{ticketId}/User/{userId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7172
+        }
+      ],
+      "UpstreamPathTemplate": "/History",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Identity",
+        "AllowedScopes": []
+      },
+      "SwaggerKey": "History"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "Tickets",
+      "TransformByOcelotConfig": false,
+      "Config": [
+        {
+          "Name": "AirlineTicketsAPI",
+          "Version": "v1",
+          "Url": "https://localhost:7060/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "Notifications",
+      "Config": [
+        {
+          "Name": "AirlineTicketsNotificationsAPI",
+          "Version": "v1",
+          "Url": "https://localhost:7061/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "History",
+      "Config": [
+        {
+          "Name": "AirlineTicketsHistoryAPI",
+          "Version": "v1",
+          "Url": "https://localhost:7172/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7150"
+  }
+}
