@@ -16,7 +16,7 @@
       },
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Identity",
-        "AllowedScopes": [ "AirlineTicketsAPI" ]
+        "AllowedScopes": [ ]
       },
       "SwaggerKey": "Tickets"
     },
@@ -30,10 +30,10 @@
         }
       ],
       "UpstreamPathTemplate": "/AirlineTicket/{id}",
-      "UpstreamHttpMethod": [ "GET", "DELETE", "UPDATE" ],
+      "UpstreamHttpMethod": [ "GET", "DELETE", "PUT" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Identity",
-        "AllowedScopes": [ "AirlineTicketsAPI" ]
+        "AllowedScopes": [ ]
       },
       "SwaggerKey": "Tickets"
     },
@@ -54,7 +54,7 @@
       },
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Identity",
-        "AllowedScopes": [ "AirlineTicketsAPI" ]
+        "AllowedScopes": [ ]
       },
       "SwaggerKey": "Tickets"
     },
@@ -68,10 +68,10 @@
         }
       ],
       "UpstreamPathTemplate": "/City/{id}",
-      "UpstreamHttpMethod": [ "GET", "DELETE", "UPDATE" ],
+      "UpstreamHttpMethod": [ "GET", "DELETE", "PUT" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Identity",
-        "AllowedScopes": [ "AirlineTicketsAPI" ]
+        "AllowedScopes": [ ]
       },
       "SwaggerKey": "Tickets"
     },
@@ -106,7 +106,7 @@
         }
       ],
       "UpstreamPathTemplate": "/Hotel/{id}",
-      "UpstreamHttpMethod": [ "GET", "DELETE", "UPDATE" ],
+      "UpstreamHttpMethod": [ "GET", "DELETE", "PUT" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Identity",
         "AllowedScopes": []
@@ -124,7 +124,7 @@
         }
       ],
       "UpstreamPathTemplate": "/AirlineTicketCity",
-      "UpstreamHttpMethod": [ "GET", "POST", "UPDATE" ],
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 1
       },
