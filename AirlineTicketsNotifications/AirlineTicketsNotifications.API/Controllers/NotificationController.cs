@@ -20,7 +20,7 @@ namespace AirlineTicketsNotifications.API.Controllers
         private readonly IValidator<CreateNotificationRequestViewModel> _requestValidator;
         private readonly IValidator<NewTicketInfoViewModel> _ticketInfoValidator;
 
-        public NotificationController(INotificationService notificationService, IMapper mapper, 
+        public NotificationController(INotificationService notificationService, IMapper mapper,
             IValidator<CreateNotificationRequestViewModel> requestValidator, IValidator<NewTicketInfoViewModel> ticketInfoValidator)
         {
             _notificationService = notificationService;

@@ -1,9 +1,9 @@
 ﻿using AirlineTicketsNotifications.BLL.Interfaces;
+using AirlineTicketsNotifications.BLL.Mapper.Profiles;
 using AirlineTicketsNotifications.BLL.Services;
+using AirlineTicketsNotifications.DAL.DI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using AirlineTicketsNotifications.DAL.DI;
-using AirlineTicketsNotifications.BLL.Mapper.Profiles;
 
 namespace AirlineTicketsNotifications.BLL.DI
 {

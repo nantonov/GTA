@@ -1,3 +1,4 @@
+using AirlineTicketsNotifications.API.Extensions;
 using AirlineTicketsNotifications.API.Mapper.Profiles;
 using AirlineTicketsNotifications.API.Middleware;
 using AirlineTicketsNotifications.API.Validation.Validators;
@@ -7,7 +8,6 @@ using AirlineTicketsNotifications.BLL.DI;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -42,49 +42,8 @@ builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
-{
-    options.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Description = "Demo Swagger API v1",
-        Title = "Swagger with IdentityServer4",
-        Version = "1.0.0"
-    });
 
-    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
-    {
-        Type = SecuritySchemeType.OAuth2,
-        Flows = new OpenApiOAuthFlows
-        {
-            Password = new OpenApiOAuthFlow
-            {
-                TokenUrl = new Uri(configurationBuilder["Urls:Token"]),
-                Scopes = new Dictionary<string, string>
-                {
-                    {"AirlineTicketsNotificationsAPI", "AirlineTicketsNotifications API"}
-                }
-            }
-        }
-    });
-
-    options.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "oauth2"
-                },
-                Scheme = "oauth2",
-                Name = "Bearer",
-                In = ParameterLocation.Header
-            },
-            new List<string>()
-        }
-    });
-});
+builder.Services.AddSwaggerDependencies(configurationBuilder);
 
 builder.Services.AddBLLLogicDependencies(configurationBuilder);
 
