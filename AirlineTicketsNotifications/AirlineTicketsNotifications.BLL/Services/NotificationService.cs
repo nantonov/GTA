@@ -26,14 +26,14 @@ namespace AirlineTicketsNotifications.BLL.Services
                 _mapper.Map<NotificationRequestEntity>(notificationRequest), cancellationToken));
         }
 
-        public async Task HandleNewTicketEvent(NewTicketInfo ticketInfo, CancellationToken cancellationToken)
+        public async Task HandleNewTicketEvent(NewTicketInfo ticketInfo)
         {
             var requests = _mapper.Map<IEnumerable<NotificationRequest>>(await _notificationRepository
-                .GetNotificationRequests(ticketInfo.CityName, ticketInfo.StayingStatus, cancellationToken));
+                .GetNotificationRequests(ticketInfo.CityName, ticketInfo.StayingStatus));
 
             foreach (var request in requests)
             {
-                await _emailService.SendEmailMessage(request, cancellationToken);
+                await _emailService.SendEmailMessage(request);
             }
         }
     }

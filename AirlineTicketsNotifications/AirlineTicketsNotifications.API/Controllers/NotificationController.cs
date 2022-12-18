@@ -41,15 +41,5 @@ namespace AirlineTicketsNotifications.API.Controllers
 
             return _mapper.Map<NotificationRequestViewModel>(request);
         }
-
-        [HttpPost("TicketEvent")]
-        public async Task HandleNewTicketEvent([FromBody] NewTicketInfoViewModel ticketInfo, CancellationToken cancellationToken)
-        {
-            await _ticketInfoValidator.ValidateAndThrowAsync(ticketInfo, cancellationToken);
-
-            var model = _mapper.Map<NewTicketInfo>(ticketInfo);
-
-            await _notificationService.HandleNewTicketEvent(model, cancellationToken);
-        }
     }
 }

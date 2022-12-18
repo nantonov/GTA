@@ -1,9 +1,9 @@
-﻿using AirlineTicketsNotifications.API.ViewModels.TicketInfo;
+﻿using AirlineTicketsNotifications.API.Messages;
 using FluentValidation;
 
 namespace AirlineTicketsNotifications.API.Validation.Validators
 {
-    public class TicketInfoValidator : AbstractValidator<NewTicketInfoViewModel>
+    public class TicketInfoValidator : AbstractValidator<NewTicketInfoMessage>
     {
         public TicketInfoValidator()
         {
