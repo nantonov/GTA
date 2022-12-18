@@ -1,5 +1,4 @@
 ﻿using AirlineTicketsHistory.API.Middleware.Models;
-using Microsoft.AspNetCore.Diagnostics;
 using System.Net;
 
 namespace AirlineTicketsHistory.API.Middleware
@@ -24,11 +23,11 @@ namespace AirlineTicketsHistory.API.Middleware
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error occured");
-                await HandleExceptionAsync(httpContext);
+                await HandleExceptionAsync(httpContext, ex);
             }
         }
 
-        private static async Task HandleExceptionAsync(HttpContext context)
+        private static async Task HandleExceptionAsync(HttpContext context, Exception ex)
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
@@ -36,7 +35,7 @@ namespace AirlineTicketsHistory.API.Middleware
             await context.Response.WriteAsync(new ErrorDetails()
             {
                 StatusCode = context.Response.StatusCode,
-                Message = context?.Features?.Get<IExceptionHandlerFeature>()?.Error?.Message
+                Message = ex.Message
             }.ToString());
         }
     }
