@@ -1,4 +1,6 @@
+using AirlineTickets.API.Controllers;
 using AirlineTickets.API.Mapper.Profiles;
+using AirlineTickets.API.Messages;
 using AirlineTickets.API.Middleware;
 using AirlineTickets.API.Validation.Validators;
 using AirlineTickets.API.ViewModels.AirlineTicket;
@@ -7,6 +9,7 @@ using AirlineTickets.API.ViewModels.City;
 using AirlineTickets.API.ViewModels.Hotel;
 using AirlineTickets.BLL.DI;
 using FluentValidation;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -51,6 +54,30 @@ builder.Services.AddControllersWithViews()
 );
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+//builder.Services.AddMassTransit(options =>
+//{
+//    options.SetKebabCaseEndpointNameFormatter();
+//    options.UsingRabbitMq((context, config) =>
+//    {
+//        config.Host("localhost", "/", host =>
+//        {
+//            host.Username("guest");
+//            host.Password("guest");
+//        });
+//        config.ReceiveEndpoint("new-ticket-info-message", e =>
+//        {
+//            e.Bind("handle-new-ticket-event");
+//            e.Bind<NewTicketInfoMessage>();
+//        });
+//    });
+//});
+
+builder.Services.AddMassTransit(x =>
+{
+    x.SetKebabCaseEndpointNameFormatter();
+    x.UsingRabbitMq();
+});
 
 builder.Services.AddSwaggerGen(options =>
 {

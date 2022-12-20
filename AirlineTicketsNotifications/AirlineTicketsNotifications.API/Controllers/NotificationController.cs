@@ -1,8 +1,6 @@
 ﻿using AirlineTicketsNotifications.API.ViewModels.NotificationRequest;
-using AirlineTicketsNotifications.API.ViewModels.TicketInfo;
 using AirlineTicketsNotifications.BLL.Interfaces;
 using AirlineTicketsNotifications.BLL.Models.Requests;
-using AirlineTicketsNotifications.BLL.Models.TicketInfo;
 using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
@@ -18,15 +16,13 @@ namespace AirlineTicketsNotifications.API.Controllers
         private readonly INotificationService _notificationService;
         private readonly IMapper _mapper;
         private readonly IValidator<CreateNotificationRequestViewModel> _requestValidator;
-        private readonly IValidator<NewTicketInfoViewModel> _ticketInfoValidator;
 
         public NotificationController(INotificationService notificationService, IMapper mapper, 
-            IValidator<CreateNotificationRequestViewModel> requestValidator, IValidator<NewTicketInfoViewModel> ticketInfoValidator)
+            IValidator<CreateNotificationRequestViewModel> requestValidator)
         {
             _notificationService = notificationService;
             _mapper = mapper;
             _requestValidator = requestValidator;
-            _ticketInfoValidator = ticketInfoValidator;
         }
 
         [HttpPost("Request")]

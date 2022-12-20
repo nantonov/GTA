@@ -4,7 +4,6 @@ using AirlineTicketsNotifications.API.Messages;
 using AirlineTicketsNotifications.API.Middleware;
 using AirlineTicketsNotifications.API.Validation.Validators;
 using AirlineTicketsNotifications.API.ViewModels.NotificationRequest;
-using AirlineTicketsNotifications.API.ViewModels.TicketInfo;
 using AirlineTicketsNotifications.BLL.DI;
 using FluentValidation;
 using MassTransit;
@@ -48,7 +47,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddMassTransit(options =>
 {
-    options.AddConsumer<HandleNewTicketEventConsumer>();
+    options.AddConsumer<NewTicketInfoMessageConsumer>();
     options.SetKebabCaseEndpointNameFormatter();
     options.UsingRabbitMq((context, config) =>
     {
@@ -60,6 +59,13 @@ builder.Services.AddMassTransit(options =>
         config.ConfigureEndpoints(context);
     });
 });
+
+//builder.Services.AddMassTransit(x =>
+//{
+//    x.AddConsumer<NewTicketInfoMessageConsumer>();
+//    x.SetKebabCaseEndpointNameFormatter();
+//    x.UsingRabbitMq((ctx, cfg) => cfg.ConfigureEndpoints(ctx));
+//});
 
 builder.Services.AddSwaggerGen(options =>
 {

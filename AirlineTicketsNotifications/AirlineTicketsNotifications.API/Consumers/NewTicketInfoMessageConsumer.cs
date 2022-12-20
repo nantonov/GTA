@@ -7,20 +7,25 @@ using MassTransit;
 
 namespace AirlineTicketsNotifications.API.Consumers
 {
-    public class HandleNewTicketEventConsumer : IConsumer<NewTicketInfoMessage>
+    public class NewTicketInfoMessageConsumer : IConsumer<NewTicketInfoMessage>
     {
         private readonly INotificationService _notificationService;
         private readonly IMapper _mapper;
         private readonly IValidator<NewTicketInfoMessage> _ticketInfoValidator;
 
-        public HandleNewTicketEventConsumer(INotificationService notificationService, IMapper mapper,
+        public NewTicketInfoMessageConsumer()
+        {
+
+        }
+
+        public NewTicketInfoMessageConsumer(INotificationService notificationService, IMapper mapper,
             IValidator<NewTicketInfoMessage> ticketInfoValidator)
         {
             _notificationService = notificationService;
             _mapper = mapper;
             _ticketInfoValidator = ticketInfoValidator;
         }
-
+            
         public async Task Consume(ConsumeContext<NewTicketInfoMessage> context)
         {
             var ticketInfo = context.Message;
