@@ -1,5 +1,7 @@
-using AirlineTickets.API.Extensions;
+using AirlineTickets.API.Extensions
+using AirlineTickets.API.Controllers;
 using AirlineTickets.API.Mapper.Profiles;
+using Messages;
 using AirlineTickets.API.Middleware;
 using AirlineTickets.API.Validation.Validators;
 using AirlineTickets.API.ViewModels.AirlineTicket;
@@ -8,6 +10,7 @@ using AirlineTickets.API.ViewModels.City;
 using AirlineTickets.API.ViewModels.Hotel;
 using AirlineTickets.BLL.DI;
 using FluentValidation;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.SwaggerUI;
@@ -26,7 +29,7 @@ builder.Services.AddCors(config =>
     config.AddPolicy("DefaultPolicy",
         builder =>
         {
-            builder.WithOrigins("http://localhost/3000").AllowAnyMethod().AllowAnyHeader();
+            builder.WithOrigins("http://localhost/3000", "http://localhost/7150").AllowAnyMethod().AllowAnyHeader();
         });
 });
 
@@ -53,6 +56,12 @@ builder.Services.AddControllersWithViews()
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerDependencies(configurationBuilder);
+
+builder.Services.AddMassTransit(x =>
+{
+    x.SetKebabCaseEndpointNameFormatter();
+    x.UsingRabbitMq();
+});
 
 builder.Services.AddBLLLogicDependencies(configurationBuilder);
 

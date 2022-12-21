@@ -1,11 +1,13 @@
 using AirlineTicketsNotifications.API.Extensions;
+using AirlineTicketsNotifications.API.Consumers;
 using AirlineTicketsNotifications.API.Mapper.Profiles;
+using Messages;
 using AirlineTicketsNotifications.API.Middleware;
 using AirlineTicketsNotifications.API.Validation.Validators;
 using AirlineTicketsNotifications.API.ViewModels.NotificationRequest;
-using AirlineTicketsNotifications.API.ViewModels.TicketInfo;
 using AirlineTicketsNotifications.BLL.DI;
 using FluentValidation;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.SwaggerUI;
@@ -43,12 +45,27 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
+builder.Services.AddMassTransit(options =>
+{
+    options.AddConsumer<NewTicketInfoMessageConsumer>();
+    options.SetKebabCaseEndpointNameFormatter();
+    options.UsingRabbitMq((context, config) =>
+    {
+        config.Host("localhost", "/", host =>
+        {
+            host.Username("guest");
+            host.Password("guest");
+        });
+        config.ConfigureEndpoints(context);
+    });
+});
+
 builder.Services.AddSwaggerDependencies(configurationBuilder);
 
 builder.Services.AddBLLLogicDependencies(configurationBuilder);
 
 builder.Services.AddScoped<IValidator<CreateNotificationRequestViewModel>, NotificationRequestValidator>()
-    .AddScoped<IValidator<NewTicketInfoViewModel>, TicketInfoValidator>();
+    .AddScoped<IValidator<NewTicketInfoMessage>, TicketInfoValidator>();
 
 builder.Services.AddAutoMapper(typeof(ModelViewModel));
 
