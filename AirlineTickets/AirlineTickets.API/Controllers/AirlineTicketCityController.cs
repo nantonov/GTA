@@ -1,12 +1,8 @@
 using AirlineTickets.API.ViewModels.AirlineTicketCity;
 using AirlineTickets.BLL.Interfaces;
 using AirlineTickets.BLL.Models;
-using AirlineTickets.Core.Constants;
 using AutoMapper;
 using FluentValidation;
-using IdentityModel.Client;
-using MassTransit;
-using Messages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,21 +14,19 @@ namespace AirlineTickets.API.Controllers
     public class AirlineTicketCityController : ControllerBase
     {
         private readonly IAirlineTicketCityService _ticketCityService;
-        private readonly IGenericService<City> _cityService; 
+        private readonly IGenericService<City> _cityService;
         private readonly IMapper _mapper;
         private readonly IValidator<CreateUpdateTicketCityViewModel> _ticketCityValidator;
-        private readonly IPublishEndpoint _publishEndpoint;
+        private readonly IMessageService _messageService;
 
         public AirlineTicketCityController(IAirlineTicketCityService ticketCityService, IGenericService<City> cityService,
-            IMapper mapper, IValidator<CreateUpdateTicketCityViewModel> hotelValidator, IConfiguration configuration, 
-            IPublishEndpoint publishEndpoint)
+            IMapper mapper, IValidator<CreateUpdateTicketCityViewModel> hotelValidator, IMessageService messageService)
         {
             _ticketCityService = ticketCityService;
             _cityService = cityService;
             _mapper = mapper;
             _ticketCityValidator = hotelValidator;
-            _configuration = configuration;
-            _publishEndpoint = publishEndpoint;
+            _messageService = messageService;
         }
 
         [HttpGet]
@@ -53,13 +47,13 @@ namespace AirlineTickets.API.Controllers
             var ticketCity = await _ticketCityService.Create(model, cancellationToken);
 
             var city = await _cityService.Get(model.CityId, cancellationToken);
-            var ticketInfo = new NewTicketInfoMessage()
+            var ticketInfo = new Message()
             {
                 StayingStatus = model.StayingStatus,
                 CityName = city.Name,
             };
 
-            await _publishEndpoint.Publish(ticketInfo, cancellationToken);
+            await _messageService.PublishNewTicketInfo(ticketInfo, cancellationToken);
 
             return _mapper.Map<TicketCityViewModel>(ticketCity);
         }
