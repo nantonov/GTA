@@ -21,7 +21,6 @@ namespace AirlineTickets.API.Controllers
         private readonly IGenericService<City> _cityService; 
         private readonly IMapper _mapper;
         private readonly IValidator<CreateUpdateTicketCityViewModel> _ticketCityValidator;
-        private readonly IConfiguration _configuration;
         private readonly IPublishEndpoint _publishEndpoint;
 
         public AirlineTicketCityController(IAirlineTicketCityService ticketCityService, IGenericService<City> cityService,
