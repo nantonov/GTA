@@ -1,6 +1,6 @@
 ﻿using AirlineTickets.Core.Enums;
 
-namespace AirlineTickets.API.Messages
+namespace Messages
 {
     public class NewTicketInfoMessage
     {

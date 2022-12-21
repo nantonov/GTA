@@ -1,4 +1,3 @@
-using AirlineTickets.API.Messages;
 using AirlineTickets.API.ViewModels.AirlineTicketCity;
 using AirlineTickets.BLL.Interfaces;
 using AirlineTickets.BLL.Models;
@@ -7,6 +6,7 @@ using AutoMapper;
 using FluentValidation;
 using IdentityModel.Client;
 using MassTransit;
+using Messages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

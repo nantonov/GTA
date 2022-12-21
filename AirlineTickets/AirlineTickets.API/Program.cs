@@ -1,6 +1,6 @@
 using AirlineTickets.API.Controllers;
 using AirlineTickets.API.Mapper.Profiles;
-using AirlineTickets.API.Messages;
+using Messages;
 using AirlineTickets.API.Middleware;
 using AirlineTickets.API.Validation.Validators;
 using AirlineTickets.API.ViewModels.AirlineTicket;
@@ -54,24 +54,6 @@ builder.Services.AddControllersWithViews()
 );
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-
-//builder.Services.AddMassTransit(options =>
-//{
-//    options.SetKebabCaseEndpointNameFormatter();
-//    options.UsingRabbitMq((context, config) =>
-//    {
-//        config.Host("localhost", "/", host =>
-//        {
-//            host.Username("guest");
-//            host.Password("guest");
-//        });
-//        config.ReceiveEndpoint("new-ticket-info-message", e =>
-//        {
-//            e.Bind("handle-new-ticket-event");
-//            e.Bind<NewTicketInfoMessage>();
-//        });
-//    });
-//});
 
 builder.Services.AddMassTransit(x =>
 {

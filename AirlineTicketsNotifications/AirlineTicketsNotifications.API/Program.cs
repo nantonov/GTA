@@ -1,6 +1,6 @@
 using AirlineTicketsNotifications.API.Consumers;
 using AirlineTicketsNotifications.API.Mapper.Profiles;
-using AirlineTicketsNotifications.API.Messages;
+using Messages;
 using AirlineTicketsNotifications.API.Middleware;
 using AirlineTicketsNotifications.API.Validation.Validators;
 using AirlineTicketsNotifications.API.ViewModels.NotificationRequest;
@@ -59,13 +59,6 @@ builder.Services.AddMassTransit(options =>
         config.ConfigureEndpoints(context);
     });
 });
-
-//builder.Services.AddMassTransit(x =>
-//{
-//    x.AddConsumer<NewTicketInfoMessageConsumer>();
-//    x.SetKebabCaseEndpointNameFormatter();
-//    x.UsingRabbitMq((ctx, cfg) => cfg.ConfigureEndpoints(ctx));
-//});
 
 builder.Services.AddSwaggerGen(options =>
 {

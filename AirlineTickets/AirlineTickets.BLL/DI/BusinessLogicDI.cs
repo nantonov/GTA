@@ -20,7 +20,6 @@ namespace AirlineTickets.BLL.DI
             services.AddTransient<IAirlineTicketCityService, AirlineTicketCityService>();
             services.AddTransient<IGenericService<City>, GenericService<City, CityEntity>>();
             services.AddTransient<IGenericService<Hotel>, GenericService<Hotel, HotelEntity>>();
-            services.AddTransient<IHttpClientService, HttpClientService>();
 
             services.AddAutoMapper(typeof(EntityModel));
         }

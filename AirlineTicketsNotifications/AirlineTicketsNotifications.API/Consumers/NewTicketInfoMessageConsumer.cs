@@ -1,4 +1,4 @@
-﻿using AirlineTicketsNotifications.API.Messages;
+﻿using Messages;
 using AirlineTicketsNotifications.BLL.Interfaces;
 using AirlineTicketsNotifications.BLL.Models.TicketInfo;
 using AutoMapper;
@@ -12,11 +12,6 @@ namespace AirlineTicketsNotifications.API.Consumers
         private readonly INotificationService _notificationService;
         private readonly IMapper _mapper;
         private readonly IValidator<NewTicketInfoMessage> _ticketInfoValidator;
-
-        public NewTicketInfoMessageConsumer()
-        {
-
-        }
 
         public NewTicketInfoMessageConsumer(INotificationService notificationService, IMapper mapper,
             IValidator<NewTicketInfoMessage> ticketInfoValidator)

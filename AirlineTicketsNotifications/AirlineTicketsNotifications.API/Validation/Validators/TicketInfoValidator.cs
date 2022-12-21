@@ -1,4 +1,4 @@
-﻿using AirlineTicketsNotifications.API.Messages;
+﻿using Messages;
 using FluentValidation;
 
 namespace AirlineTicketsNotifications.API.Validation.Validators

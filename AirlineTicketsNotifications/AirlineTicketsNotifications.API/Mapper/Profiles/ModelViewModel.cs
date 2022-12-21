@@ -1,4 +1,4 @@
-﻿using AirlineTicketsNotifications.API.Messages;
+﻿using Messages;
 using AirlineTicketsNotifications.API.ViewModels.NotificationRequest;
 using AirlineTicketsNotifications.BLL.Models.Requests;
 using AirlineTicketsNotifications.BLL.Models.TicketInfo;
