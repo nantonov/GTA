@@ -17,7 +17,7 @@ namespace AirlineTicketsNotifications.BLL.Services
             _configuration = configuration;
         }
 
-        public async Task SendEmailMessage(NotificationRequest notificationRequest, CancellationToken cancellationToken)
+        public async Task SendEmailMessage(NotificationRequest notificationRequest)
         {
             var smtpClient = new SmtpClient("smtp.gmail.com")
             {
@@ -29,7 +29,7 @@ namespace AirlineTicketsNotifications.BLL.Services
 
             var message = CreateEmailMessage(notificationRequest);
 
-            await smtpClient.SendMailAsync(message, cancellationToken);
+            await smtpClient.SendMailAsync(message);
         }
 
         private MailMessage CreateEmailMessage(NotificationRequest notificationRequest)

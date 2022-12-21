@@ -1,8 +1,8 @@
 ﻿using AirlineTickets.Core.Enums;
 
-namespace AirlineTickets.API.ViewModels.TicketInfo
+namespace Messages
 {
-    public class NewTicketInfoViewModel
+    public class NewTicketInfoMessage
     {
         public CityStayingStatus StayingStatus { get; set; }
         public string? CityName { get; set; }

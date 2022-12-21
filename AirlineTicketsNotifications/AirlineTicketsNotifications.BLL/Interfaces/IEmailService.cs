@@ -4,6 +4,6 @@ namespace AirlineTicketsNotifications.BLL.Interfaces
 {
     public interface IEmailService
     {
-        public Task SendEmailMessage(NotificationRequest notificationRequest, CancellationToken cancellationToken);
+        public Task SendEmailMessage(NotificationRequest notificationRequest);
     }
 }

@@ -9,6 +9,6 @@ namespace AirlineTicketsNotifications.DAL.Interfaces
             CancellationToken cancellationToken);
 
         public Task<IEnumerable<NotificationRequestEntity>> GetNotificationRequests(string cityName,
-            CityStayingStatus stayingStatus, CancellationToken cancellationToken);
+            CityStayingStatus stayingStatus);
     }
 }

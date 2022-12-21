@@ -7,6 +7,6 @@ namespace AirlineTicketsNotifications.BLL.Interfaces
     {
         public Task<NotificationRequest> CreateNotificationRequest(NotificationRequest notificationRequest, CancellationToken cancellationToken);
 
-        public Task HandleNewTicketEvent(NewTicketInfo ticketInfo, CancellationToken cancellationToken);
+        public Task HandleNewTicketEvent(NewTicketInfo ticketInfo);
     }
 }

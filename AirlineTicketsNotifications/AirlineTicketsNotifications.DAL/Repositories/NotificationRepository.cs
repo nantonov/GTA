@@ -26,10 +26,10 @@ namespace AirlineTicketsNotifications.DAL.Repositories
         }
 
         public async Task<IEnumerable<NotificationRequestEntity>> GetNotificationRequests(string cityName,
-            CityStayingStatus stayingStatus, CancellationToken cancellationToken)
+            CityStayingStatus stayingStatus)
         {
             return await _notificationRequests.AsNoTracking().Where(r => r.StayingStatus == stayingStatus
-                && r.CityName.Equals(cityName)).ToListAsync(cancellationToken);
+                && r.CityName.Equals(cityName)).ToListAsync();
         }
     }
 }
