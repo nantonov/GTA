@@ -2,7 +2,6 @@
 using AirlineTickets.BLL.Models;
 using AirlineTickets.DAL.Entities;
 using AirlineTickets.DAL.Interfaces;
-using AirlineTickets.DAL.Repositories;
 using AutoMapper;
 
 namespace AirlineTickets.BLL.Services

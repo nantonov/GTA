@@ -1,3 +1,4 @@
+using AirlineTickets.API.Extensions
 using AirlineTickets.API.Controllers;
 using AirlineTickets.API.Mapper.Profiles;
 using Messages;
@@ -12,7 +13,6 @@ using FluentValidation;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Text;
 
@@ -55,54 +55,12 @@ builder.Services.AddControllersWithViews()
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
+builder.Services.AddSwaggerDependencies(configurationBuilder);
+
 builder.Services.AddMassTransit(x =>
 {
     x.SetKebabCaseEndpointNameFormatter();
     x.UsingRabbitMq();
-});
-
-builder.Services.AddSwaggerGen(options =>
-{
-    options.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Description = "Demo Swagger API v1",
-        Title = "Swagger with IdentityServer4",
-        Version = "1.0.0"
-    });
-
-    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
-    {
-        Type = SecuritySchemeType.OAuth2,
-        Flows = new OpenApiOAuthFlows
-        {
-            Password = new OpenApiOAuthFlow
-            {
-                TokenUrl = new Uri(configurationBuilder["Urls:Token"]),
-                Scopes = new Dictionary<string, string>
-                {
-                    {"AirlineTicketsAPI", "AirlineTickets API"}
-                }
-            }
-        }
-    });
-
-    options.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = "oauth2"
-                            },
-                            Scheme = "oauth2",
-                            Name = "Bearer",
-                            In = ParameterLocation.Header
-                        },
-                        new List<string>()
-                    }
-                });
 });
 
 builder.Services.AddBLLLogicDependencies(configurationBuilder);

@@ -4,7 +4,6 @@ using AirlineTickets.BLL.Models;
 using AirlineTickets.BLL.Services;
 using AirlineTickets.DAL.DI;
 using AirlineTickets.DAL.Entities;
-using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
