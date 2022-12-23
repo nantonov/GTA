@@ -15,6 +15,7 @@
 	
   <ItemGroup>
     <ProjectReference Include="..\AirlineTickets.Core\AirlineTickets.Core.csproj" />
+    <ProjectReference Include="..\AirlineTickets.DAL.External\AirlineTickets.DAL.External.csproj" />
     <ProjectReference Include="..\AirlineTickets.DAL\AirlineTickets.DAL.csproj" />
   </ItemGroup>
 

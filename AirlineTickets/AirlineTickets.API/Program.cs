@@ -1,7 +1,5 @@
-using AirlineTickets.API.Extensions
-using AirlineTickets.API.Controllers;
+using AirlineTickets.API.Extensions;
 using AirlineTickets.API.Mapper.Profiles;
-using Messages;
 using AirlineTickets.API.Middleware;
 using AirlineTickets.API.Validation.Validators;
 using AirlineTickets.API.ViewModels.AirlineTicket;
