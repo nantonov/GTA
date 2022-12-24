@@ -5,17 +5,19 @@ import addAxiosInterceptors from './axiosInterceptors';
 
 addAxiosInterceptors();
 
-export const getAllService = async (): Promise<Array<UserTicketsHistoryGetModel>> => {
+export const getAllUserHistoriesService = async (): Promise<Array<UserTicketsHistoryGetModel>> => {
   const response = await axiosInstance.get(`/history`);
   return response.data;
 };
 
-export const getByUserIdService = async (userId: string): Promise<UserTicketsHistoryGetModel> => {
+export const getUserHistoryByUserIdService = async (
+  userId: string
+): Promise<UserTicketsHistoryGetModel> => {
   const response = await axiosInstance.get(`/history/${userId}`);
   return response.data;
 };
 
-export const deleteService = async (userId: string): Promise<void> => {
+export const deleteUserHistoryService = async (userId: string): Promise<void> => {
   const response = await axiosInstance.delete(`/history/${userId}`);
   return response.data;
 };

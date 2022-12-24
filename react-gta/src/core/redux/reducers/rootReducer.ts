@@ -5,6 +5,8 @@ import cityReducer from './cityReducer';
 import ticketReducer from './ticketReducer';
 import hotelReducer from './hotelReducer';
 import ticketCityReducer from './ticketCityReducer';
+import notificationsReducer from './notificationsReducer';
+import historyReducer from './historyReducer';
 
 const rootReducer = combineReducers({
   modal: ModalReducer,
@@ -13,6 +15,8 @@ const rootReducer = combineReducers({
   ticket: ticketReducer,
   hotel: hotelReducer,
   ticketCity: ticketCityReducer,
+  notifications: notificationsReducer,
+  history: historyReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
