@@ -1,48 +1,60 @@
 import { Button } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import AppModalWrapper from '../../core/components/appModalWrapper/AppModalWrapper';
-import PagesTicketInput from '../../core/components/inputs/PagesTicketInput';
 import PagesHistoryTable from '../../core/components/tables/PagesHistoryTable';
-import { ModalActionTypes } from '../../core/redux/actionTypes/modalTypes';
 import { RootState } from '../../core/redux/reducers/rootReducer';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import UserService from '../../core/services/UserService';
+import PagesHistoryTicketInput from '../../core/components/inputs/PagesHistoryTicketInput';
+import PagesHistoryTicketByIdInput from '../../core/components/inputs/PagesHistoryTicketByIdInput';
+import { HistoryModalActionTypes } from '../../core/redux/actionTypes/historyModalTypes';
 
 const History = () => {
-  const openModal = useSelector((state: RootState) => state.modal);
+  const modal = useSelector((state: RootState) => state.historyModal);
+  const [userName, setUserName] = useState<string | undefined>('');
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const getUser = async () => {
+      const user = await UserService.getUser();
+      setUserName(user?.profile.name);
+    };
+
+    setTimeout(() => getUser(), 250);
+  }, [dispatch]);
 
   return (
     <div>
       <AppModalWrapper
-        open={openModal.createModal}
-        onClose={() => dispatch({ type:  })}
+        open={modal.idModal}
+        onClose={() => dispatch({ type: HistoryModalActionTypes.HideIdModal })}
       >
-        < />
+        <PagesHistoryTicketByIdInput userName={userName} />
       </AppModalWrapper>
       <Button
         variant="outlined"
-        onClick={() => dispatch({ type:  })}
+        onClick={() => dispatch({ type: HistoryModalActionTypes.ShowIdModal })}
         startIcon={<AddCircleIcon />}
       >
-        Create a new ticket
+        Add a ticket via Id
       </Button>
-      
+
       <AppModalWrapper
-        open={openModal.createModal}
-        onClose={() => dispatch({ type:  })}
+        open={modal.createModal}
+        onClose={() => dispatch({ type: HistoryModalActionTypes.HideCreateModal })}
       >
-        <PagesTicketInput creatingInput={true} id={0} />
+        <PagesHistoryTicketInput userName={userName} />
       </AppModalWrapper>
       <Button
         variant="outlined"
-        onClick={() => dispatch({ type:  })}
+        onClick={() => dispatch({ type: HistoryModalActionTypes.ShowCreateModal })}
         startIcon={<AddCircleIcon />}
       >
         Create a new ticket
       </Button>
-      
-      <PagesHistoryTable />
+
+      <PagesHistoryTable userName={userName} />
     </div>
   );
 };

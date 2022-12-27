@@ -8,10 +8,7 @@ import Typography from '@mui/material/Typography';
 import AppNavLink from '../appNavLink/AppNavLink';
 import { Button } from '@mui/material';
 import UserService from '../../services/UserService';
-import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { RootState } from '../../redux/reducers/rootReducer';
-import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { AuthActionTypes } from '../../redux/actionTypes/authTypes';
 
@@ -38,6 +35,8 @@ const AppNavBar = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Gleb Tickets App
           </Typography>
+          <AppNavLink path="/notifications" content="Notifications" />
+          <AppNavLink path="/history" content="History" />
           <AppNavLink path="/tickets" content="Tickets" />
           <AppNavLink path="/cities" content="Cities" />
           <AppNavLink path="/hotels" content="Hotels" />

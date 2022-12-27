@@ -26,6 +26,13 @@ const historyReducer = (state = initialState, action: HistoryAction): InitHistor
       return {
         ...state,
         isLoading: false,
+        histories: action.payload,
+      };
+    case HistoryActionTypes.HISTORY_SUCCESS_SEPARATE:
+      return {
+        ...state,
+        isLoading: false,
+        history: action.payload,
       };
     case HistoryActionTypes.HISTORY_FAIL:
       return {

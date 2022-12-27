@@ -1,6 +1,6 @@
-import { TicketGetModel } from './ticketGetModel';
+import { HistoryTicketGetModel } from './historyTicketGetModel';
 
 export interface UserTicketsHistoryGetModel {
   userId: string;
-  tickets: Array<TicketGetModel>;
+  airlineTickets: Array<HistoryTicketGetModel>;
 }

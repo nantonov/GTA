@@ -7,9 +7,11 @@ import hotelReducer from './hotelReducer';
 import ticketCityReducer from './ticketCityReducer';
 import notificationsReducer from './notificationsReducer';
 import historyReducer from './historyReducer';
+import HistoryModalReducer from './historyModalReducer';
 
 const rootReducer = combineReducers({
   modal: ModalReducer,
+  historyModal: HistoryModalReducer,
   auth: AuthReducer,
   city: cityReducer,
   ticket: ticketReducer,

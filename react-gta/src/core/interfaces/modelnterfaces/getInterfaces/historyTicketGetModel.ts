@@ -1,5 +1,4 @@
-export interface CreateUserTicketModel {
-  userId: string;
+export interface HistoryTicketGetModel {
   ticketId: number;
   departureTime: Date;
   arrivalTime: Date;
