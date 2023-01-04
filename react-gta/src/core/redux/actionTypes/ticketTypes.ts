@@ -3,6 +3,7 @@ import { TicketGetModel } from '../../interfaces/modelnterfaces/getInterfaces/ti
 export enum TicketActionTypes {
   TICKET_START = 'TICKET_START',
   TICKET_SUCCESS = 'TICKET_SUCCESS',
+  TICKET_SUCCESS_SEPARATE = 'TICKET_SUCCESS_SEPARATE',
   TICKET_FAIL = 'TICKET_FAIL',
 }
 
@@ -15,9 +16,18 @@ interface TicketSuccessAction {
   payload: TicketGetModel[];
 }
 
+interface TicketSuccessSeparateAction {
+  type: TicketActionTypes.TICKET_SUCCESS_SEPARATE;
+  payload: TicketGetModel;
+}
+
 interface TicketFailAction {
   type: TicketActionTypes.TICKET_FAIL;
   payload: string;
 }
 
-export type TicketAction = TicketStartAction | TicketSuccessAction | TicketFailAction;
+export type TicketAction =
+  | TicketStartAction
+  | TicketSuccessAction
+  | TicketSuccessSeparateAction
+  | TicketFailAction;

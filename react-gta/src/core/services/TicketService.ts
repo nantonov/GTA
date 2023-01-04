@@ -10,6 +10,11 @@ export const getAllTicketsService = async (): Promise<Array<TicketGetModel>> => 
   return response.data;
 };
 
+export const getTicketByIdService = async (id: number): Promise<TicketGetModel> => {
+  const response = await axiosInstance.get(`/airlineticket/${id}`);
+  return response.data;
+};
+
 export const createTicketService = async (
   ticket: CreateUpdateTicketModel
 ): Promise<Array<TicketGetModel>> => {

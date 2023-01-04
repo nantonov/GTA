@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AirlineTicketsHistory.API.Controllers
 {
     [ApiController]
-    [Authorize]
+    //[Authorize]
     [Route("History")]
     public class UserTicketsHistoryController : Controller
     {

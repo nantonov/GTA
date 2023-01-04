@@ -4,6 +4,6 @@ import { AuthActionTypes } from '../actionTypes/authTypes';
 export function setIsAuth(isAuth: boolean): AuthAction {
   return {
     type: AuthActionTypes.SetIsAuth,
-    isAuth: isAuth,
+    payload: isAuth,
   };
 }

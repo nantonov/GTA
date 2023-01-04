@@ -4,10 +4,16 @@ import {
   createTicketService,
   deleteTicketService,
   getAllTicketsService,
+  getTicketByIdService,
   updateTicketService,
 } from '../../services/TicketService';
 import rootReducer from '../reducers/rootReducer';
-import { setTicketFail, setTicketStart, setTicketSuccess } from '../actionCreators/ticketAction';
+import {
+  setTicketFail,
+  setTicketStart,
+  setTicketSuccess,
+  setTicketSuccessSeparate,
+} from '../actionCreators/ticketAction';
 
 export const getAllTickets =
   () => async (dispatch: ThunkDispatch<typeof rootReducer, any, AnyAction>) => {
@@ -15,6 +21,18 @@ export const getAllTickets =
       dispatch(setTicketStart());
       const tickets = await getAllTicketsService();
       dispatch(setTicketSuccess(tickets));
+    } catch (error) {
+      const errorMessage = (error as Error).message;
+      dispatch(setTicketFail(errorMessage));
+    }
+  };
+
+export const getTicketById =
+  (id: number) => async (dispatch: ThunkDispatch<typeof rootReducer, any, AnyAction>) => {
+    try {
+      dispatch(setTicketStart());
+      const ticket = await getTicketByIdService(id);
+      dispatch(setTicketSuccessSeparate(ticket));
     } catch (error) {
       const errorMessage = (error as Error).message;
       dispatch(setTicketFail(errorMessage));

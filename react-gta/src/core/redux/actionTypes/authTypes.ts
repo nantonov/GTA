@@ -4,6 +4,5 @@ export enum AuthActionTypes {
 
 export interface AuthAction {
   type: AuthActionTypes;
-  isAuth: boolean;
   payload?: any;
 }

@@ -5,6 +5,8 @@ import Logout from '../../pages/Auth/Logout';
 import Refresh from '../../pages/Auth/Refresh';
 import TicketCities from '../../pages/TicketCities/TicketCities';
 import Tickets from '../../pages/Tickets/Tickets';
+import History from '../../pages/History/History';
+import Notifications from '../../pages/Notifications/Notifications';
 
 export const routes = [
   { path: '/tickets', component: Tickets, exact: true },
@@ -14,4 +16,6 @@ export const routes = [
   { path: '/callback', component: Callback, exact: true },
   { path: '/logout', component: Logout, exact: true },
   { path: '/refresh', component: Refresh, exact: true },
+  { path: '/history', component: History, exact: true },
+  { path: '/notifications', component: Notifications, exact: true },
 ];
